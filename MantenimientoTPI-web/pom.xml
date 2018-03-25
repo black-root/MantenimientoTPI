@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>MantenimientoTPI</artifactId>
-    <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>MantenimientoTPI</artifactId>
+        <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
     <artifactId>MantenimientoTPI-web</artifactId>
@@ -73,12 +73,39 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-      
+        <!-- https://mvnrepository.com/artifact/javax.transaction/jta -->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>com.thetransactioncompany</groupId>
             <artifactId>java-property-utils</artifactId>
             <version>1.10</version>
         </dependency> 
+        
+        
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-processing -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-processing</artifactId>
+            <version>2.26</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.26</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.26</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -86,13 +113,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.6.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <compilerArguments>
-                        <endorseddirs>${endorsed.dir}</endorseddirs>
-                    </compilerArguments>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
