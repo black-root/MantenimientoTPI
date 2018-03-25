@@ -1,7 +1,7 @@
 # computerMaintenance
 <h3>Aplicacion Empresarial enfocada para la solución de servicios de mantenimiento de computadoras en linea, para tener un mejor control y ser mas cercana al cliente. </h3>
 <br>
-<h3>http://localhost:8080/MantenimientoTPI-web/</h3>
+<h3>http://localhost:8080/MantenimientoTPI-web/ <br> userpayara:admin<br>passwordpayara:admin<br>usermaria:root<br>passwordmaria:1234<br></h3>
 
 <h1><center>Configuraciones para Payara</center></h1>
 <br>
