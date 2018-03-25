@@ -24,11 +24,8 @@ services:
         - "./wait-for-mariadb.sh"
         - "172.18.0.1:3300"
         - "-t"
-        - "60"
+        - "30"
         - "--"
         - "bin/asadmin"
         - "start-domain"
         - "-v"
-    
-
-
