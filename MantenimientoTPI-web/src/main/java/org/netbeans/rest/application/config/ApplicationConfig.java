@@ -23,7 +23,6 @@ public class ApplicationConfig extends Application {
         Set<Class<?>> resources = new java.util.HashSet<>();
 //ir agregando las de mas clases
         resources.add(SolicitudRest.class);
-        resources.add(UnidadRest.class);
         resources.add(PrioridadRest.class);
         
         resources.add(NewCrossOriginResourceSharingFilter.class);
@@ -33,7 +32,6 @@ public class ApplicationConfig extends Application {
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.PrioridadRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.UnidadRest.class);
     }  
 
     
