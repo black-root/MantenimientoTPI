@@ -5,10 +5,11 @@
  */
 package org.netbeans.rest.application.config;
 
-import ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest;
 import java.util.Set;
 import javax.ws.rs.core.Application;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
+import ues.fmocc.ingenieria.tpi2018.Service.*;
+
+
 
 /**
  *
@@ -20,17 +21,19 @@ public class ApplicationConfig extends Application {
    @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
-        resources.add(Solicitud.class);
 //ir agregando las de mas clases
-        
         resources.add(SolicitudRest.class);
+        resources.add(UnidadRest.class);
+        resources.add(PrioridadRest.class);
         
         resources.add(NewCrossOriginResourceSharingFilter.class);
         return resources;
     }
     private void addRestResourceClasses(Set<Class<?>> resources){
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest.class);
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.PrioridadRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.UnidadRest.class);
     }  
 
     
