@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
 
@@ -23,7 +24,25 @@ public class SolicitudRest implements Serializable {
 
     @EJB
     private SolicitudFacadeLocal ejbSolicitud;
+    private Solicitud solicitud = new Solicitud();
 
+    public Solicitud getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(Solicitud solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public void nuevo() {
+        this.solicitud = new Solicitud();
+
+    }
+
+    public void obtener(Solicitud sol) {
+        this.solicitud = sol;
+    }
+    //devuelve todo
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Solicitud> findall() {
@@ -55,6 +74,7 @@ public class SolicitudRest implements Serializable {
         return 0;
     }
 
+    //busca uno en particular
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
@@ -70,6 +90,75 @@ public class SolicitudRest implements Serializable {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
         return new Solicitud();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public void eliminarMantenimiento() {
+        try {
+            if (this.solicitud != null && this.ejbSolicitud != null) {
+                ejbSolicitud.remove(this.solicitud);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    //crea
+    @POST
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void crearMantenimiento() {
+
+        if (this.solicitud.getSolicitante().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true
+                && this.solicitud.getSolicitante() != null && this.solicitud.getDescripcion() != null) {
+
+            try {
+                if (this.solicitud != null && this.ejbSolicitud != null) {
+                    ejbSolicitud.create(this.solicitud);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Creado con Exito! (Created it)", null));
+                    nuevo();
+                }
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+    }
+
+    @Path("{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void actualizarMantenimiento() {
+
+        if (this.solicitud.getSolicitante().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true
+                && this.solicitud.getSolicitante() != null && this.solicitud.getDescripcion() != null) {
+
+            try {
+                if (this.solicitud != null && this.ejbSolicitud != null) {
+                    //aqui se actuliza o edita xd
+                    ejbSolicitud.edit(this.solicitud);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se actualizo! (It's updated)", null));
+
+                }
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            }
+
+        }
+    }
+
+    public void validar(FacesContext context, UIComponent toValidate, Object value) {
+        context = FacesContext.getCurrentInstance();
+        String texto = (String) value;
+        if (texto.isEmpty() || texto.startsWith(" ") || texto == null) {
+
+            ((UIInput) toValidate).setValid(false);
+            context.addMessage(toValidate.getClientId(context), new FacesMessage("Campo Obligatorio"));
+
+        }
+
     }
 
 }
