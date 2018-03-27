@@ -17,7 +17,7 @@ asadmin create-jdbc-resource --user admin --passwordfile /opt/pwdfile \
 
 COPY ./wait-for-mariadb.sh ./
 
-ADD MantenimientoTPI-ear-1.0-SNAPSHOT.ear /opt/payara41/glassfish/domains/domain1/autodeploy 
+ADD MantenimientoTPI-web.war  /opt/payara41/glassfish/domains/domain1/autodeploy/
 #COPY  /opt/payara41/glassfish/domains/domain1/autodeploy 
 
 EXPOSE 4848 8080
