@@ -2,7 +2,7 @@ version: '2'
 
 services:
     marmantenimiento:
-        image: 'mariadbtpi:IR13002'
+        image: 'mariadbtpi'
         build: ./MariaDB/.
         container_name: 'conmdbtpi'
         environment: 
