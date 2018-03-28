@@ -3,7 +3,7 @@ docker rm conpayaratpi
 docker rm conmdbtpi
 
 docker rmi -f payaratpi
-docker rmi -f mariadbtpi:IR13002
+docker rmi -f mariadbtpi
 
 mvn clean install
 #rm Payarafull/MantenimientoTPI-ear-1.0-SNAPSHOT.ear
