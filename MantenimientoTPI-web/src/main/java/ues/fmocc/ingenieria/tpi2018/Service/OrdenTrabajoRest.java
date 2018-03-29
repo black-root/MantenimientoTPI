@@ -1,35 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ues.fmocc.ingenieria.tpi2018.Service;
+
 import java.io.Serializable;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
+import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
+import ues.fmoocc.ingenieria.tpi2018.Sessions.OrdenTrabajoFacadeLocal;
+
 
 /**
  *
  * @author yisusdebian
  */
-//Ronald Ibanez
-@Path("solicitud")
-public class SolicitudRest implements Serializable {
-
+@Path("ordentrabajo")
+public class OrdenTrabajoRest implements Serializable {
     @EJB
-    private SolicitudFacadeLocal ejbSolicitud;
+    private OrdenTrabajoFacadeLocal ejbOrdenTrabajo;
 
-    //devuelve todo
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Solicitud> findall() {
+    public List<OrdenTrabajo> findall() {
         List salida = null;
         try {
-            if (ejbSolicitud != null) {
-                return ejbSolicitud.findAll();
+            if (ejbOrdenTrabajo != null) {
+                return ejbOrdenTrabajo.findAll();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -44,8 +53,8 @@ public class SolicitudRest implements Serializable {
     public Integer count() {
 
         try {
-            if (ejbSolicitud != null) {
-                return ejbSolicitud.count();
+            if (ejbOrdenTrabajo != null) {
+                return ejbOrdenTrabajo.count();
             }
 
         } catch (Exception e) {
@@ -54,30 +63,29 @@ public class SolicitudRest implements Serializable {
         return 0;
     }
 
-    //busca uno en particular
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public Solicitud findById(
+    public OrdenTrabajo findById(
             @PathParam("id") Integer id
     ) {
         try {
-            if (ejbSolicitud != null) {
-                return ejbSolicitud.find(id);
+            if (ejbOrdenTrabajo != null) {
+                return ejbOrdenTrabajo.find(id);
             }
 
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return new Solicitud();
+        return new OrdenTrabajo();
     }
-
+    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
-            if (id != null && this.ejbSolicitud != null) {
-                ejbSolicitud.remove(ejbSolicitud.find(id));
+            if (id != null && this.ejbOrdenTrabajo != null) {
+                ejbOrdenTrabajo.remove(ejbOrdenTrabajo.find(id));
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -86,11 +94,11 @@ public class SolicitudRest implements Serializable {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Solicitud entity) {
+    public void create(OrdenTrabajo entity) {
 
         try {
-            if (this.ejbSolicitud != null) {
-                ejbSolicitud.create(entity);
+            if (this.ejbOrdenTrabajo != null) {
+                ejbOrdenTrabajo.create(entity);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -100,11 +108,11 @@ public class SolicitudRest implements Serializable {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Solicitud entity) {
+    public void edit(@PathParam("id") Integer id, OrdenTrabajo entity) {
 
         try {
-            if (this.ejbSolicitud != null) {
-                ejbSolicitud.edit(entity);
+            if (this.ejbOrdenTrabajo != null) {
+                ejbOrdenTrabajo.edit(entity);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);

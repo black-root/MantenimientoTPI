@@ -30,8 +30,10 @@ public class ApplicationConfig extends Application {
     }
     private void addRestResourceClasses(Set<Class<?>> resources){
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.OrdenTrabajoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.PrioridadRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.SubTipoMantenimientoRest.class);
     }  
 
     
