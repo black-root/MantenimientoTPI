@@ -73,9 +73,6 @@ public class PrioridadRestTest {
         PowerMockito.whenNew(PrioridadFacadeLocal.class).withAnyArguments().thenReturn(mokpri);
         int result = rest.count();
         assertEquals(1, result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
