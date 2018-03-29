@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
@@ -18,18 +20,9 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
 @Path("solicitud")
 public class SolicitudRest implements Serializable {
 
-   
-
     @EJB
     private SolicitudFacadeLocal ejbSolicitud;
-    
-    public SolicitudFacadeLocal getEjbSolicitud() {
-        return ejbSolicitud;
-    }
 
-    public void setEjbSolicitud(SolicitudFacadeLocal ejbSolicitud) {
-        this.ejbSolicitud = ejbSolicitud;
-    }
     //devuelve todo
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -83,21 +76,40 @@ public class SolicitudRest implements Serializable {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        ejbSolicitud.remove(ejbSolicitud.find(id));
+        try {
+            if (id != null && this.ejbSolicitud != null) {
+                ejbSolicitud.remove(ejbSolicitud.find(id));
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
-    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void create(Solicitud entity) {
-        ejbSolicitud.create(entity);
+
+        try {
+            if (this.ejbSolicitud != null) {
+                ejbSolicitud.create(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
-    
+
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void edit(@PathParam("id") Integer id, Solicitud entity) {
-        ejbSolicitud.edit(entity);
+
+        try {
+            if (this.ejbSolicitud != null) {
+                ejbSolicitud.edit(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
 }

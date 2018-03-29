@@ -58,7 +58,7 @@ public class PrioridadRestTest {
         List<Prioridad> result = instance.findall();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -80,7 +80,7 @@ public class PrioridadRestTest {
 
     /**
      * Test of findById method, of class PrioridadRest.
-     */
+     *//*
     @Test
     public void testFindById() {
         System.out.println("findById");
@@ -90,7 +90,7 @@ public class PrioridadRestTest {
         Prioridad result = instance.findById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    //    fail("The test case is a prototype.");
+    }*/
     
 }
