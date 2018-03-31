@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -80,6 +81,7 @@ public class Prioridad implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<OrdenTrabajo> getOrdenTrabajoList() {
         return ordenTrabajoList;
     }
