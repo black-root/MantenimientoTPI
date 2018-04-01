@@ -5,7 +5,9 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,6 +19,7 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.PrioridadFacadeLocal;
 
@@ -52,17 +55,27 @@ public class PrioridadRestTest {
      */
     @Test
     public void testFindall() {
-        System.out.println("findall");
-        PrioridadRest instance = new PrioridadRest();
-        List<Prioridad> expResult = null;
-        List<Prioridad> result = instance.findall();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("findall");      
+        PrioridadRest rest = new PrioridadRest();
+        List<Prioridad> expResult = new ArrayList<>();
+        PrioridadFacadeLocal mokpri = Mockito.mock(PrioridadFacadeLocal.class);
+        Prioridad p = new Prioridad();
+        OrdenTrabajo ot = Mockito.mock(OrdenTrabajo.class);
+        List<OrdenTrabajo> listaorden = new ArrayList<>();
+        listaorden.add(ot);
+        p.setOrdenTrabajoList(listaorden);
+        p.setPkidPrioridad(1);
+        p.setPrioridadNivel("1");
+        expResult.add(p);
+        Mockito.when(mokpri.findAll()).thenReturn(expResult);
+        List<Prioridad> result = mokpri.findAll();
+        assertThat(result, CoreMatchers.hasItems(p));
+       
     }
 
     /**
      * Test of count method, of class PrioridadRest.
+     * @throws java.lang.Exception
      */
     @Test(expected = Exception.class)
     public void testCount() throws Exception {
