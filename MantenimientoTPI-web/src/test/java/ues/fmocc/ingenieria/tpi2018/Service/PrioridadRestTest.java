@@ -30,8 +30,10 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.PrioridadFacadeLocal;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(PrioridadRest.class)
 public class PrioridadRestTest {
-    
+    final PrioridadRest mokPrioridadRest = Mockito.mock(PrioridadRest.class);
+    final Prioridad mokPrioridad = Mockito.mock(Prioridad.class);
     public PrioridadRestTest() {
+        
     }
     
     @BeforeClass
@@ -43,7 +45,16 @@ public class PrioridadRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(Prioridad.class).withAnyArguments().thenReturn(mokPrioridad);
+        Mockito.when(mokPrioridadRest.count()).thenReturn(1);
+        Prioridad p = new Prioridad(1, "1");    
+        Prioridad p1 = new Prioridad(2);
+        List<Prioridad> listaprioridad = new ArrayList<>();   
+        listaprioridad.add(p);
+        listaprioridad.add(p1);
+        Mockito.when(mokPrioridadRest.findall()).thenReturn(listaprioridad);
+        Mockito.when(mokPrioridadRest.findById(1)).thenReturn(p);
     }
     
     @After
@@ -56,36 +67,23 @@ public class PrioridadRestTest {
     @Test
     public void testFindall() {
         System.out.println("findall");      
-        PrioridadRest rest = new PrioridadRest();
-        List<Prioridad> expResult = new ArrayList<>();
-        PrioridadFacadeLocal mokpri = Mockito.mock(PrioridadFacadeLocal.class);
-        Prioridad p = new Prioridad();
-        OrdenTrabajo ot = Mockito.mock(OrdenTrabajo.class);
-        List<OrdenTrabajo> listaorden = new ArrayList<>();
-        listaorden.add(ot);
-        p.setOrdenTrabajoList(listaorden);
-        p.setPkidPrioridad(1);
-        p.setPrioridadNivel("1");
-        expResult.add(p);
-        Mockito.when(mokpri.findAll()).thenReturn(expResult);
-        List<Prioridad> result = mokpri.findAll();
-        assertThat(result, CoreMatchers.hasItems(p));
-       
+        PrioridadRest rest = mokPrioridadRest;
+        List<Prioridad> result = rest.findall();
+        Prioridad prioridad = new Prioridad(1, "1");
+        assertThat(result, CoreMatchers.hasItems(prioridad));
     }
 
     /**
      * Test of count method, of class PrioridadRest.
      * @throws java.lang.Exception
      */
-    @Test(expected = Exception.class)
+    @Test
     public void testCount() throws Exception {
         System.out.println("count");
-        PrioridadRest rest = new PrioridadRest();
-        PrioridadFacadeLocal mokpri = Mockito.mock(PrioridadFacadeLocal.class);
-        Mockito.when(mokpri.count()).thenReturn(1);
-        PowerMockito.whenNew(PrioridadFacadeLocal.class).withAnyArguments().thenReturn(mokpri);
-        int result = rest.count();
-        assertEquals(1, result);
+        PrioridadRest instance = mokPrioridadRest;
+        int expResult = 1;
+        int result = instance.count();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -94,13 +92,12 @@ public class PrioridadRestTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        Integer id = null;
-        PrioridadRest instance = new PrioridadRest();
-        Prioridad expResult = null;
+        Integer id = 1;
+        PrioridadRest instance = mokPrioridadRest;
+        Prioridad expResult = new Prioridad(1,"1");
         Prioridad result = instance.findById(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
