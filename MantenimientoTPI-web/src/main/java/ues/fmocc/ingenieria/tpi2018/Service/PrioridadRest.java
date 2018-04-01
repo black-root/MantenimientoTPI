@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -69,6 +73,45 @@ public class PrioridadRest implements Serializable{
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
         return new Prioridad();
+    }
+    
+    @DELETE
+    @Path("{id}")
+    public void remove(@PathParam("id") Integer id) {
+        try {
+            if (id != null && this.ejbPrioridad != null) {
+                ejbPrioridad.remove(ejbPrioridad.find(id));
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(Prioridad entity) {
+
+        try {
+            if (this.ejbPrioridad != null) {
+                ejbPrioridad.create(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void edit(@PathParam("id") Integer id, Prioridad entity) {
+
+        try {
+            if (this.ejbPrioridad != null) {
+                ejbPrioridad.edit(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
 }
