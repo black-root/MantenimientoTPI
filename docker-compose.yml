@@ -1,10 +1,9 @@
 version: '2'
-
 services:
     marmantenimiento:
         image: 'mariadbtpi'
         build: ./MariaDB/.
-        container_name: 'conmdbtpi'
+        container_name: 'mariamicro'
         environment: 
         - 'MYSQL_ROOT_PASSWORD=1234'
         ports:
@@ -12,20 +11,11 @@ services:
         volumes:
         - /mysqlMantenimiento:/var/lib/mysql
     paymantenimiento: 
-        image: 'payaratpi'
-        build: ./Payarafull/.   
-        container_name: 'conpayaratpi'
+        image: 'sergiopa'
+        build: ./Payaramicro/.   
+        container_name: 'paymicro'
         depends_on:
         - 'marmantenimiento'
         ports:
-        - "8080:8080"
-        - "4848:4848"
-        entrypoint:
-        - "./wait-for-mariadb.sh"
-        - "172.18.0.1:3300"
-        - "-t"
-        - "30"
-        - "--"
-        - "bin/asadmin"
-        - "start-domain"
-        - "-v"
+        - "8080:8181"
+
