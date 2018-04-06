@@ -18,32 +18,32 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.PasosFacadeLocal;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos;
+import ues.fmoocc.ingenieria.tpi2018.Sessions.ProcedimientosFacadeLocal;
 
 /**
  *
  * @author Daniel Murillo
  */
 @Stateless
-@Path("pasos")
-public class PasosRest implements Serializable{
+@Path("procedimientos")
+public class ProcedimientosRest implements Serializable{
     
     @EJB
-    private PasosFacadeLocal pasosFacade;
+    private ProcedimientosFacadeLocal procFacade;
     
        
     @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em = null;
     
-    //Obtener lista de pasos en formato Json
+    //Obtener lista de procedimientos en formato Json
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Pasos> findAll() {
+    public List<Procedimientos> findAll() {
         List salida = null;
         try {
-            if (pasosFacade != null) {
-                return pasosFacade.findAll();
+            if (procFacade != null) {
+                return procFacade.findAll();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -51,15 +51,15 @@ public class PasosRest implements Serializable{
         return salida;
     }
 
-    //Obtener un paso por id: ej. localhost:8080/ManteniemientoTPI/webresources/pasos/1
+    //Obtener un procedimiento por id: ej. localhost:8080/ManteniemientoTPI/webresources/procedimientos/1
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Pasos findById(@PathParam("id") int id){
-        Pasos salida = new Pasos();
+    public Procedimientos findById(@PathParam("id") int id){
+        Procedimientos salida = new Procedimientos();
         try{
-           if(pasosFacade!=null){
-               return pasosFacade.find(id);
+           if(procFacade!=null){
+               return procFacade.find(id);
            }
         }    catch(Exception e){
            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -68,14 +68,14 @@ public class PasosRest implements Serializable{
     }
     
     
-    //Elimina un paso de la base de datos
+    //Elimina un procedimiento de la base de datos
     @DELETE
     @Path("/{id}")
-    public Response borrarPaso(@PathParam("id") Integer id){
+    public Response borrarProcedimiento(@PathParam("id") Integer id){
         Response salida = Response.status(Response.Status.NOT_FOUND).build();
        try{
-           if(id!=null && pasosFacade!=null){
-               pasosFacade.remove(pasosFacade.find(id));
+           if(id!=null && procFacade!=null){
+               procFacade.remove(procFacade.find(id));
                salida = Response.status(Response.Status.OK).build();
            }
         }    catch(Exception e){
@@ -86,14 +86,14 @@ public class PasosRest implements Serializable{
     }
     
     
-    //Guardar un paso en la base de datos
+    //Guardar un procedimiento en la base de datos
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarPaso(Pasos paso){
-       try{
-            if(this.pasosFacade!=null){
-             pasosFacade.create(paso);
-        return Response.status(Response.Status.CREATED).entity(paso).build();  
+    public Response guardarProcedimimento(Procedimientos proc){
+        try{
+            if(this.procFacade!=null){
+             procFacade.create(proc);
+        return Response.status(Response.Status.CREATED).entity(proc).build();  
         }
         }catch(Exception e){
              Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -105,10 +105,10 @@ public class PasosRest implements Serializable{
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarPaso(@PathParam("id") Integer id, Pasos paso) {
+    public Response editarProcedimiento(@PathParam("id") Integer id, Procedimientos proc) {
         try {
-            if (this.pasosFacade != null) {
-                pasosFacade.edit(paso);
+            if (this.procFacade != null) {
+                procFacade.edit(proc);
                 return Response.status(Response.Status.OK).build();
             }
         } catch (Exception e) {
@@ -116,8 +116,6 @@ public class PasosRest implements Serializable{
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
-    
-    
-    
+
     
 }

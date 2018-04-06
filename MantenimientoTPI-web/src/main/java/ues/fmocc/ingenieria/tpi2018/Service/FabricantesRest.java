@@ -19,9 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.FabricantesFacadeLocal;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.PasosFacadeLocal;
 
 /**
  *
