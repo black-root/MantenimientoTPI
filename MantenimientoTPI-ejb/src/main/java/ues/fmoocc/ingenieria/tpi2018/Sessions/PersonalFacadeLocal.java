@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Personal;
 
@@ -14,20 +13,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Personal;
  * @author yisusdebian
  */
 @Local
-public interface PersonalFacadeLocal {
+public interface PersonalFacadeLocal extends AbstractFacadeInterface<Personal>{
 
-    void create(Personal personal);
-
-    void edit(Personal personal);
-
-    void remove(Personal personal);
-
-    Personal find(Object id);
-
-    List<Personal> findAll();
-
-    List<Personal> findRange(int[] range);
-
-    int count();
+    
     
 }

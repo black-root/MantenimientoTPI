@@ -14,20 +14,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo;
  * @author yisusdebian
  */
 @Local
-public interface HistorialTrabajoFacadeLocal {
+public interface HistorialTrabajoFacadeLocal extends AbstractFacadeInterface<HistorialTrabajo>{
 
-    void create(HistorialTrabajo historialTrabajo);
-
-    void edit(HistorialTrabajo historialTrabajo);
-
-    void remove(HistorialTrabajo historialTrabajo);
-
-    HistorialTrabajo find(Object id);
-
-    List<HistorialTrabajo> findAll();
-
-    List<HistorialTrabajo> findRange(int[] range);
-
-    int count();
-    
 }

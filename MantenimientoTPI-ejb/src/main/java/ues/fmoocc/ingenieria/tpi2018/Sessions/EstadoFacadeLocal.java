@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
 
@@ -14,20 +13,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
  * @author yisusdebian
  */
 @Local
-public interface EstadoFacadeLocal {
+public interface EstadoFacadeLocal extends AbstractFacadeInterface<Estado>{
 
-    void create(Estado estado);
-
-    void edit(Estado estado);
-
-    void remove(Estado estado);
-
-    Estado find(Object id);
-
-    List<Estado> findAll();
-
-    List<Estado> findRange(int[] range);
-
-    int count();
-    
 }

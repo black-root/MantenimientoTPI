@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Unidad;
 
@@ -14,20 +13,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Unidad;
  * @author yisusdebian
  */
 @Local
-public interface UnidadFacadeLocal {
+public interface UnidadFacadeLocal extends AbstractFacadeInterface<Unidad> {
 
-    void create(Unidad unidad);
-
-    void edit(Unidad unidad);
-
-    void remove(Unidad unidad);
-
-    Unidad find(Object id);
-
-    List<Unidad> findAll();
-
-    List<Unidad> findRange(int[] range);
-
-    int count();
     
 }

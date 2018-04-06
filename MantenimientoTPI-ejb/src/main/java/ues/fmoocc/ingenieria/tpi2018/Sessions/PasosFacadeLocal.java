@@ -5,7 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
+
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
 
@@ -14,20 +14,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
  * @author yisusdebian
  */
 @Local
-public interface PasosFacadeLocal {
+public interface PasosFacadeLocal extends AbstractFacadeInterface<Pasos>{
 
-    void create(Pasos pasos);
-
-    void edit(Pasos pasos);
-
-    void remove(Pasos pasos);
-
-    Pasos find(Object id);
-
-    List<Pasos> findAll();
-
-    List<Pasos> findRange(int[] range);
-
-    int count();
-    
 }

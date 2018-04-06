@@ -14,20 +14,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
  * @author yisusdebian
  */
 @Local
-public interface FabricantesFacadeLocal {
-
-    void create(Fabricantes fabricantes);
-
-    void edit(Fabricantes fabricantes);
-
-    void remove(Fabricantes fabricantes);
-
-    Fabricantes find(Object id);
-
-    List<Fabricantes> findAll();
-
-    List<Fabricantes> findRange(int[] range);
-
-    int count();
+public interface FabricantesFacadeLocal extends AbstractFacadeInterface<Fabricantes>{
     
 }

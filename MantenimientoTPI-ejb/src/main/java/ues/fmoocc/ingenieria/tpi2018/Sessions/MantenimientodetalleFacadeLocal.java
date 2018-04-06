@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Mantenimientodetalle;
 
@@ -14,20 +13,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Mantenimientodetalle;
  * @author yisusdebian
  */
 @Local
-public interface MantenimientodetalleFacadeLocal {
+public interface MantenimientodetalleFacadeLocal extends AbstractFacadeInterface<Mantenimientodetalle>{
 
-    void create(Mantenimientodetalle mantenimientodetalle);
-
-    void edit(Mantenimientodetalle mantenimientodetalle);
-
-    void remove(Mantenimientodetalle mantenimientodetalle);
-
-    Mantenimientodetalle find(Object id);
-
-    List<Mantenimientodetalle> findAll();
-
-    List<Mantenimientodetalle> findRange(int[] range);
-
-    int count();
-    
 }

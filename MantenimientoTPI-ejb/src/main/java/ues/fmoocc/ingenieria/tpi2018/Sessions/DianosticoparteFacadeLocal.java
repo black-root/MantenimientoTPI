@@ -14,20 +14,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
  * @author yisusdebian
  */
 @Local
-public interface DianosticoparteFacadeLocal {
+public interface DianosticoparteFacadeLocal extends AbstractFacadeInterface<Dianosticoparte>{
 
-    void create(Dianosticoparte dianosticoparte);
-
-    void edit(Dianosticoparte dianosticoparte);
-
-    void remove(Dianosticoparte dianosticoparte);
-
-    Dianosticoparte find(Object id);
-
-    List<Dianosticoparte> findAll();
-
-    List<Dianosticoparte> findRange(int[] range);
-
-    int count();
     
 }

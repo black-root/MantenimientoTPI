@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos;
 
@@ -14,20 +13,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos;
  * @author yisusdebian
  */
 @Local
-public interface ProcedimientosFacadeLocal {
+public interface ProcedimientosFacadeLocal extends AbstractFacadeInterface<Procedimientos>{
 
-    void create(Procedimientos procedimientos);
-
-    void edit(Procedimientos procedimientos);
-
-    void remove(Procedimientos procedimientos);
-
-    Procedimientos find(Object id);
-
-    List<Procedimientos> findAll();
-
-    List<Procedimientos> findRange(int[] range);
-
-    int count();
-    
 }

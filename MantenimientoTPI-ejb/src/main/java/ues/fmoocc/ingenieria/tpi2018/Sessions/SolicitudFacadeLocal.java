@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
 
@@ -14,20 +13,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
  * @author yisusdebian
  */
 @Local
-public interface SolicitudFacadeLocal {
+public interface SolicitudFacadeLocal extends AbstractFacadeInterface<Solicitud>{
 
-    void create(Solicitud solicitud);
-
-    void edit(Solicitud solicitud);
-
-    void remove(Solicitud solicitud);
-
-    Solicitud find(Object id);
-
-    List<Solicitud> findAll();
-
-    List<Solicitud> findRange(int[] range);
-
-    int count();
     
 }

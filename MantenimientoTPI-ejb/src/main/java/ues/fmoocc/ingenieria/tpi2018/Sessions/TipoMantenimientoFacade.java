@@ -28,5 +28,5 @@ public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> i
     public TipoMantenimientoFacade() {
         super(TipoMantenimiento.class);
     }
-    
+
 }
