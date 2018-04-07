@@ -11,7 +11,6 @@ import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -22,7 +21,7 @@ import org.junit.runners.model.Statement;
  */
 public class EntityManagerProvider implements TestRule{
     protected static EntityManagerFactory emf;
-    public static EntityManager em; 
+    protected static EntityManager em; 
     
     @BeforeClass
     public static void init(){
@@ -40,12 +39,14 @@ public class EntityManagerProvider implements TestRule{
         em.close();
         emf.close();
     }
-    
-    
 
+    public static EntityManager getEm() {
+        return em;
+    }
 
     @Override
     public Statement apply(Statement stmnt, Description d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
