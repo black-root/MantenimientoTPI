@@ -5,15 +5,11 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import javax.persistence.EntityTransaction;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
 import org.powermock.reflect.Whitebox;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
 
@@ -22,17 +18,11 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
  * @author sergio
  */
 public class RolFacadeTest {
-    protected static EntityManagerFactory emf;
-    protected static EntityManager em;
+    @Rule public EntityManagerProvider emProvider = new EntityManagerProvider("mantenimientoPU");
     public RolFacadeTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-        
-        emf = Persistence.createEntityManagerFactory("mantenimientoPU");
-        em = emf.createEntityManager();
-    }
+    
 //
 //    /**
 //     * Test of find method, of class TipoMantenimientoFacade.
@@ -48,6 +38,8 @@ public class RolFacadeTest {
     @Test
     public void testCrear() throws Exception {
         System.out.println("crear");
+        EntityManager em = emProvider.em();
+  
         Rol tipo1 = new Rol(1, "esto es una descripcion");
         Rol tipo2 = new Rol(2, "esto es una prueba");
         
@@ -61,10 +53,10 @@ public class RolFacadeTest {
         boolean test2 = Rf.crear(tipo1);
         boolean test3 = Rf.crear(tipo2);
 
-        assertFalse(test1);
-        assertTrue(test2);
+        assertFalse(test1);//verifica si no se crea un valor nulo
+        assertTrue(test2);// verifica si se crean tipo1 y tipo2
         assertTrue(test3);
-        assertEquals(2, Rf.findAll().size());
+        assertEquals(2, Rf.findAll().size());//si se crean verifica en la bd cuantos datos hay
    }
 //
 //    /**
@@ -106,15 +98,5 @@ public class RolFacadeTest {
 //    public void testCount() throws Exception {
 //       
 //    }
-     @After
-    public void cleanup() {
-        em.getTransaction().rollback();
-    }
     
-    @AfterClass
-    public static void tearDownClass() {
-        em.clear();
-        em.close();
-        emf.close();
-    }
 }
