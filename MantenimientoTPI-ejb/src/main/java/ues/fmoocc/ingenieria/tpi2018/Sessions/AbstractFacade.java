@@ -98,5 +98,8 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+    public List<T> findWithDescripcion(String namedQueryName, String name) {
+        return getEntityManager().createNamedQuery(namedQueryName).setParameter("descripcion", name).getResultList();
+    }
+
 }

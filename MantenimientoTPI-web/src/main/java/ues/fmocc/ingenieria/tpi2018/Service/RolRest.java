@@ -25,6 +25,7 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
  * @author yisusdebian
  */
 @Path("rol")
+@Produces({MediaType.APPLICATION_JSON})
 public class RolRest implements Serializable {
   
     @EJB
@@ -32,7 +33,7 @@ public class RolRest implements Serializable {
 
     //devuelve todo
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+//    @Produces({MediaType.APPLICATION_JSON})
     public List<Rol> findall() {
         List salida = null;
         try {
@@ -48,7 +49,7 @@ public class RolRest implements Serializable {
 
     @Path("count")
     @GET
-    @Produces({MediaType.TEXT_PLAIN})
+//    @Produces({MediaType.TEXT_PLAIN})
     public Integer count() {
 
         try {
@@ -64,10 +65,10 @@ public class RolRest implements Serializable {
 
     //busca uno en particular
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    @Path("/{id:\\d+}")
+//    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Rol findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbRol != null) {
@@ -79,7 +80,22 @@ public class RolRest implements Serializable {
         }
         return new Rol();
     }
+    
+    @GET
+    @Path("/{descripcion}")
+    public List<Rol> findByDescripcion(@PathParam("descripcion") String descripcion){
+        try {
+            if (ejbRol != null) {
+                return ejbRol.findWithDescripcion("Rol.findByDescripcion", descripcion);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
 
+        }
+        return null;
+    }
+    
+    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

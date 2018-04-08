@@ -31,4 +31,6 @@ public interface AbstractFacadeInterface <T> {
     List<T> findRange(int[] range);
 
     int count();
+    
+    List<T> findWithDescripcion(String namedQueryName, String name);
 }
