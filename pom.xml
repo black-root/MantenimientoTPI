@@ -10,5 +10,6 @@
     <module>MantenimientoTPI-ear</module>
     <module>MantenimientoTPI-web</module>
     <module>MantenimientoTPI-ejb</module>
+    <module>LibreriaMantenimiento</module>
   </modules>
 </project>

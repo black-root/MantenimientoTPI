@@ -120,14 +120,26 @@ public class RolFacadeTest {
         assertEquals(list, rf.findAll());
     }
     
-//
-//    /**
-//     * Test of findRange method, of class TipoMantenimientoFacade.
-//     */
-//    @Test
-//    public void testFindRange() throws Exception {
-//        
-//    }
+
+    /**
+     * Test of findRange method, of class TipoMantenimientoFacade.
+     */
+    @Test
+    public void testFindRange() throws Exception {
+        EntityManager em = emProvider.em();
+        int[] rango = {0,1};
+        Rol rol1 = new Rol(1);
+        Rol rol2 = new Rol(2);
+        List<Rol> list = new ArrayList<>();
+        list.add(rol2);
+        list.add(rol1);
+        RolFacade rf = new RolFacade();
+        Whitebox.setInternalState(rf, "em", em);
+        rf.getEntityManager().getTransaction().begin();
+        rf.getEntityManager().persist(rol1);
+        rf.getEntityManager().persist(rol2);
+        assertEquals(list, rf.findRange(rango));
+    }
 
     /**
      * Test of count method, of class TipoMantenimientoFacade.

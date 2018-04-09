@@ -26,7 +26,11 @@
             <artifactId>jsf-api</artifactId>
             <version>2.2.16</version>
         </dependency>
-
+        <dependency>
+            <groupId>sv.edu.ues.fmoocc.ingenieria.tpi2018.Entities</groupId>
+            <artifactId>LibreriaMantenimiento</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>MantenimientoTPI-ejb</artifactId>

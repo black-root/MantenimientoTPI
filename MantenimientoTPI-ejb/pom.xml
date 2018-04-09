@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>sv.edu.ues.fmoocc.ingenieria.tpi2018.Entities</groupId>
+            <artifactId>LibreriaMantenimiento</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.8.4</version>

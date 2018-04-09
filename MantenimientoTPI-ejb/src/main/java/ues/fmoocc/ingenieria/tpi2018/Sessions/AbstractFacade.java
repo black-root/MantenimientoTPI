@@ -101,5 +101,7 @@ public abstract class AbstractFacade<T> {
     public List<T> findWithDescripcion(String namedQueryName, String name) {
         return getEntityManager().createNamedQuery(namedQueryName).setParameter("descripcion", name).getResultList();
     }
-
+    public List<T> findWithNombre(String namedQueryName, String name) {
+        return getEntityManager().createNamedQuery(namedQueryName).setParameter("nombre", name).getResultList();
+    }
 }

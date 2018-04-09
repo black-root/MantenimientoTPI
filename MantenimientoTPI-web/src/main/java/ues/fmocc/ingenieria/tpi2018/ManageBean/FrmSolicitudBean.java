@@ -91,8 +91,8 @@ public class FrmSolicitudBean implements Serializable {
     // tengo dudas si validar todos los campos
     public void actualizar() {
 
-        if (this.solicitud.getSolicitante().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true 
-                && this.solicitud.getSolicitante() != null && this.solicitud.getDescripcion() != null) {
+        if (this.solicitud.getNombre().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true 
+                && this.solicitud.getNombre()!= null && this.solicitud.getDescripcion() != null) {
 
             try {
                 if (this.solicitud!= null && this.ejbSolicitud != null) {
@@ -110,8 +110,8 @@ public class FrmSolicitudBean implements Serializable {
 
     public void crear() {
 
-        if (this.solicitud.getSolicitante().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true 
-                && this.solicitud.getSolicitante() != null && this.solicitud.getDescripcion() != null) {
+        if (this.solicitud.getNombre().isEmpty() != true && this.solicitud.getDescripcion().isEmpty() != true 
+                && this.solicitud.getNombre()!= null && this.solicitud.getDescripcion() != null) {
 
             try {
                 if (this.solicitud != null && this.ejbSolicitud != null) {
