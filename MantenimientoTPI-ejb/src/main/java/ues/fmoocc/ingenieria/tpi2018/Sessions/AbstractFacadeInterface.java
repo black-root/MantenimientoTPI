@@ -29,7 +29,7 @@ public interface AbstractFacadeInterface<T> {
 
     List<T> findAll();
 
-    List<T> findRange(int[] range);
+    List<T> findRange(int lower, int higher);
 
     int count();
 
