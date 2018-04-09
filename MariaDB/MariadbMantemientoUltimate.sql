@@ -55,7 +55,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`Solicitud` (
   `pk_idSolicitud` INT(3) NOT NULL AUTO_INCREMENT,
-  `solicitante` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   `descripcion` TEXT NULL,
   `correo` VARCHAR(150) NULL,
   PRIMARY KEY (`pk_idSolicitud`))
@@ -68,7 +68,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`Unidad` (
   `pk_idUnidad` INT(2) NOT NULL AUTO_INCREMENT,
-  `UnidadNombre` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
   PRIMARY KEY (`pk_idUnidad`))
 ENGINE = InnoDB;
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`OrdenTrabajo` (
   `pk_idOrdenTrabajo` INT(6) NOT NULL AUTO_INCREMENT,
   `solicitudDescripcion` TEXT NULL,
   `solicitudFecha` DATE NULL,
-  `clienteNombre` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NULL,
   `clienteEmail` VARCHAR(45) NULL,
   `clienteTelefono` VARCHAR(15) NULL,
   `clienteDomicilio` VARCHAR(45) NULL,
@@ -147,7 +147,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`fabricantes` (
   `idFabricante` INT NOT NULL AUTO_INCREMENT,
-  `nombre_Fabricante` VARCHAR(60) NOT NULL,
+  `nombre` VARCHAR(60) NOT NULL,
   `descripcion_Fabricante` TEXT NULL,
   `correo_Fabricante` VARCHAR(45) NULL,
   `telefono` VARCHAR(45) NULL,
@@ -253,7 +253,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`Dianostico_parte` (
   `pk_idDianostico_parte` INT(3) NOT NULL,
-  `descripcionProblema` VARCHAR(45) NOT NULL,
+  `descripcion` VARCHAR(45) NOT NULL,
   `Diagnostico_pK_idDiagnostico` INT(2) NOT NULL,
   `Diagnostico_OrdenTrabajo_pk_idOrdenTrabajo` INT(6) NOT NULL,
   `Equipo_detalle_pk_EDnoSerie` VARCHAR(15) NOT NULL,
@@ -317,7 +317,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mantenimientoPC`.`Estado` (
   `pk_idEstado` INT(2) NOT NULL,
-  `EstadoNombre` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   `descripcion` TEXT NULL,
   `Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento` INT(3) NOT NULL,
   `Procedimientos_Pasos_pk_idPaso` INT(3) NOT NULL,

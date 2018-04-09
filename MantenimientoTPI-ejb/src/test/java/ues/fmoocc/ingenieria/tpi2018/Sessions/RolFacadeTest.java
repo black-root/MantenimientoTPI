@@ -134,7 +134,7 @@ public class RolFacadeTest {
      */
     @Test
     public void testCount() throws Exception {
-       EntityManager em = emProvider.em();
+        EntityManager em = emProvider.em();
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
         List<Rol> list = new ArrayList<>();
@@ -146,6 +146,18 @@ public class RolFacadeTest {
         rf.getEntityManager().persist(rol1);
         rf.getEntityManager().persist(rol2);
         assertEquals(list.size(), rf.count());
+    }
+    
+    @Test 
+    public void testfindWithDescripcion() throws Exception{
+        EntityManager em = emProvider.em();
+        Rol rol = new Rol(1, "esto es una prueba");
+        RolFacade rf = new RolFacade();
+        Whitebox.setInternalState(rf, "em", em);
+        rf.getEntityManager().getTransaction().begin();
+        rf.getEntityManager().persist(rol);
+        assertEquals(rol, rf.findWithDescripcion("Rol.findByDescripcion", rol.getDescripcion()).get(0));
+    
     }
     
 }
