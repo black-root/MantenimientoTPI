@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ues.fmoocc.ingenieria.tpi2018_LibreriaMantenimiento_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Rol</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Personal</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Diagnostico</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Estado</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Telefono</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Unidad</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Calendario</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Pasos</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Mantenimientodetalle</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3300/mantenimientoPC?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+    </properties>
+  </persistence-unit>
+</persistence>
