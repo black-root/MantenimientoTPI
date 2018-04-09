@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -174,6 +175,7 @@ public class Equipodetalle implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Dianosticoparte> getDianosticoparteList() {
         return dianosticoparteList;
     }
@@ -183,6 +185,7 @@ public class Equipodetalle implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Equipodetalle> getEquipodetalleList() {
         return equipodetalleList;
     }
@@ -208,6 +211,7 @@ public class Equipodetalle implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Mantenimientodetalle> getMantenimientodetalleList() {
         return mantenimientodetalleList;
     }

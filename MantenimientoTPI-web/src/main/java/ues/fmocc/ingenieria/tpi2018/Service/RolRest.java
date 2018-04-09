@@ -33,7 +33,7 @@ public class RolRest implements Serializable {
 
     //devuelve todo
     @GET
-//    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Rol> findall() {
         List salida = null;
         try {
@@ -49,7 +49,7 @@ public class RolRest implements Serializable {
 
     @Path("count")
     @GET
-//    @Produces({MediaType.TEXT_PLAIN})
+   @Produces({MediaType.TEXT_PLAIN})
     public Integer count() {
 
         try {
@@ -66,7 +66,7 @@ public class RolRest implements Serializable {
     //busca uno en particular
     @GET
     @Path("/{id:\\d+}")
-//    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Rol findById(
             @PathParam("id") int id
     ) {
@@ -83,6 +83,7 @@ public class RolRest implements Serializable {
     
     @GET
     @Path("/{descripcion}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public List<Rol> findByDescripcion(@PathParam("descripcion") String descripcion){
         try {
             if (ejbRol != null) {

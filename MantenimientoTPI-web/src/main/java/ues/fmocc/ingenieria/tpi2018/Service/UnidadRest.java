@@ -23,7 +23,8 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.UnidadFacadeLocal;
  */
 @Path("unidad")
 public class UnidadRest implements Serializable {
-       @EJB
+
+    @EJB
     private UnidadFacadeLocal ejbUnidad;
 
     //devuelve todo
@@ -60,10 +61,10 @@ public class UnidadRest implements Serializable {
 
     //busca uno en particular
     @GET
-    @Path("{id}")
+    @Path("/{id:\\d+}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Unidad findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbUnidad != null) {
@@ -74,6 +75,21 @@ public class UnidadRest implements Serializable {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
         return new Unidad();
+    }
+
+    @GET
+    @Path("/{nombre}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<Unidad> findByNombre(@PathParam("nombre") String nombre) {
+        try {
+            if (ejbUnidad != null) {
+                return ejbUnidad.findWithNombre("Unidad.findByNombre", nombre);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
     }
 
     @DELETE

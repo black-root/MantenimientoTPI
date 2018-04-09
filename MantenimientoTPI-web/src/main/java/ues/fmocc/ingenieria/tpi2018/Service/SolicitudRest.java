@@ -1,12 +1,11 @@
 package ues.fmocc.ingenieria.tpi2018.Service;
+
 import java.io.Serializable;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
@@ -54,12 +53,12 @@ public class SolicitudRest implements Serializable {
         return 0;
     }
 
-    //busca uno en particular
+      //busca uno en particular
     @GET
-    @Path("{id}")
+    @Path("/{id:\\d+}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Solicitud findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbSolicitud != null) {
@@ -71,7 +70,22 @@ public class SolicitudRest implements Serializable {
         }
         return new Solicitud();
     }
+    
+    @GET
+    @Path("/{nombre}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<Solicitud> findBySolicitud(@PathParam("nombre") String nombre){
+        try {
+            if (ejbSolicitud != null) {
+                return ejbSolicitud.findWithNombre("Solicitud.findByNombre", nombre);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
 
+        }
+        return null;
+    }
+    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

@@ -24,7 +24,7 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
  * @author yisusdebian
  */
 @Path("personal")
-public class PersonalRest implements Serializable{
+public class PersonalRest implements Serializable {
 
     @EJB
     private PersonalFacadeLocal ejbPersonal;
@@ -35,7 +35,7 @@ public class PersonalRest implements Serializable{
     public List<Personal> findall() {
         List salida = null;
         try {
-            if (ejbPersonal!= null) {
+            if (ejbPersonal != null) {
                 return ejbPersonal.findAll();
             }
         } catch (Exception e) {
@@ -63,10 +63,10 @@ public class PersonalRest implements Serializable{
 
     //busca uno en particular
     @GET
-    @Path("{id}")
+    @Path("/{id:\\d+}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public Personal findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbPersonal != null) {
@@ -77,6 +77,21 @@ public class PersonalRest implements Serializable{
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
         return new Personal();
+    }
+
+    @GET
+    @Path("/{nombre}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<Personal> findByNombre(@PathParam("nombre") String nombre) {
+        try {
+            if (ejbPersonal != null) {
+                return ejbPersonal.findWithNombre("Personal.findByNombre", nombre);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
     }
 
     @DELETE
@@ -117,5 +132,5 @@ public class PersonalRest implements Serializable{
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
     }
-   
+
 }

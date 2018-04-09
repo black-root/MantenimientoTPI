@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -57,6 +58,7 @@ public class Diagnostico implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Dianosticoparte> getDianosticoparteList() {
         return dianosticoparteList;
     }

@@ -27,24 +27,41 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.SubTipoMantenimientoFacadeLocal;
  * @author yisusdebian
  */
 @Path("subtipomantenimiento")
-public class SubTipoMantenimientoRest implements Serializable  {
-     @EJB
+public class SubTipoMantenimientoRest implements Serializable {
+
+    @EJB
     private SubTipoMantenimientoFacadeLocal ejbSubTipoMantenimiento;
 
-    //devuelve todo
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<SubTipoMantenimiento> findall() {
-        List salida = null;
+    @Path("/{id:\\d+}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public SubTipoMantenimiento findById(
+            @PathParam("id") int id
+    ) {
         try {
             if (ejbSubTipoMantenimiento != null) {
-                return ejbSubTipoMantenimiento.findAll();
+                return ejbSubTipoMantenimiento.find(id);
             }
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
+        return new SubTipoMantenimiento();
+    }
 
-        return salida;
+    @GET
+    @Path("/{descripcion}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<SubTipoMantenimiento> findByDescripcion(@PathParam("descripcion") String descripcion) {
+        try {
+            if (ejbSubTipoMantenimiento != null) {
+                return ejbSubTipoMantenimiento.findWithDescripcion("SubTipoDescripcion.findByDescripcion", descripcion);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
     }
 
     @Path("count")
@@ -85,7 +102,7 @@ public class SubTipoMantenimientoRest implements Serializable  {
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         try {
-            if (id != null && this.ejbSubTipoMantenimiento!= null) {
+            if (id != null && this.ejbSubTipoMantenimiento != null) {
                 ejbSubTipoMantenimiento.remove(ejbSubTipoMantenimiento.find(id));
             }
         } catch (Exception e) {
