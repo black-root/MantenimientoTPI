@@ -25,7 +25,7 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
  * @author yisusdebian
  */
 @Path("rol")
-@Produces({MediaType.APPLICATION_JSON})
+//@Produces({MediaType.APPLICATION_JSON})
 public class RolRest implements Serializable {
   
     @EJB
