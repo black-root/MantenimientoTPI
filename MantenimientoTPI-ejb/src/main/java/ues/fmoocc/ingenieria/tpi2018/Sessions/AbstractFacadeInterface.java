@@ -33,4 +33,6 @@ public interface AbstractFacadeInterface <T> {
     int count();
     
     List<T> findWithDescripcion(String namedQueryName, String name);
+    
+    List<T> findWithNombre(String namedQueryName, String name);
 }
