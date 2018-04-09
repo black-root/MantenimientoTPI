@@ -109,15 +109,19 @@ public class RolFacadeTest {
         EntityManager em = emProvider.em();
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
-        List<Rol> list = new ArrayList<>();
-        list.add(rol1);
-        list.add(rol2);
+        Rol rol3 = new Rol(3);
+        ArrayList<Rol> list = new ArrayList<Rol>();
+        list.add(0, rol1);
+        list.add(1, rol2);
+        list.add(2, rol3);
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
-        rf.getEntityManager().persist(rol2);
         rf.getEntityManager().persist(rol1);
-        assertEquals(list, rf.findAll());
+        rf.getEntityManager().persist(rol2);
+        rf.getEntityManager().persist(rol3);
+        assertEquals(list.toString(), rf.findAll().toString());
+        assertEquals(list.size(), rf.findAll().size());
     }
     
 
