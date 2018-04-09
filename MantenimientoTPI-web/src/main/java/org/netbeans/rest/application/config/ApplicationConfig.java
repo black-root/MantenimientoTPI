@@ -34,6 +34,8 @@ public class ApplicationConfig extends Application {
         resources.add(MantenimientoDetalleRest.class);
         resources.add(PersonalRest.class);
         
+        resources.add(PasosRest.class);
+        
         resources.add(NewCrossOriginResourceSharingFilter.class);
         return resources;
     }
