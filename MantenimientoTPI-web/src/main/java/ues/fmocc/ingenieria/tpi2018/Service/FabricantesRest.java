@@ -25,99 +25,114 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.FabricantesFacadeLocal;
  *
  * @author Daniel Murillo
  */
-@Stateless
 @Path("fabricantes")
 public class FabricantesRest implements Serializable{
     
     @EJB
-    private FabricantesFacadeLocal fabricanteFacade;
-    
-       
-    @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em = null;
-    
-    //Obtener lista de fabricantes en formato Json
+    private FabricantesFacadeLocal ejbFabricante;
+
+    //devuelve todo
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Fabricantes> findAll() {
+    public List<Fabricantes> findall() {
         List salida = null;
         try {
-            if (fabricanteFacade != null) {
-                return fabricanteFacade.findAll();
+            if (ejbFabricante!= null) {
+                return ejbFabricante.findAll();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
+
         return salida;
     }
 
-    //Obtener un fabricante por id: ej. localhost:8080/ManteniemientoTPI/webresources/fabricantes/1
+    @Path("count")
     @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Fabricantes findById(@PathParam("id") int id){
-        Fabricantes salida = new Fabricantes();
-        try{
-           if(fabricanteFacade!=null){
-               return fabricanteFacade.find(id);
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        return salida;
-    }
-    
-    
-    //Elimina un fabricante de la base de datos
-    @DELETE
-    @Path("/{id}")
-    public Response borrarFabricante(@PathParam("id") Integer id){
-        Response salida = Response.status(Response.Status.NOT_FOUND).build();
-       try{
-           if(id!=null && fabricanteFacade!=null){
-               fabricanteFacade.remove(fabricanteFacade.find(id));
-               salida = Response.status(Response.Status.OK).build();
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return salida;
-    }
-    
-    
-    //Guardar un fabricante en la base de datos
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarFabricante(Fabricantes fabricante){
-        try{
-            if(this.fabricanteFacade!=null){
-             fabricanteFacade.create(fabricante);
-        return Response.status(Response.Status.CREATED).entity(fabricante).build();  
-        }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarFabricante(@PathParam("id") Integer id, Fabricantes fabricante) {
+   @Produces({MediaType.TEXT_PLAIN})
+    public Integer count() {
+
         try {
-            if (this.fabricanteFacade != null) {
-                fabricanteFacade.edit(fabricante);
-                return Response.status(Response.Status.OK).build();
+            if (ejbFabricante != null) {
+                return ejbFabricante.count();
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+        return 0;
+    }
+
+    //busca uno en particular
+    @GET
+    @Path("/{id:\\d+}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public Fabricantes findById(
+            @PathParam("id") int id
+    ) {
+        try {
+            if (ejbFabricante != null) {
+                return ejbFabricante.find(id);
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+        return new Fabricantes();
+    }
+    
+    @GET
+    @Path("/{descripcion}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<Fabricantes> findByDescripcion(@PathParam("descripcion") String descripcion){
+        try {
+            if (ejbFabricante != null) {
+                return ejbFabricante.findWithDescripcion("Fabricantes.findByDescripcion", descripcion);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
+    }
+    
+    
+    @DELETE
+    @Path("{id}")
+    public void remove(@PathParam("id") Integer id) {
+        try {
+            if (id != null && this.ejbFabricante != null) {
+                ejbFabricante.remove(ejbFabricante.find(id));
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
     }
-    
-    
-    
-    
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(Fabricantes entity) {
+
+        try {
+            if (this.ejbFabricante != null) {
+                ejbFabricante.create(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void edit(@PathParam("id") Integer id, Fabricantes entity) {
+
+        try {
+            if (this.ejbFabricante != null) {
+                ejbFabricante.edit(entity);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
 }
