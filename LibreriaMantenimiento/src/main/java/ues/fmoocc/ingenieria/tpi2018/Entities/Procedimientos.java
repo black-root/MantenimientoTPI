@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Procedimientos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Procedimientos.findAll", query = "SELECT p FROM Procedimientos p")
@@ -39,17 +39,17 @@ public class Procedimientos implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProcedimientosPK procedimientosPK;
-    @Column(name = "nombre_Procedimiento", length = 60)
+    @Column(name = "nombre_Procedimiento")
     private String nombreProcedimiento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "procedimientos", fetch = FetchType.LAZY)
     private List<Estado> estadoList;
-    @JoinColumn(name = "Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "pk_idDianostico_parte", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "pk_idDianostico_parte", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Dianosticoparte dianosticoparte;
-    @JoinColumn(name = "Pasos_pk_idPaso", referencedColumnName = "pk_idPaso", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "Pasos_pk_idPaso", referencedColumnName = "pk_idPaso", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pasos pasos;
-    @JoinColumn(name = "Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "pk_idTipo_procedimiento", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "pk_idTipo_procedimiento", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipoprocedimiento tipoprocedimiento;
 

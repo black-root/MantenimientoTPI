@@ -28,7 +28,7 @@ public class EntityManagerProvider implements TestRule{
     
     @BeforeClass
     public static void init(){
-        emf = Persistence.createEntityManagerFactory("mantenimientoTestPU");
+        emf = Persistence.createEntityManagerFactory("mantenimientoPU");
         em = emf.createEntityManager();
     
     }

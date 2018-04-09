@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Prioridad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prioridad.findAll", query = "SELECT p FROM Prioridad p")
@@ -39,10 +39,10 @@ public class Prioridad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idPrioridad", nullable = false)
+    @Column(name = "pk_idPrioridad")
     private Integer pkidPrioridad;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "PrioridadNivel")
     private String prioridadNivel;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prioridadpkidPrioridad", fetch = FetchType.LAZY)
     private List<OrdenTrabajo> ordenTrabajoList;

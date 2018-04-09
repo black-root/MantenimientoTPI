@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Personal")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Personal.findAll", query = "SELECT p FROM Personal p")
@@ -47,30 +47,30 @@ public class Personal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idPersonal", nullable = false)
+    @Column(name = "pk_idPersonal")
     private Integer pkidPersonal;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "dui")
     private String dui;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "nit")
     private String nit;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "estado")
     private boolean estado;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "empleadoEstudiante")
     private boolean empleadoEstudiante;
-    @Column(length = 45)
+    @Column(name = "due")
     private String due;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "domicilio")
     private String domicilio;
     @ManyToMany(mappedBy = "personalList", fetch = FetchType.LAZY)
     private List<Estado> estadoList;

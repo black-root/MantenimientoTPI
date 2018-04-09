@@ -110,8 +110,8 @@ public class RolFacadeTest {
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
         List<Rol> list = new ArrayList<>();
-        list.add(rol1);
         list.add(rol2);
+        list.add(rol1);
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
@@ -131,8 +131,8 @@ public class RolFacadeTest {
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
         List<Rol> list = new ArrayList<>();
-        list.add(rol2);
         list.add(rol1);
+        list.add(rol2);
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();

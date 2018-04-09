@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sergio
  */
 @Entity
-@Table(name = "Mantenimiento_detalle", catalog = "mantenimientoPC", schema = "")
+@Table(name = "Mantenimiento_detalle")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mantenimientodetalle.findAll", query = "SELECT m FROM Mantenimientodetalle m")
@@ -41,23 +41,23 @@ public class Mantenimientodetalle implements Serializable {
     @EmbeddedId
     protected MantenimientodetallePK mantenimientodetallePK;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "observaciones")
     private String observaciones;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie", nullable = false)
+    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Equipodetalle equipodetallepkEDnoSerie;
     @JoinColumns({
-        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte", nullable = false)})
+        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado")
+        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento")
+        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso")
+        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte")})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estado estado;
-    @JoinColumn(name = "OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "pk_idOrdenTrabajo", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "pk_idOrdenTrabajo", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrdenTrabajo ordenTrabajo;
 

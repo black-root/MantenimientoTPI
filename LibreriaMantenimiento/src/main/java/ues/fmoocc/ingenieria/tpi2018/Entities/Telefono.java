@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Telefono")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Telefono.findAll", query = "SELECT t FROM Telefono t")
@@ -37,12 +37,12 @@ public class Telefono implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idTelefono", nullable = false)
+    @Column(name = "pk_idTelefono")
     private Integer pkidTelefono;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "Telefono")
     private String telefono;
-    @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal", nullable = false)
+    @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Personal personalpkidPersonal;
 

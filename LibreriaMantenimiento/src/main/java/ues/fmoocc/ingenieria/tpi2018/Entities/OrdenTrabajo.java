@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "OrdenTrabajo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrdenTrabajo.findAll", query = "SELECT o FROM OrdenTrabajo o")
@@ -52,43 +52,46 @@ public class OrdenTrabajo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idOrdenTrabajo", nullable = false)
+    @Column(name = "pk_idOrdenTrabajo")
     private Integer pkidOrdenTrabajo;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "solicitudDescripcion")
     private String solicitudDescripcion;
+    @Column(name = "solicitudFecha")
     @Temporal(TemporalType.DATE)
     private Date solicitudFecha;
-    @Column(length = 45)
+    @Column(name = "nombre")
     private String nombre;
-    @Column(length = 45)
+    @Column(name = "clienteEmail")
     private String clienteEmail;
-    @Column(length = 15)
+    @Column(name = "clienteTelefono")
     private String clienteTelefono;
-    @Column(length = 45)
+    @Column(name = "clienteDomicilio")
     private String clienteDomicilio;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "Estado")
     private boolean estado;
+    @Column(name = "ordenTrabajoAprobadaFecha")
     @Temporal(TemporalType.DATE)
     private Date ordenTrabajoAprobadaFecha;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "tecnicoDiagnostico")
     private String tecnicoDiagnostico;
+    @Column(name = "posibleFechaEntrega")
     @Temporal(TemporalType.DATE)
     private Date posibleFechaEntrega;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenTrabajo", fetch = FetchType.LAZY)
     private List<Mantenimientodetalle> mantenimientodetalleList;
-    @JoinColumn(name = "Prioridad_pk_idPrioridad", referencedColumnName = "pk_idPrioridad", nullable = false)
+    @JoinColumn(name = "Prioridad_pk_idPrioridad", referencedColumnName = "pk_idPrioridad")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Prioridad prioridadpkidPrioridad;
-    @JoinColumn(name = "Solicitud_pk_idSolicitud", referencedColumnName = "pk_idSolicitud", nullable = false)
+    @JoinColumn(name = "Solicitud_pk_idSolicitud", referencedColumnName = "pk_idSolicitud")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Solicitud solicitudpkidSolicitud;
-    @JoinColumn(name = "TipoMantenimiento_pk_idTipoMantenimiento", referencedColumnName = "pk_idTipoMantenimiento", nullable = false)
+    @JoinColumn(name = "TipoMantenimiento_pk_idTipoMantenimiento", referencedColumnName = "pk_idTipoMantenimiento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoMantenimiento tipoMantenimientopkidTipoMantenimiento;
-    @JoinColumn(name = "Unidad_pk_idUnidad", referencedColumnName = "pk_idUnidad", nullable = false)
+    @JoinColumn(name = "Unidad_pk_idUnidad", referencedColumnName = "pk_idUnidad")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Unidad unidadpkidUnidad;
 

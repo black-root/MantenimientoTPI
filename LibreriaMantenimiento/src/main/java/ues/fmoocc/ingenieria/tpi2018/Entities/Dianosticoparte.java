@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(name = "Dianostico_parte", catalog = "mantenimientoPC", schema = "")
+@Table(name = "Dianostico_parte")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Dianosticoparte.findAll", query = "SELECT d FROM Dianosticoparte d")
@@ -39,17 +39,17 @@ public class Dianosticoparte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "pk_idDianostico_parte", nullable = false)
+    @Column(name = "pk_idDianostico_parte")
     private Integer pkidDianosticoparte;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "descripcion")
     private String descripcion;
     @JoinColumns({
-        @JoinColumn(name = "Diagnostico_pK_idDiagnostico", referencedColumnName = "pK_idDiagnostico", nullable = false)
-        , @JoinColumn(name = "Diagnostico_OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "OrdenTrabajo_pk_idOrdenTrabajo", nullable = false)})
+        @JoinColumn(name = "Diagnostico_pK_idDiagnostico", referencedColumnName = "pK_idDiagnostico")
+        , @JoinColumn(name = "Diagnostico_OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "OrdenTrabajo_pk_idOrdenTrabajo")})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Diagnostico diagnostico;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie", nullable = false)
+    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Equipodetalle equipodetallepkEDnoSerie;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dianosticoparte", fetch = FetchType.LAZY)

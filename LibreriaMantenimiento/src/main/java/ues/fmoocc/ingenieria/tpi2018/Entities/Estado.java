@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Estado")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")
@@ -46,25 +46,25 @@ public class Estado implements Serializable {
     @EmbeddedId
     protected EstadoPK estadoPK;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "descripcion")
     private String descripcion;
     @JoinTable(name = "Estado_detalle", joinColumns = {
-        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso", nullable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal", nullable = false)})
+        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado")
+        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento")
+        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso")
+        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte")}, inverseJoinColumns = {
+        @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Personal> personalList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado", fetch = FetchType.LAZY)
     private List<Mantenimientodetalle> mantenimientodetalleList;
     @JoinColumns({
-        @JoinColumn(name = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Tipo_procedimiento_pk_idTipo_procedimiento", nullable = false, insertable = false, updatable = false)
-        , @JoinColumn(name = "Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Pasos_pk_idPaso", nullable = false, insertable = false, updatable = false)
-        , @JoinColumn(name = "Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Dianostico_parte_pk_idDianostico_parte", nullable = false, insertable = false, updatable = false)})
+        @JoinColumn(name = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Tipo_procedimiento_pk_idTipo_procedimiento", insertable = false, updatable = false)
+        , @JoinColumn(name = "Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Pasos_pk_idPaso", insertable = false, updatable = false)
+        , @JoinColumn(name = "Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Dianostico_parte_pk_idDianostico_parte", insertable = false, updatable = false)})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Procedimientos procedimientos;
 

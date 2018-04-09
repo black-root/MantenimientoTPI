@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author sergio
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Calendario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Calendario.findAll", query = "SELECT c FROM Calendario c")
@@ -38,14 +38,14 @@ public class Calendario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "idCalendario")
     private Integer idCalendario;
     @Basic(optional = false)
-    @Column(name = "fecha_mantenimiento", nullable = false)
+    @Column(name = "fecha_mantenimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaMantenimiento;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "excepcion")
     private boolean excepcion;
 
     public Calendario() {

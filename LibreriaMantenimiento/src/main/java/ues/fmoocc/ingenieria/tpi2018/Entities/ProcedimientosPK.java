@@ -18,13 +18,13 @@ import javax.persistence.Embeddable;
 public class ProcedimientosPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "Tipo_procedimiento_pk_idTipo_procedimiento", nullable = false)
+    @Column(name = "Tipo_procedimiento_pk_idTipo_procedimiento")
     private int tipoprocedimientopkidTipoprocedimiento;
     @Basic(optional = false)
-    @Column(name = "Pasos_pk_idPaso", nullable = false)
+    @Column(name = "Pasos_pk_idPaso")
     private int pasospkidPaso;
     @Basic(optional = false)
-    @Column(name = "Dianostico_parte_pk_idDianostico_parte", nullable = false)
+    @Column(name = "Dianostico_parte_pk_idDianostico_parte")
     private int dianosticopartepkidDianosticoparte;
 
     public ProcedimientosPK() {
