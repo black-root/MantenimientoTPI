@@ -5,15 +5,20 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.ws.rs.core.Response;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
 
 /**
@@ -21,7 +26,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
  * @author viktor
  */
 public class EstadoRestTest {
-    
+    final EstadoRest mokEstadoRest = Mockito.mock(EstadoRest.class);
+    final Estado mokEstado = Mockito.mock(Estado.class);
     public EstadoRestTest() {
     }
     
@@ -34,7 +40,16 @@ public class EstadoRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(Estado.class).withAnyArguments().thenReturn(mokEstado);
+        Estado d= new Estado(0, 0, 0, 0);
+        Estado d1= new Estado(1, 1, 1, 1);
+        List<Estado> listaEstado = new ArrayList<>();
+        listaEstado.add(d);
+        listaEstado.add(d1);
+        Mockito.when(mokEstadoRest.findAll()).thenReturn(listaEstado);
+        Mockito.when(mokEstadoRest.findById(1)).thenReturn(d);
+        
     }
     
     @After
@@ -46,15 +61,11 @@ public class EstadoRestTest {
      */
     @Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        EstadoRest instance = (EstadoRest)container.getContext().lookup("java:global/classes/EstadoRest");
-        List<Estado> expResult = null;
-        List<Estado> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        EstadoRest rest = mokEstadoRest;
+        List<Estado> result = rest.findAll();
+        Estado estado = new Estado(0, 0, 0, 0);
+        assertThat(result, CoreMatchers.hasItem(estado));
+        assertNotNull(rest);
     }
 
     /**
@@ -62,16 +73,12 @@ public class EstadoRestTest {
      */
     @Test
     public void testFindById() throws Exception {
-        System.out.println("findById");
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        EstadoRest instance = (EstadoRest)container.getContext().lookup("java:global/classes/EstadoRest");
-        Estado expResult = null;
+        int id=1;
+        EstadoRest instance = mokEstadoRest;
+        Estado expResult = new Estado(0, 0, 0, 0);
         Estado result = instance.findById(id);
+        assertNotNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -79,16 +86,14 @@ public class EstadoRestTest {
      */
     @Test
     public void testBorrarEstado() throws Exception {
-        System.out.println("borrarEstado");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        EstadoRest instance = (EstadoRest)container.getContext().lookup("java:global/classes/EstadoRest");
-        Response expResult = null;
+        int id=1;
+        EstadoRest instance = mokEstadoRest;
+        Estado expResult = null;
         Response result = instance.borrarEstado(id);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+         assertEquals(expResult, result);
+        assertNull(result);
+        Mockito.verify(mokEstadoRest, times(1)).borrarEstado(id);
+
     }
 
     /**
@@ -96,16 +101,13 @@ public class EstadoRestTest {
      */
     @Test
     public void testGuardarEstado() throws Exception {
-        System.out.println("guardarEstado");
-        Estado estado = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        EstadoRest instance = (EstadoRest)container.getContext().lookup("java:global/classes/EstadoRest");
-        Response expResult = null;
-        Response result = instance.guardarEstado(estado);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int id=1;
+        EstadoRest instance = mokEstadoRest;
+        Estado expResult = null;
+        Response result = instance.guardarEstado(mokEstado);
+         assertEquals(expResult, result);
+        assertNull(result);
+        Mockito.verify(mokEstadoRest, times(1)).guardarEstado(mokEstado);;
     }
 
     /**
@@ -113,17 +115,14 @@ public class EstadoRestTest {
      */
     @Test
     public void testEditarEstado() throws Exception {
-        System.out.println("editarEstado");
-        Integer id = null;
-        Estado estado = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        EstadoRest instance = (EstadoRest)container.getContext().lookup("java:global/classes/EstadoRest");
-        Response expResult = null;
-        Response result = instance.editarEstado(id, estado);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int id=1;
+        EstadoRest instance = mokEstadoRest;
+        Estado expResult = null;
+        Response result = instance.editarEstado(id, mokEstado);
+         assertEquals(expResult, result);
+        assertNull(result);
+        Mockito.verify(mokEstadoRest, times(1)).editarEstado(id, mokEstado);;;
+   
     }
     
 }
