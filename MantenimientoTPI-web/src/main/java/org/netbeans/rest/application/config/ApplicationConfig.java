@@ -20,6 +20,7 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
 //ir agregando las de mas clases
+//Ronald
         resources.add(SolicitudRest.class);
         resources.add(PrioridadRest.class);
         resources.add(OrdenTrabajoRest.class);
@@ -30,16 +31,37 @@ public class ApplicationConfig extends Application {
         resources.add(RolRest.class);
         resources.add(MantenimientoDetalleRest.class);
         resources.add(PersonalRest.class);
-        
+       
         resources.add(PasosRest.class);
         resources.add(TipoProcedimientoRest.class);
         resources.add(FabricantesRest.class);
-         resources.add(Estado_detalleRest.class);
+        resources.add(Estado_detalleRest.class);
+//Daniel metodos distintos 
+        resources.add(EstadoRest.class);
+        resources.add(ProcedimientosRest.class);
+        resources.add(DiagnosticoRest.class);
+        resources.add(DiagnosticoRest.class);
+        resources.add(MantenimientoDetalleRest.class);
         
         resources.add(NewCrossOriginResourceSharingFilter.class);
         return resources;
     }
     private void addRestResourceClasses(Set<Class<?>> resources){
+        /*
+
+        resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Equipo_detalleRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.EstadoRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Estado_detalleRest.class);
+
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.FabricantesRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.PasosRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.RolRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRest.class);
+        
+        */
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
@@ -61,7 +83,7 @@ public class ApplicationConfig extends Application {
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoMantenimientoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.UnidadRest.class);
-      
+        
     }  
 
     
