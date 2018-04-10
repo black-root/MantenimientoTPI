@@ -156,7 +156,7 @@
                 <executions>
                     <execution>
                         <id>removiendomariamicero</id>
-                        <phase>initialize</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -165,11 +165,13 @@
                             <commandlineArgs>rm mariamicro</commandlineArgs>
                             <executable>docker</executable>
                             <commandlineArgs>rmi -f mariadbtpi</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>build -t mariadbtpi ./MariaDB</commandlineArgs>
                         </configuration>
                     </execution>
                     <execution>
                         <id>removiendopaymicros</id>
-                        <phase>initialize</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -178,6 +180,8 @@
                             <commandlineArgs>rm paymicro</commandlineArgs>
                             <executable>docker</executable>
                             <commandlineArgs>rmi -f sergiopa</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>build -t sergiopa ./Payaramicro</commandlineArgs>
                         </configuration>
                     </execution>
                 </executions>
@@ -188,7 +192,7 @@
                 <version>3.2.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>MantenimientoTPI2018-web</warName>
+                    <warName>MantenimientoTPI-web</warName>
                     <outputDirectory>${project.basedir}/Payaramicro</outputDirectory>
                 </configuration>
             </plugin>    

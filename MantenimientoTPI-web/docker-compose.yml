@@ -9,7 +9,7 @@ services:
         ports:
         - '3300:3306'
         volumes:
-        - ../mariadblMantenimientoVol:/var/lib/mysql
+        - /home/mariadblMantenimientoVol:/var/lib/mysql
     paymantenimiento: 
         image: 'sergiopa'
         build: ./Payaramicro/.   
