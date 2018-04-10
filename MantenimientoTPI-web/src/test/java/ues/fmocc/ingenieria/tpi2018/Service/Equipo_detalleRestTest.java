@@ -5,15 +5,20 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.ws.rs.core.Response;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle;
 
 /**
@@ -21,6 +26,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle;
  * @author viktor
  */
 public class Equipo_detalleRestTest {
+    final Equipo_detalleRest mokEquipo_detalleRest = Mockito.mock(Equipo_detalleRest.class);
+    final Equipodetalle mokEquipodetalle = Mockito.mock(Equipodetalle.class);
     
     public Equipo_detalleRestTest() {
     }
@@ -34,7 +41,15 @@ public class Equipo_detalleRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+     PowerMockito.whenNew(Equipodetalle.class).withAnyArguments().thenReturn(mokEquipodetalle);
+     Equipodetalle d = new Equipodetalle("1", true);
+     Equipodetalle d1 = new Equipodetalle("2", false);
+     List<Equipodetalle> listaEquipodetalle = new ArrayList<>();
+     listaEquipodetalle.add(d);
+     listaEquipodetalle.add(d1);
+     Mockito.when(mokEquipo_detalleRest.findAll()).thenReturn(listaEquipodetalle);
+     Mockito.when(mokEquipo_detalleRest.findById(1)).thenReturn(d);
     }
     
     @After
@@ -46,15 +61,11 @@ public class Equipo_detalleRestTest {
      */
     @Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Equipo_detalleRest instance = (Equipo_detalleRest)container.getContext().lookup("java:global/classes/Equipo_detalleRest");
-        List<Equipodetalle> expResult = null;
-        List<Equipodetalle> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Equipo_detalleRest rest = mokEquipo_detalleRest;
+        List<Equipodetalle> result = rest.findAll();
+        Equipodetalle EdDetalle = new Equipodetalle("1", true);
+        assertThat(result, CoreMatchers.hasItem(EdDetalle));
+        assertNotNull(rest);
     }
 
     /**
@@ -62,16 +73,12 @@ public class Equipo_detalleRestTest {
      */
     @Test
     public void testFindById() throws Exception {
-        System.out.println("findById");
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Equipo_detalleRest instance = (Equipo_detalleRest)container.getContext().lookup("java:global/classes/Equipo_detalleRest");
-        Equipodetalle expResult = null;
+        int id =1;
+        Equipo_detalleRest instance = mokEquipo_detalleRest;
+        Equipodetalle expResult = new Equipodetalle("1", true);
         Equipodetalle result = instance.findById(id);
+        assertNotNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -79,16 +86,13 @@ public class Equipo_detalleRestTest {
      */
     @Test
     public void testBorrarEquipodetalle() throws Exception {
-        System.out.println("borrarEquipodetalle");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Equipo_detalleRest instance = (Equipo_detalleRest)container.getContext().lookup("java:global/classes/Equipo_detalleRest");
-        Response expResult = null;
+        int id=1;
+        Equipo_detalleRest instance = mokEquipo_detalleRest;
+        Equipodetalle expResult = null;
         Response result = instance.borrarEquipodetalle(id);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(result);
+        Mockito.verify(mokEquipo_detalleRest, times(1)).borrarEquipodetalle(id);
     }
 
     /**
@@ -96,16 +100,14 @@ public class Equipo_detalleRestTest {
      */
     @Test
     public void testGuardarEquipodetalle() throws Exception {
-        System.out.println("guardarEquipodetalle");
-        Equipodetalle ed = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Equipo_detalleRest instance = (Equipo_detalleRest)container.getContext().lookup("java:global/classes/Equipo_detalleRest");
-        Response expResult = null;
-        Response result = instance.guardarEquipodetalle(ed);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int id=1;
+        Equipo_detalleRest instance = mokEquipo_detalleRest;
+        Equipodetalle expResult=null;
+        Response result = instance.guardarEquipodetalle(mokEquipodetalle);
+          assertEquals(expResult, result);
+        assertNull(result);
+        Mockito.verify(mokEquipo_detalleRest, times(1)).guardarEquipodetalle(mokEquipodetalle);
+
     }
 
     /**
@@ -113,17 +115,14 @@ public class Equipo_detalleRestTest {
      */
     @Test
     public void testEditarEquipodetalle() throws Exception {
-        System.out.println("editarEquipodetalle");
-        Integer id = null;
-        Equipodetalle ed = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        Equipo_detalleRest instance = (Equipo_detalleRest)container.getContext().lookup("java:global/classes/Equipo_detalleRest");
-        Response expResult = null;
-        Response result = instance.editarEquipodetalle(id, ed);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int id = 1;
+        Equipo_detalleRest instance = mokEquipo_detalleRest;
+        Equipodetalle expResult=null;
+        Response result = instance.editarEquipodetalle(id,mokEquipodetalle);
+         assertEquals(expResult, result);
+        assertNull(result);
+        Mockito.verify(mokEquipo_detalleRest, times(1)).editarEquipodetalle(id,mokEquipodetalle);
+
     }
     
 }
