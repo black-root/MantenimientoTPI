@@ -15,10 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.RolFacade;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.RolFacadeLocal;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.SolicitudFacadeLocal;
 
 /**
  *

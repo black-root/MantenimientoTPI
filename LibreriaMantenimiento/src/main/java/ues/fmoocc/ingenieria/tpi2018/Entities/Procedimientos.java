@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
 @Table(name = "Procedimientos")
@@ -82,7 +81,6 @@ public class Procedimientos implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
     public List<Estado> getEstadoList() {
         return estadoList;
     }

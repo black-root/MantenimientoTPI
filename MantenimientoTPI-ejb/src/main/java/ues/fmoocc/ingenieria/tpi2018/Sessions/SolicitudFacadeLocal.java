@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
 
@@ -14,6 +15,5 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
  */
 @Local
 public interface SolicitudFacadeLocal extends AbstractFacadeInterface<Solicitud>{
-
     
 }

@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,7 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
 @Table(name = "Personal")
@@ -73,8 +71,8 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "domicilio")
     private String domicilio;
-    @ManyToMany(mappedBy = "personalList", fetch = FetchType.LAZY)
-    private List<Estado> estadoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personal", fetch = FetchType.LAZY)
+    private List<Estadodetalle> estadodetalleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
     private List<HistorialTrabajo> historialTrabajoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
@@ -171,17 +169,15 @@ public class Personal implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
-    public List<Estado> getEstadoList() {
-        return estadoList;
+    public List<Estadodetalle> getEstadodetalleList() {
+        return estadodetalleList;
     }
 
-    public void setEstadoList(List<Estado> estadoList) {
-        this.estadoList = estadoList;
+    public void setEstadodetalleList(List<Estadodetalle> estadodetalleList) {
+        this.estadodetalleList = estadodetalleList;
     }
 
     @XmlTransient
-    @JsonIgnore
     public List<HistorialTrabajo> getHistorialTrabajoList() {
         return historialTrabajoList;
     }
@@ -191,7 +187,6 @@ public class Personal implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
     public List<Telefono> getTelefonoList() {
         return telefonoList;
     }
