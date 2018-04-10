@@ -5,21 +5,30 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.configuration.ConfigurationType;
 import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad;
 
 /**
  *
  * @author viktor
  */
 public class OrdenTrabajoRestTest {
-    
+    final OrdenTrabajoRest mokOrdenTrabajoRest = Mockito.mock(OrdenTrabajoRest.class);
+    final OrdenTrabajo mokOrdenTrabajo = Mockito.mock(OrdenTrabajo.class);
     public OrdenTrabajoRestTest() {
     }
     
@@ -32,7 +41,18 @@ public class OrdenTrabajoRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(OrdenTrabajo.class).withAnyArguments().thenReturn(mokOrdenTrabajo);
+        Mockito.when(mokOrdenTrabajoRest.count()).thenReturn(1);
+        OrdenTrabajo or = new OrdenTrabajo(1);
+        OrdenTrabajo or1 = new OrdenTrabajo(2);
+        List<OrdenTrabajo> listaOrdenTrabajo = new ArrayList<>();
+        listaOrdenTrabajo.add(or);
+        listaOrdenTrabajo.add(or1);
+        Mockito.when(mokOrdenTrabajoRest.findall()).thenReturn(listaOrdenTrabajo);
+        Mockito.when(mokOrdenTrabajoRest.findById(1)).thenReturn(or1);
+        
+        
     }
     
     @After
@@ -44,13 +64,10 @@ public class OrdenTrabajoRestTest {
      */
     @Test
     public void testFindall() {
-        System.out.println("findall");
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        List<OrdenTrabajo> expResult = null;
-        List<OrdenTrabajo> result = instance.findall();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        OrdenTrabajoRest rest = mokOrdenTrabajoRest;
+        List<OrdenTrabajo> result = rest.findall();
+        OrdenTrabajo oT = new OrdenTrabajo(1);
+        assertThat(result, CoreMatchers.hasItems(oT));
     }
 
     /**
@@ -58,13 +75,10 @@ public class OrdenTrabajoRestTest {
      */
     @Test
     public void testCount() {
-        System.out.println("count");
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        Integer expResult = null;
-        Integer result = instance.count();
+        OrdenTrabajoRest instance = mokOrdenTrabajoRest;
+        int expResult = 1;
+        int result = instance.count();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,14 +86,11 @@ public class OrdenTrabajoRestTest {
      */
     @Test
     public void testFindById() {
-        System.out.println("findById");
-        Integer id = null;
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        OrdenTrabajo expResult = null;
+        Integer id = 1;
+        OrdenTrabajoRest instance = mokOrdenTrabajoRest;
+        OrdenTrabajo expResult = new OrdenTrabajo(2);
         OrdenTrabajo result = instance.findById(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,12 +98,10 @@ public class OrdenTrabajoRestTest {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
-        Integer id = null;
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        instance.remove(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokOrdenTrabajoRest).remove((Integer) Matchers.anyObject());
+        mokOrdenTrabajoRest.remove(Integer.SIZE);
+        Mockito.verify(mokOrdenTrabajoRest, times(1)).remove(Integer.SIZE);
+        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).remove(Integer.SIZE);
     }
 
     /**
@@ -100,26 +109,21 @@ public class OrdenTrabajoRestTest {
      */
     @Test
     public void testCreate() {
-        System.out.println("create");
-        OrdenTrabajo entity = null;
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokOrdenTrabajoRest).create(mokOrdenTrabajo);
+        mokOrdenTrabajoRest.create(mokOrdenTrabajo);
+        Mockito.verify(mokOrdenTrabajoRest, times(1)).create(mokOrdenTrabajo);
+        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).create(mokOrdenTrabajo);
     }
 
     /**
      * Test of edit method, of class OrdenTrabajoRest.
      */
     @Test
-    public void testEdit() {
-        System.out.println("edit");
-        Integer id = null;
-        OrdenTrabajo entity = null;
-        OrdenTrabajoRest instance = new OrdenTrabajoRest();
-        instance.edit(id, entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testEdit() { 
+       Mockito.doNothing().when(mokOrdenTrabajoRest).edit(Integer.SIZE, mokOrdenTrabajo);
+        mokOrdenTrabajoRest.edit(Integer.SIZE, mokOrdenTrabajo);
+        Mockito.verify(mokOrdenTrabajoRest, times(1)).edit(Integer.SIZE, mokOrdenTrabajo);
+        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).edit(Integer.SIZE, mokOrdenTrabajo);
     }
     
 }
