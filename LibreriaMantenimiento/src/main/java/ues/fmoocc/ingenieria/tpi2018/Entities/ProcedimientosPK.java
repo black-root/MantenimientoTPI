@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Embeddable
 public class ProcedimientosPK implements Serializable {

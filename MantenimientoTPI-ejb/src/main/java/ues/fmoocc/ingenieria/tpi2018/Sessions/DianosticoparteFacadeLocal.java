@@ -16,5 +16,4 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
 @Local
 public interface DianosticoparteFacadeLocal extends AbstractFacadeInterface<Dianosticoparte>{
 
-    
 }

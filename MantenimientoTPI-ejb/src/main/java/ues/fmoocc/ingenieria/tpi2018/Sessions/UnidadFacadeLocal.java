@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Unidad;
 
@@ -14,6 +15,4 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Unidad;
  */
 @Local
 public interface UnidadFacadeLocal extends AbstractFacadeInterface<Unidad> {
-
-    
 }

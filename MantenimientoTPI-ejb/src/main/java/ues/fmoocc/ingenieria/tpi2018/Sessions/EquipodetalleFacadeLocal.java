@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle;
 
@@ -14,5 +15,5 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle;
  */
 @Local
 public interface EquipodetalleFacadeLocal extends AbstractFacadeInterface<Equipodetalle>{
-    
+  
 }

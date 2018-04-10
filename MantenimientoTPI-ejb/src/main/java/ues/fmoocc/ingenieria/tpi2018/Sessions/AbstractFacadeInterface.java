@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 public interface AbstractFacadeInterface<T> {
 

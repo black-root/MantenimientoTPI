@@ -5,7 +5,6 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
 @Table(name = "OrdenTrabajo")
@@ -197,7 +196,6 @@ public class OrdenTrabajo implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
     public List<Mantenimientodetalle> getMantenimientodetalleList() {
         return mantenimientodetalleList;
     }
