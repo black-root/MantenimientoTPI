@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import org.powermock.api.mockito.PowerMockito;
@@ -48,8 +49,9 @@ public class TipoProcedimientoRestTest {
         List<Tipoprocedimiento> listTp = new ArrayList<>();
         listTp.add(tp);
         listTp.add(tp1);
-        Mockito.when(mokTPRest.findAll()).thenReturn(listTp);
+        Mockito.when(mokTPRest.findall()).thenReturn(listTp);
         Mockito.when(mokTPRest.findById(1)).thenReturn(tp);
+        Mockito.when(mokTPRest.findByDescripcion("descripcion")).thenReturn(listTp);
     }
     
     @After
@@ -60,10 +62,10 @@ public class TipoProcedimientoRestTest {
      * Test of findAll method, of class TipoProcedimientoRest.
      */
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindall() throws Exception {
         System.out.println("findAll");
         TipoProcedimientoRest rest = mokTPRest;
-        List<Tipoprocedimiento> result = rest.findAll();
+        List<Tipoprocedimiento> result = rest.findall();
         Tipoprocedimiento tp = new Tipoprocedimiento(1);
         assertThat(result, CoreMatchers.hasItem(tp));
         assertNotNull(result);
@@ -83,52 +85,75 @@ public class TipoProcedimientoRestTest {
         assertEquals(expResult, result);
     }
 
+    
     /**
-     * Test of borrarTipoProcedimiento method, of class TipoProcedimientoRest.
+     * Test of count method, of class TipoProcedimientoRest.
      */
     @Test
-    public void testBorrarTipoProcedimiento() throws Exception {
-        System.out.println("borrarTipoProcedimiento");
-        int id = 1;
+    public void testCount() {
+        System.out.println("count");
         TipoProcedimientoRest instance = mokTPRest;
-        Tipoprocedimiento expResult = null;
-        Response result = instance.borrarTipoProcedimiento(id);
+        Integer expResult = 0;
+        Integer result = instance.count();
         assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokTPRest, times(1)).borrarTipoProcedimiento(id);
-
     }
 
     /**
-     * Test of guardarTipoProcedimiento method, of class TipoProcedimientoRest.
+     * Test of findByDescripcion method, of class TipoProcedimientoRest.
      */
     @Test
-    public void testGuardarTipoProcedimiento() throws Exception {
-        System.out.println("guardarTipoProcedimiento");
-        int id=1;
+    public void testFindByDescripcion() {
+        System.out.println("findByDescripcion");
         TipoProcedimientoRest instance = mokTPRest;
-        Tipoprocedimiento expResult = null;
-        Response result = instance.guardarTipoProcedimiento(mokTP);
-        assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokTPRest, times(1)).guardarTipoProcedimiento(mokTP);
-
+         Tipoprocedimiento expResult = new  Tipoprocedimiento(1);
+        List<Tipoprocedimiento> result = instance.findByDescripcion("descripcion");
+        assertThat(result, CoreMatchers.hasItem(expResult));
+        assertNotNull(result);
     }
 
     /**
-     * Test of editarFabricante method, of class TipoProcedimientoRest.
+     * Test of remove method, of class TipoProcedimientoRest.
      */
     @Test
-    public void testEditarFabricante() throws Exception {
-        System.out.println("editarFabricante");
-        Integer id = null;
-        TipoProcedimientoRest instance = mokTPRest;
-        Tipoprocedimiento expResult = null;
-        Response result = instance.editarFabricante(id, mokTP);
-        assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokTPRest, times(1)).editarFabricante(id, mokTP);
+    public void testRemove() {
+           System.out.println("remove");
+          Mockito.doNothing().when(mokTPRest).remove((Integer) Matchers.anyObject());
+        
+        mokTPRest.remove(Integer.SIZE);
+        Mockito.verify(mokTPRest, times(1)).remove(Integer.SIZE);
+        
+        Mockito.doThrow(Exception.class).when(mokTPRest).remove(Integer.SIZE);
+    
+    }
 
+    /**
+     * Test of create method, of class TipoProcedimientoRest.
+     */
+    @Test
+    public void testCreate() {
+        System.out.println("create");
+         Mockito.doNothing().when(mokTPRest).create(mokTP);
+        
+        mokTPRest.create(mokTP);
+        Mockito.verify(mokTPRest, times(1)).create(mokTP);
+        
+        Mockito.doThrow(Exception.class).when(mokTPRest).create(mokTP);
+    
+    }
+
+    /**
+     * Test of edit method, of class TipoProcedimientoRest.
+     */
+    @Test
+    public void testEdit() {
+        System.out.println("edit");
+         Mockito.doNothing().when(mokTPRest).edit(Integer.SIZE, mokTP);
+        
+        mokTPRest.edit(Integer.SIZE, mokTP);
+        Mockito.verify(mokTPRest, times(1)).edit(Integer.SIZE, mokTP);
+        
+        Mockito.doThrow(Exception.class).when(mokTPRest).edit(Integer.SIZE, mokTP);
+    
     }
     
 }

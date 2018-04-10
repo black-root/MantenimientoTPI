@@ -18,9 +18,9 @@ import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.configuration.ConfigurationType;
+
 import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad;
+
 
 /**
  *
