@@ -5,13 +5,19 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Personal;
 
 /**
@@ -19,6 +25,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Personal;
  * @author viktor
  */
 public class PersonalRestTest {
+    final PersonalRest mokPersonalRest = Mockito.mock(PersonalRest.class);
+    final Personal mokPersonal = Mockito.mock(Personal.class);
     
     public PersonalRestTest() {
     }
@@ -32,7 +40,17 @@ public class PersonalRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(Personal.class).withAnyArguments().thenReturn(mokPersonal);
+        Mockito.when(mokPersonalRest.count()).thenReturn(1);
+        Personal p = new Personal(1);
+        Personal p1 = new Personal(2);
+        List<Personal> listaPersonal = new ArrayList<>();
+        listaPersonal.add(p);
+        listaPersonal.add(p1);
+        Mockito.when(mokPersonalRest.findall()).thenReturn(listaPersonal);
+        Mockito.when(mokPersonalRest.findById(1)).thenReturn(p1);
+        Mockito.when(mokPersonalRest.findByNombre("nombre")).thenReturn(listaPersonal);
     }
     
     @After
@@ -44,13 +62,10 @@ public class PersonalRestTest {
      */
     @Test
     public void testFindall() {
-        System.out.println("findall");
-        PersonalRest instance = new PersonalRest();
-        List<Personal> expResult = null;
-        List<Personal> result = instance.findall();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      PersonalRest rest = mokPersonalRest;
+      List<Personal> result = rest.findall();
+      Personal per = new Personal(1);
+      assertThat(result, CoreMatchers.hasItems(per));
     }
 
     /**
@@ -59,12 +74,10 @@ public class PersonalRestTest {
     @Test
     public void testCount() {
         System.out.println("count");
-        PersonalRest instance = new PersonalRest();
-        Integer expResult = null;
-        Integer result = instance.count();
+        PersonalRest instance = mokPersonalRest;
+        int expResult = 1;
+        int result = instance.count();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,14 +85,11 @@ public class PersonalRestTest {
      */
     @Test
     public void testFindById() {
-        System.out.println("findById");
-        int id = 0;
-        PersonalRest instance = new PersonalRest();
-        Personal expResult = null;
+        Integer id = 1;
+        PersonalRest instance = mokPersonalRest;
+        Personal expResult = new Personal(2);
         Personal result = instance.findById(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,14 +97,13 @@ public class PersonalRestTest {
      */
     @Test
     public void testFindByNombre() {
-        System.out.println("findByNombre");
-        String nombre = "";
-        PersonalRest instance = new PersonalRest();
-        List<Personal> expResult = null;
-        List<Personal> result = instance.findByNombre(nombre);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
+        Integer id = 1;
+        PersonalRest instance = mokPersonalRest;
+        Personal expResult = new Personal(1);
+        List<Personal> result = instance.findByNombre("nombre");
+        assertThat(result, CoreMatchers.hasItem(expResult));
+        assertNotNull(instance);
     }
 
     /**
@@ -102,12 +111,12 @@ public class PersonalRestTest {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
-        Integer id = null;
-        PersonalRest instance = new PersonalRest();
-        instance.remove(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokPersonalRest).remove((Integer) Matchers.anyObject());
+        mokPersonalRest.remove(Integer.SIZE);
+        Mockito.verify(mokPersonalRest, times(1)).remove(Integer.SIZE);
+        
+        Mockito.doThrow(Exception.class).when(mokPersonalRest).remove(Integer.SIZE);
+   
     }
 
     /**
@@ -115,12 +124,11 @@ public class PersonalRestTest {
      */
     @Test
     public void testCreate() {
-        System.out.println("create");
-        Personal entity = null;
-        PersonalRest instance = new PersonalRest();
-        instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokPersonalRest).create(mokPersonal);
+        mokPersonalRest.create(mokPersonal);
+        Mockito.verify(mokPersonalRest, times(1)).create(mokPersonal);
+        Mockito.doThrow(Exception.class).when(mokPersonalRest).create(mokPersonal);
+       
     }
 
     /**
@@ -128,13 +136,11 @@ public class PersonalRestTest {
      */
     @Test
     public void testEdit() {
-        System.out.println("edit");
-        Integer id = null;
-        Personal entity = null;
-        PersonalRest instance = new PersonalRest();
-        instance.edit(id, entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       Mockito.doNothing().when(mokPersonalRest).edit(Integer.SIZE, mokPersonal);
+        mokPersonalRest.edit(Integer.SIZE, mokPersonal);
+        Mockito.verify(mokPersonalRest, times(1)).edit(Integer.SIZE, mokPersonal);
+        Mockito.doThrow(Exception.class).when(mokPersonalRest).edit(Integer.SIZE, mokPersonal);
+       
     }
     
 }
