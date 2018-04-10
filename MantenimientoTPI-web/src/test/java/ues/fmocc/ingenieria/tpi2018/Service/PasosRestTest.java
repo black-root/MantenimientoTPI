@@ -5,15 +5,20 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.ws.rs.core.Response;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
 
 /**
@@ -21,6 +26,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
  * @author viktor
  */
 public class PasosRestTest {
+    final PasosRest mokPasosRest = Mockito.mock(PasosRest.class);
+    final Pasos mokPasos = Mockito.mock(Pasos.class);
     
     public PasosRestTest() {
     }
@@ -34,7 +41,17 @@ public class PasosRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(Pasos.class).withAnyArguments().thenReturn(mokPasos);
+        Pasos p = new Pasos(1);
+        Pasos p1 = new Pasos(2);
+        List<Pasos> listaPasos = new ArrayList<>();
+        listaPasos.add(p);
+        listaPasos.add(p1);
+        Mockito.when(mokPasosRest.findAll()).thenReturn(listaPasos);
+        Mockito.when(mokPasosRest.findById(1)).thenReturn(p);
+            
+        
     }
     
     @After
@@ -46,15 +63,11 @@ public class PasosRestTest {
      */
     @Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        PasosRest instance = (PasosRest)container.getContext().lookup("java:global/classes/PasosRest");
-        List<Pasos> expResult = null;
-        List<Pasos> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        PasosRest rest = mokPasosRest;
+        List<Pasos> result = rest.findAll();
+        Pasos pas = new Pasos(1);
+        assertThat(result, CoreMatchers.hasItem(pas));
+        assertNotNull(rest);
     }
 
     /**
@@ -62,16 +75,12 @@ public class PasosRestTest {
      */
     @Test
     public void testFindById() throws Exception {
-        System.out.println("findById");
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        PasosRest instance = (PasosRest)container.getContext().lookup("java:global/classes/PasosRest");
-        Pasos expResult = null;
+        int id = 1;
+        PasosRest instance = mokPasosRest;
+        Pasos expResult = new Pasos(1);
         Pasos result = instance.findById(id);
+        assertNotNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -79,16 +88,13 @@ public class PasosRestTest {
      */
     @Test
     public void testBorrarPaso() throws Exception {
-        System.out.println("borrarPaso");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        PasosRest instance = (PasosRest)container.getContext().lookup("java:global/classes/PasosRest");
-        Response expResult = null;
+        int id = 1;
+        PasosRest instance = mokPasosRest;
+        Pasos expResult = null;
         Response result = instance.borrarPaso(id);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokPasosRest, times(1)).borrarPaso(id);
     }
 
     /**
@@ -96,16 +102,13 @@ public class PasosRestTest {
      */
     @Test
     public void testGuardarPaso() throws Exception {
-        System.out.println("guardarPaso");
-        Pasos paso = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        PasosRest instance = (PasosRest)container.getContext().lookup("java:global/classes/PasosRest");
-        Response expResult = null;
-        Response result = instance.guardarPaso(paso);
+        int id = 1;
+        PasosRest instance = mokPasosRest;
+        Pasos expResult = null;
+        Response result = instance.guardarPaso(mokPasos);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokPasosRest, times(1)).guardarPaso(mokPasos);
     }
 
     /**
@@ -113,17 +116,13 @@ public class PasosRestTest {
      */
     @Test
     public void testEditarPaso() throws Exception {
-        System.out.println("editarPaso");
-        Integer id = null;
-        Pasos paso = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        PasosRest instance = (PasosRest)container.getContext().lookup("java:global/classes/PasosRest");
-        Response expResult = null;
-        Response result = instance.editarPaso(id, paso);
+        int id = 1;
+        PasosRest instance = mokPasosRest;
+        Pasos expResult = null;
+        Response result = instance.editarPaso(id, mokPasos);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokPasosRest, times(1)).editarPaso(id, mokPasos);
     }
     
 }
