@@ -5,13 +5,19 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo;
 
 /**
@@ -19,6 +25,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo;
  * @author viktor
  */
 public class HistorialTrabajoRestTest {
+    final HistorialTrabajoRest mokHistorialTrabajoRest = Mockito.mock(HistorialTrabajoRest.class);
+    final HistorialTrabajo mokHistorialTrabajo = Mockito.mock(HistorialTrabajo.class);
     
     public HistorialTrabajoRestTest() {
     }
@@ -32,7 +40,16 @@ public class HistorialTrabajoRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(HistorialTrabajo.class).withAnyArguments().thenReturn(mokHistorialTrabajo);
+        Mockito.when(mokHistorialTrabajoRest.count()).thenReturn(1);
+        HistorialTrabajo h = new HistorialTrabajo(1);
+        HistorialTrabajo h1 = new HistorialTrabajo(2);
+        List<HistorialTrabajo> listaHistorialTrabajo = new ArrayList<>();
+        listaHistorialTrabajo.add(h);
+        listaHistorialTrabajo.add(h1);
+        Mockito.when(mokHistorialTrabajoRest.findall()).thenReturn(listaHistorialTrabajo);
+        Mockito.when(mokHistorialTrabajoRest.findById(1)).thenReturn(h);
     }
     
     @After
@@ -44,13 +61,10 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testFindall() {
-        System.out.println("findall");
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        List<HistorialTrabajo> expResult = null;
-        List<HistorialTrabajo> result = instance.findall();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+     HistorialTrabajoRest rest = mokHistorialTrabajoRest;
+     List<HistorialTrabajo> result = rest.findall();
+     HistorialTrabajo histo = new HistorialTrabajo(1);
+     assertThat(result, CoreMatchers.hasItems(histo));
     }
 
     /**
@@ -58,13 +72,10 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testCount() {
-        System.out.println("count");
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        Integer expResult = null;
-        Integer result = instance.count();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       HistorialTrabajoRest instance = mokHistorialTrabajoRest;
+       int expResult = 1;
+       int result = instance.count();
+       assertEquals(expResult, result);
     }
 
     /**
@@ -72,14 +83,11 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testFindById() {
-        System.out.println("findById");
-        Integer id = null;
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        HistorialTrabajo expResult = null;
+        Integer id=1;
+        HistorialTrabajoRest instance = mokHistorialTrabajoRest;
+        HistorialTrabajo expResult = new HistorialTrabajo(1);
         HistorialTrabajo result = instance.findById(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,12 +95,11 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
-        Integer id = null;
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        instance.remove(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokHistorialTrabajoRest).remove((Integer) Matchers.anyObject());
+        mokHistorialTrabajoRest.remove(Integer.SIZE);
+        Mockito.verify(mokHistorialTrabajoRest, times(1)).remove(Integer.SIZE);
+         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).remove(Integer.SIZE);
+
     }
 
     /**
@@ -100,12 +107,11 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testCreate() {
-        System.out.println("create");
-        HistorialTrabajo entity = null;
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokHistorialTrabajoRest).create(mokHistorialTrabajo);
+        mokHistorialTrabajoRest.create(mokHistorialTrabajo);
+        Mockito.verify(mokHistorialTrabajoRest, times(1)).create(mokHistorialTrabajo);
+        Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).create(mokHistorialTrabajo);
+
     }
 
     /**
@@ -113,13 +119,10 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testEdit() {
-        System.out.println("edit");
-        Integer id = null;
-        HistorialTrabajo entity = null;
-        HistorialTrabajoRest instance = new HistorialTrabajoRest();
-        instance.edit(id, entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokHistorialTrabajoRest).edit(Integer.SIZE, mokHistorialTrabajo);
+        mokHistorialTrabajoRest.edit(Integer.SIZE, mokHistorialTrabajo);
+        Mockito.verify(mokHistorialTrabajoRest, times(1)).edit(Integer.SIZE, mokHistorialTrabajo);
+         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).edit(Integer.SIZE, mokHistorialTrabajo);
     }
     
 }

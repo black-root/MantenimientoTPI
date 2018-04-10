@@ -96,7 +96,7 @@ public class PrioridadRestTest {
         System.out.println("findById");
         Integer id = 1;
         PrioridadRest instance = mokPrioridadRest;
-        Prioridad expResult = new Prioridad(1,"1");
+        Prioridad expResult = new Prioridad(1);
         Prioridad result = instance.findById(id);
         assertEquals(expResult, result);
         
