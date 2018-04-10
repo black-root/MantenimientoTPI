@@ -134,7 +134,7 @@ public class RolFacadeTest {
         
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
-        List<Rol> list = new ArrayList<>();
+        List<Rol> list = new ArrayList<Rol>();
         list.add(rol1);
         list.add(rol2);
         RolFacade rf = new RolFacade();

@@ -42,26 +42,10 @@ public class ApplicationConfig extends Application {
         return resources;
     }
     private void addRestResourceClasses(Set<Class<?>> resources){
-        resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Equipo_detalleRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.EstadoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.FabricantesRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.HistorialTrabajoRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.MantenimientoDetalleRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.OrdenTrabajoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.PasosRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.PersonalRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.PrioridadRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.ProcedimientosRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.RolRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.SolicitudRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.SubTipoMantenimientoRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.TelefonoRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoMantenimientoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRest.class);
-        resources.add(ues.fmocc.ingenieria.tpi2018.Service.UnidadRest.class);
       
     }  
 
