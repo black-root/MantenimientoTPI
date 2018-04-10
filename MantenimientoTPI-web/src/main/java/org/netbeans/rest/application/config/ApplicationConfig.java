@@ -16,7 +16,7 @@ import ues.fmocc.ingenieria.tpi2018.Service.*;
 @javax.ws.rs.ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
-   @Override
+    @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
 //ir agregando las de mas clases
@@ -31,7 +31,7 @@ public class ApplicationConfig extends Application {
         resources.add(RolRest.class);
         resources.add(MantenimientoDetalleRest.class);
         resources.add(PersonalRest.class);
-       
+
         resources.add(PasosRest.class);
         resources.add(TipoProcedimientoRest.class);
         resources.add(FabricantesRest.class);
@@ -42,11 +42,13 @@ public class ApplicationConfig extends Application {
         resources.add(DiagnosticoRest.class);
         resources.add(DiagnosticoRest.class);
         resources.add(MantenimientoDetalleRest.class);
-        
+
         resources.add(NewCrossOriginResourceSharingFilter.class);
         return resources;
     }
-    private void addRestResourceClasses(Set<Class<?>> resources){
+
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+
         /*
 
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
@@ -61,7 +63,7 @@ public class ApplicationConfig extends Application {
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.RolRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRest.class);
         
-        */
+         */
         resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
@@ -83,8 +85,7 @@ public class ApplicationConfig extends Application {
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoMantenimientoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.UnidadRest.class);
-        
-    }  
 
-    
+    }
+
 }
