@@ -74,7 +74,7 @@ public class DiagnosticoRestTest {
         List<Diagnostico> result = rest.findAll();
         Diagnostico diagnostico = new Diagnostico(1, 2);
         assertThat(result, CoreMatchers.hasItem(diagnostico));
-        assertNotNull(rest);
+        assertNotNull(result);
     }
 
     /**

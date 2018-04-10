@@ -5,15 +5,20 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.ws.rs.core.Response;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento;
 
 /**
@@ -21,6 +26,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento;
  * @author viktor
  */
 public class TipoProcedimientoRestTest {
+    final TipoProcedimientoRest mokTPRest = Mockito.mock(TipoProcedimientoRest.class);
+    final Tipoprocedimiento mokTP = Mockito.mock(Tipoprocedimiento.class);
     
     public TipoProcedimientoRestTest() {
     }
@@ -34,7 +41,15 @@ public class TipoProcedimientoRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        PowerMockito.whenNew(Tipoprocedimiento.class).withAnyArguments().thenReturn(mokTP);
+        Tipoprocedimiento tp = new Tipoprocedimiento(1);
+        Tipoprocedimiento tp1 = new Tipoprocedimiento(2);
+        List<Tipoprocedimiento> listTp = new ArrayList<>();
+        listTp.add(tp);
+        listTp.add(tp1);
+        Mockito.when(mokTPRest.findAll()).thenReturn(listTp);
+        Mockito.when(mokTPRest.findById(1)).thenReturn(tp);
     }
     
     @After
@@ -47,14 +62,11 @@ public class TipoProcedimientoRestTest {
     @Test
     public void testFindAll() throws Exception {
         System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TipoProcedimientoRest instance = (TipoProcedimientoRest)container.getContext().lookup("java:global/classes/TipoProcedimientoRest");
-        List<Tipoprocedimiento> expResult = null;
-        List<Tipoprocedimiento> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        TipoProcedimientoRest rest = mokTPRest;
+        List<Tipoprocedimiento> result = rest.findAll();
+        Tipoprocedimiento tp = new Tipoprocedimiento(1);
+        assertThat(result, CoreMatchers.hasItem(tp));
+        assertNotNull(result);
     }
 
     /**
@@ -63,15 +75,12 @@ public class TipoProcedimientoRestTest {
     @Test
     public void testFindById() throws Exception {
         System.out.println("findById");
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TipoProcedimientoRest instance = (TipoProcedimientoRest)container.getContext().lookup("java:global/classes/TipoProcedimientoRest");
-        Tipoprocedimiento expResult = null;
+        int id = 1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Tipoprocedimiento expResult = new Tipoprocedimiento(1);
         Tipoprocedimiento result = instance.findById(id);
+        assertNotNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -80,15 +89,14 @@ public class TipoProcedimientoRestTest {
     @Test
     public void testBorrarTipoProcedimiento() throws Exception {
         System.out.println("borrarTipoProcedimiento");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TipoProcedimientoRest instance = (TipoProcedimientoRest)container.getContext().lookup("java:global/classes/TipoProcedimientoRest");
-        Response expResult = null;
+        int id = 1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Tipoprocedimiento expResult = null;
         Response result = instance.borrarTipoProcedimiento(id);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(result);
+        Mockito.verify(mokTPRest, times(1)).borrarTipoProcedimiento(id);
+
     }
 
     /**
@@ -97,15 +105,14 @@ public class TipoProcedimientoRestTest {
     @Test
     public void testGuardarTipoProcedimiento() throws Exception {
         System.out.println("guardarTipoProcedimiento");
-        Tipoprocedimiento tipoP = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TipoProcedimientoRest instance = (TipoProcedimientoRest)container.getContext().lookup("java:global/classes/TipoProcedimientoRest");
-        Response expResult = null;
-        Response result = instance.guardarTipoProcedimiento(tipoP);
+        int id=1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Tipoprocedimiento expResult = null;
+        Response result = instance.guardarTipoProcedimiento(mokTP);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(result);
+        Mockito.verify(mokTPRest, times(1)).guardarTipoProcedimiento(mokTP);
+
     }
 
     /**
@@ -115,15 +122,13 @@ public class TipoProcedimientoRestTest {
     public void testEditarFabricante() throws Exception {
         System.out.println("editarFabricante");
         Integer id = null;
-        Tipoprocedimiento tipoP = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        TipoProcedimientoRest instance = (TipoProcedimientoRest)container.getContext().lookup("java:global/classes/TipoProcedimientoRest");
-        Response expResult = null;
-        Response result = instance.editarFabricante(id, tipoP);
+        TipoProcedimientoRest instance = mokTPRest;
+        Tipoprocedimiento expResult = null;
+        Response result = instance.editarFabricante(id, mokTP);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(result);
+        Mockito.verify(mokTPRest, times(1)).editarFabricante(id, mokTP);
+
     }
     
 }
