@@ -8,9 +8,6 @@ package org.netbeans.rest.application.config;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 import ues.fmocc.ingenieria.tpi2018.Service.*;
-import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
-
-
 
 /**
  *
@@ -37,6 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(PasosRest.class);
         resources.add(TipoProcedimientoRest.class);
         resources.add(FabricantesRest.class);
+         resources.add(Estado_detalleRest.class);
         
         resources.add(NewCrossOriginResourceSharingFilter.class);
         return resources;
@@ -47,6 +45,7 @@ public class ApplicationConfig extends Application {
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Equipo_detalleRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.EstadoRest.class);
+        resources.add(ues.fmocc.ingenieria.tpi2018.Service.Estado_detalleRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.FabricantesRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.HistorialTrabajoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.MantenimientoDetalleRest.class);
