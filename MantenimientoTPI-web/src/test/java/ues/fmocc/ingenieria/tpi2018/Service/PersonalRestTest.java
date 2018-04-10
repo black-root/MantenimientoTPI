@@ -98,7 +98,6 @@ public class PersonalRestTest {
     @Test
     public void testFindByNombre() {
       
-        Integer id = 1;
         PersonalRest instance = mokPersonalRest;
         Personal expResult = new Personal(1);
         List<Personal> result = instance.findByNombre("nombre");
