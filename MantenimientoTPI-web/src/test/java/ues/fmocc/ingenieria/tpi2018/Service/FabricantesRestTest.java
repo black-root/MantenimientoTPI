@@ -5,15 +5,20 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.embeddable.EJBContainer;
 import javax.ws.rs.core.Response;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
 
 /**
@@ -21,6 +26,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
  * @author viktor
  */
 public class FabricantesRestTest {
+    final FabricantesRest mokFabricantesRest = Mockito.mock(FabricantesRest.class);
+    final Fabricantes mokFabricantes = Mockito.mock(Fabricantes.class);
     
     public FabricantesRestTest() {
     }
@@ -34,7 +41,15 @@ public class FabricantesRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+       PowerMockito.whenNew(Fabricantes.class).withAnyArguments().thenReturn(mokFabricantes);
+       Fabricantes d = new Fabricantes(1);
+       Fabricantes d1 = new Fabricantes(2);
+       List<Fabricantes> listaFabricantes =new ArrayList<>();
+       listaFabricantes.add(d);
+       listaFabricantes.add(d1);
+       Mockito.when(mokFabricantesRest.findAll()).thenReturn(listaFabricantes);
+       Mockito.when(mokFabricantesRest.findById(1)).thenReturn(d);
     }
     
     @After
@@ -46,15 +61,11 @@ public class FabricantesRestTest {
      */
     @Test
     public void testFindAll() throws Exception {
-        System.out.println("findAll");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        FabricantesRest instance = (FabricantesRest)container.getContext().lookup("java:global/classes/FabricantesRest");
-        List<Fabricantes> expResult = null;
-        List<Fabricantes> result = instance.findAll();
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        FabricantesRest rest = mokFabricantesRest;
+        List<Fabricantes> result = rest.findAll();
+        Fabricantes fab = new Fabricantes(1);
+        assertThat(result, CoreMatchers.hasItem(fab));
+        assertNotNull(rest);
     }
 
     /**
@@ -62,16 +73,12 @@ public class FabricantesRestTest {
      */
     @Test
     public void testFindById() throws Exception {
-        System.out.println("findById");
-        int id = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        FabricantesRest instance = (FabricantesRest)container.getContext().lookup("java:global/classes/FabricantesRest");
-        Fabricantes expResult = null;
+        int id=1;
+        FabricantesRest instance = mokFabricantesRest;
+        Fabricantes expResult = new Fabricantes(1);
         Fabricantes result = instance.findById(id);
+        assertNotNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -79,16 +86,13 @@ public class FabricantesRestTest {
      */
     @Test
     public void testBorrarFabricante() throws Exception {
-        System.out.println("borrarFabricante");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        FabricantesRest instance = (FabricantesRest)container.getContext().lookup("java:global/classes/FabricantesRest");
-        Response expResult = null;
+        int id=1;
+        FabricantesRest instance = mokFabricantesRest;
+        Fabricantes expResult = null;
         Response result = instance.borrarFabricante(id);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokFabricantesRest, times(1)).borrarFabricante(id);
     }
 
     /**
@@ -96,16 +100,13 @@ public class FabricantesRestTest {
      */
     @Test
     public void testGuardarFabricante() throws Exception {
-        System.out.println("guardarFabricante");
-        Fabricantes fabricante = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        FabricantesRest instance = (FabricantesRest)container.getContext().lookup("java:global/classes/FabricantesRest");
-        Response expResult = null;
-        Response result = instance.guardarFabricante(fabricante);
+        int id=1;
+        FabricantesRest instance = mokFabricantesRest;
+        Fabricantes expResult = null;
+        Response result = instance.guardarFabricante(mokFabricantes);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokFabricantesRest, times(1)).guardarFabricante(mokFabricantes);
     }
 
     /**
@@ -113,17 +114,13 @@ public class FabricantesRestTest {
      */
     @Test
     public void testEditarFabricante() throws Exception {
-        System.out.println("editarFabricante");
-        Integer id = null;
-        Fabricantes fabricante = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        FabricantesRest instance = (FabricantesRest)container.getContext().lookup("java:global/classes/FabricantesRest");
-        Response expResult = null;
-        Response result = instance.editarFabricante(id, fabricante);
+        int id=1;
+        FabricantesRest instance = mokFabricantesRest;
+        Fabricantes expResult = null;
+        Response result = instance.editarFabricante(id, mokFabricantes);
+        assertNull(result);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.verify(mokFabricantesRest, times(1)).editarFabricante(id, mokFabricantes);
     }
     
 }
