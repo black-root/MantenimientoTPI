@@ -17,7 +17,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -93,54 +95,49 @@ public class DiagnosticoRestTest {
 
     /**
      * Test of borrarDiagnostico method, of class DiagnosticoRest.
+     * @throws java.lang.Exception
      */
     @Test
     public void testBorrarDiagnostico() throws Exception {
-        System.out.println("borrarDiagnostico");
-        Integer id = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        DiagnosticoRest instance = (DiagnosticoRest)container.getContext().lookup("java:global/classes/DiagnosticoFacade");
-        Response expResult = null;
+        int id = 1;
+        DiagnosticoRest instance = mokDiagnosticoRest;
+        Diagnostico expResult = null;
         Response result = instance.borrarDiagnostico(id);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
+        assertNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).borrarDiagnostico(id);
+}
 
     /**
      * Test of guardarDiagnostico method, of class DiagnosticoRest.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGuardarDiagnostico() throws Exception {
-        System.out.println("guardarDiagnostico");
-        Diagnostico diagnostico = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        DiagnosticoRest instance = (DiagnosticoRest)container.getContext().lookup("java:global/classes/DiagnosticoRest");
-        Response expResult = null;
-        Response result = instance.guardarDiagnostico(diagnostico);
+        int id = 1;
+        DiagnosticoRest instance = mokDiagnosticoRest;
+        Diagnostico expResult = null;
+        Response result = instance.guardarDiagnostico(mokDiagnostico);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        
-    }
+        assertNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).guardarDiagnostico(mokDiagnostico);
+}
+    
 
     /**
      * Test of editarDiagnostico method, of class DiagnosticoRest.
      */
     @Test
     public void testEditarDiagnostico() throws Exception {
-        System.out.println("editarDiagnostico");
-        Integer id = null;
-        Diagnostico diagnostico = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        DiagnosticoRest instance = (DiagnosticoRest)container.getContext().lookup("java:global/classes/DiagnosticoRest");
-        Response expResult = null;
-        Response result = instance.editarDiagnostico(id, diagnostico);
+        int id = 1;
+        DiagnosticoRest instance = mokDiagnosticoRest;
+        Diagnostico expResult = null;
+        Response result = instance.editarDiagnostico(id, mokDiagnostico);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).editarDiagnostico(id, mokDiagnostico);
+
+    
     }
     
 }
