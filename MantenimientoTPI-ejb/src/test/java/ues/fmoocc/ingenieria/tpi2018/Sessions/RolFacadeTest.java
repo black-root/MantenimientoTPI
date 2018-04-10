@@ -19,7 +19,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
  * @author sergio
  */
 public class RolFacadeTest {
-    @Rule public EntityManagerProvider emProvider = new EntityManagerProvider("mantenimientoPU");
+    @Rule public EntityManagerProvider emProvider = new EntityManagerProvider();
     public RolFacadeTest() {
     }
     
@@ -142,7 +142,7 @@ public class RolFacadeTest {
         rf.getEntityManager().getTransaction().begin();
         rf.getEntityManager().persist(rol1);
         rf.getEntityManager().persist(rol2);
-//        assertEquals(list.get(0), rf.findRange(0,1).get(0));
+        assertEquals(list.get(0), rf.findRange(0,1).get(0));
     }
 
     /**
@@ -168,10 +168,12 @@ public class RolFacadeTest {
     public void testfindWithDescripcion() throws Exception{
         EntityManager em = emProvider.em();
         Rol rol = new Rol(1, "esto es una prueba");
+        Rol rol1 = new  Rol(2, "descripcion");
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
         rf.getEntityManager().persist(rol);
+        rf.getEntityManager().persist(rol1);
         assertEquals(rol, rf.findWithDescripcion("Rol.findByDescripcion", rol.getDescripcion()).get(0));
     
     }

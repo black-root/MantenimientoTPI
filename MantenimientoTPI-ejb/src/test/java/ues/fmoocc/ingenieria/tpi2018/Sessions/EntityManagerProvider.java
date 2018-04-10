@@ -14,7 +14,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
-import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 /**
@@ -44,13 +43,13 @@ public class EntityManagerProvider implements TestRule{
         emf.close();
     }
 
-    EntityManagerProvider(String unitName) {
-        this.em = Persistence.createEntityManagerFactory(unitName).createEntityManager();
+    EntityManagerProvider() {
+        this.em = Persistence.createEntityManagerFactory("mantenimientoPU").createEntityManager();
         this.tx = this.em.getTransaction();
     }
 
-    public final static EntityManagerProvider persistenceUnit(String unitName) {
-        return new EntityManagerProvider(unitName);
+    public final static EntityManagerProvider persistenceUnit() {
+        return new EntityManagerProvider();
     }
 
     public EntityManager em() {
