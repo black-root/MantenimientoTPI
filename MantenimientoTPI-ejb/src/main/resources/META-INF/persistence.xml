@@ -22,6 +22,7 @@
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Unidad</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Estadodetalle</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>

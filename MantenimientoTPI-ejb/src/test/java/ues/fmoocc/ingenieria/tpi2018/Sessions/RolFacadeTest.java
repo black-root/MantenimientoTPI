@@ -14,6 +14,8 @@ import org.junit.Rule;
 import org.powermock.reflect.Whitebox;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
 
+
+
 /**
  *
  * @author sergio
@@ -23,8 +25,6 @@ public class RolFacadeTest {
     public RolFacadeTest() {
     }
     
-    
-
     /**
      * Test of find method, of class TipoMantenimientoFacade.
      */

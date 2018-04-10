@@ -15,5 +15,5 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
  */
 @Local
 public interface FabricantesFacadeLocal extends AbstractFacadeInterface<Fabricantes>{
-    
+
 }

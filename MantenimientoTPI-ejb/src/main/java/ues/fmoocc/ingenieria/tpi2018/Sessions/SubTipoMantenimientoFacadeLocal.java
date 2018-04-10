@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento;
 
@@ -14,5 +15,4 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento;
  */
 @Local
 public interface SubTipoMantenimientoFacadeLocal extends AbstractFacadeInterface<SubTipoMantenimiento> {
-
 }

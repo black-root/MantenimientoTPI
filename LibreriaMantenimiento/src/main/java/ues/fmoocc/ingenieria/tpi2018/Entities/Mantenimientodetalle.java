@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
 @Table(name = "Mantenimiento_detalle")

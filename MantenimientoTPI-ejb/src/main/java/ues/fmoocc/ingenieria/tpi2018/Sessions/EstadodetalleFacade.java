@@ -8,14 +8,14 @@ package ues.fmoocc.ingenieria.tpi2018.Sessions;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Estadodetalle;
 
 /**
  *
  * @author yisusdebian
  */
 @Stateless
-public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> implements TipoMantenimientoFacadeLocal {
+public class EstadodetalleFacade extends AbstractFacade<Estadodetalle> implements EstadodetalleFacadeLocal {
 
     @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TipoMantenimientoFacade extends AbstractFacade<TipoMantenimiento> i
         return em;
     }
 
-    public TipoMantenimientoFacade() {
-        super(TipoMantenimiento.class);
+    public EstadodetalleFacade() {
+        super(Estadodetalle.class);
     }
     
 }
