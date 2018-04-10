@@ -103,7 +103,7 @@ public class PersonalRestTest {
         Personal expResult = new Personal(1);
         List<Personal> result = instance.findByNombre("nombre");
         assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(instance);
+        assertNotNull(result);
     }
 
     /**

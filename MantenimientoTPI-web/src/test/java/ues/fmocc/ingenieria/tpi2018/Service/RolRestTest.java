@@ -5,13 +5,19 @@
  */
 package ues.fmocc.ingenieria.tpi2018.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
+import org.powermock.api.mockito.PowerMockito;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
 
 /**
@@ -19,6 +25,8 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
  * @author viktor
  */
 public class RolRestTest {
+    final RolRest mokRolRest = Mockito.mock(RolRest.class);
+    final Rol mokRol = Mockito.mock(Rol.class);
     
     public RolRestTest() {
     }
@@ -32,7 +40,17 @@ public class RolRestTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+      PowerMockito.whenNew(Rol.class).withAnyArguments().thenReturn(mokRol);
+      Mockito.when(mokRolRest.count()).thenReturn(1);
+      Rol r = new Rol(1);
+      Rol r1 = new Rol(2);
+      List<Rol> listaRol = new ArrayList<>();
+      listaRol.add(r);
+      listaRol.add(r1);
+      Mockito.when(mokRolRest.findall()).thenReturn(listaRol);
+      Mockito.when(mokRolRest.findById(1)).thenReturn(r);
+      Mockito.when(mokRolRest.findByDescripcion("descripcion")).thenReturn(listaRol);
     }
     
     @After
@@ -44,13 +62,10 @@ public class RolRestTest {
      */
     @Test
     public void testFindall() {
-        System.out.println("findall");
-        RolRest instance = new RolRest();
-        List<Rol> expResult = null;
-        List<Rol> result = instance.findall();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        RolRest rest = mokRolRest;
+        List<Rol> result = rest.findall();
+        Rol rol = new Rol(1);
+        assertThat(result, CoreMatchers.hasItems(rol));
     }
 
     /**
@@ -59,12 +74,10 @@ public class RolRestTest {
     @Test
     public void testCount() {
         System.out.println("count");
-        RolRest instance = new RolRest();
-        Integer expResult = null;
-        Integer result = instance.count();
+        RolRest instance = mokRolRest;
+        int expResult = 1;
+        int result = instance.count();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -73,13 +86,11 @@ public class RolRestTest {
     @Test
     public void testFindById() {
         System.out.println("findById");
-        int id = 0;
-        RolRest instance = new RolRest();
-        Rol expResult = null;
+        int id =1;
+        RolRest instance = mokRolRest;
+        Rol expResult = new Rol(1);
         Rol result = instance.findById(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -88,13 +99,12 @@ public class RolRestTest {
     @Test
     public void testFindByDescripcion() {
         System.out.println("findByDescripcion");
-        String descripcion = "";
-        RolRest instance = new RolRest();
-        List<Rol> expResult = null;
-        List<Rol> result = instance.findByDescripcion(descripcion);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int id =1;
+        RolRest instance = mokRolRest;
+        Rol expResult = new Rol(1);
+        List<Rol> result = instance.findByDescripcion("descripcion");
+        assertThat(result, CoreMatchers.hasItem(expResult));
+        assertNotNull(result);
     }
 
     /**
@@ -103,11 +113,13 @@ public class RolRestTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Integer id = null;
-        RolRest instance = new RolRest();
-        instance.remove(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+         Mockito.doNothing().when(mokRolRest).remove((Integer) Matchers.anyObject());
+        
+        mokRolRest.remove(Integer.SIZE);
+        Mockito.verify(mokRolRest, times(1)).remove(Integer.SIZE);
+        
+        Mockito.doThrow(Exception.class).when(mokRolRest).remove(Integer.SIZE);
+   
     }
 
     /**
@@ -115,12 +127,11 @@ public class RolRestTest {
      */
     @Test
     public void testCreate() {
-        System.out.println("create");
-        Rol entity = null;
-        RolRest instance = new RolRest();
-        instance.create(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokRolRest).create(mokRol);
+        mokRolRest.create(mokRol);
+        Mockito.verify(mokRolRest, times(1)).create(mokRol);
+        Mockito.doThrow(Exception.class).when(mokRolRest).create(mokRol);
+   
     }
 
     /**
@@ -129,12 +140,11 @@ public class RolRestTest {
     @Test
     public void testEdit() {
         System.out.println("edit");
-        Integer id = null;
-        Rol entity = null;
-        RolRest instance = new RolRest();
-        instance.edit(id, entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Mockito.doNothing().when(mokRolRest).edit(Integer.SIZE, mokRol);
+        mokRolRest.edit(Integer.SIZE, mokRol);
+        Mockito.verify(mokRolRest, times(1)).edit(Integer.SIZE, mokRol);
+        Mockito.doThrow(Exception.class).when(mokRolRest).edit(Integer.SIZE, mokRol);
+   
     }
     
 }
