@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnostico;
 
@@ -13,6 +14,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnostico;
  * @author yisusdebian
  */
 @Local
-public interface DiagnosticoFacadeLocal extends AbstractFacadeInterface<Diagnostico>{
-
+public interface DiagnosticoFacadeLocal extends AbstractFacadeInterface<Diagnostico> {
+  
 }

@@ -24,9 +24,11 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.PrioridadFacadeLocal;
  */
 @Path("prioridad")
 public class PrioridadRest implements Serializable{
+    
     @EJB
     private PrioridadFacadeLocal ejbPrioridad;
-
+    
+    
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Prioridad> findall() {

@@ -27,12 +27,12 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.SubTipoMantenimientoFacadeLocal;
  * @author yisusdebian
  */
 @Path("subtipomantenimiento")
-public class SubTipoMantenimientoRest implements Serializable  {
-     @EJB
+public class SubTipoMantenimientoRest implements Serializable {
+
+    @EJB
     private SubTipoMantenimientoFacadeLocal ejbSubTipoMantenimiento;
 
-    //devuelve todo
-    @GET
+   @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<SubTipoMantenimiento> findall() {
         List salida = null;
@@ -64,11 +64,11 @@ public class SubTipoMantenimientoRest implements Serializable  {
     }
 
     //busca uno en particular
-    @GET
-    @Path("{id}")
+   @GET
+    @Path("/{id:\\d+}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public SubTipoMantenimiento findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbSubTipoMantenimiento != null) {
@@ -81,11 +81,28 @@ public class SubTipoMantenimientoRest implements Serializable  {
         return new SubTipoMantenimiento();
     }
 
+    @GET
+    @Path("/{descripcion}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<SubTipoMantenimiento> findByDescripcion(@PathParam("descripcion") String descripcion
+    ) {
+        try {
+            if (ejbSubTipoMantenimiento != null) {
+                return ejbSubTipoMantenimiento.findWithDescripcion("SubTipoDescripcion.findByDescripcion", descripcion);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
+    }
+
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
+    public void remove(@PathParam("id") Integer id
+    ) {
         try {
-            if (id != null && this.ejbSubTipoMantenimiento!= null) {
+            if (id != null && this.ejbSubTipoMantenimiento != null) {
                 ejbSubTipoMantenimiento.remove(ejbSubTipoMantenimiento.find(id));
             }
         } catch (Exception e) {
@@ -95,7 +112,8 @@ public class SubTipoMantenimientoRest implements Serializable  {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(SubTipoMantenimiento entity) {
+    public void create(SubTipoMantenimiento entity
+    ) {
 
         try {
             if (this.ejbSubTipoMantenimiento != null) {
@@ -109,7 +127,8 @@ public class SubTipoMantenimientoRest implements Serializable  {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, SubTipoMantenimiento entity) {
+    public void edit(@PathParam("id") Integer id, SubTipoMantenimiento entity
+    ) {
 
         try {
             if (this.ejbSubTipoMantenimiento != null) {

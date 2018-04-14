@@ -59,12 +59,12 @@ public class TipoMantenimientoRest implements Serializable{
         return 0;
     }
 
-    //busca uno en particular
+      //busca uno en particular
     @GET
-    @Path("{id}")
+    @Path("/{id:\\d+}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
     public TipoMantenimiento findById(
-            @PathParam("id") Integer id
+            @PathParam("id") int id
     ) {
         try {
             if (ejbTipoMantenimiento != null) {
@@ -76,7 +76,22 @@ public class TipoMantenimientoRest implements Serializable{
         }
         return new TipoMantenimiento();
     }
+    
+    @GET
+    @Path("/{descripcion}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<TipoMantenimiento> findByDescripcion(@PathParam("descripcion") String descripcion){
+        try {
+            if (ejbTipoMantenimiento != null) {
+                return ejbTipoMantenimiento.findWithDescripcion("TipoMantenimiento.findByDescripcion", descripcion);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
 
+        }
+        return null;
+    }
+    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

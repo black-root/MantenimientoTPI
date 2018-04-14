@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "fabricantes")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Fabricantes.findAll", query = "SELECT f FROM Fabricantes f")
@@ -42,20 +42,20 @@ public class Fabricantes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "idFabricante")
     private Integer idFabricante;
     @Basic(optional = false)
-    @Column(nullable = false, length = 60)
+    @Column(name = "nombre")
     private String nombre;
     @Lob
-    @Column(name = "descripcion_Fabricante", length = 65535)
+    @Column(name = "descripcion_Fabricante")
     private String descripcionFabricante;
-    @Column(name = "correo_Fabricante", length = 45)
+    @Column(name = "correo_Fabricante")
     private String correoFabricante;
-    @Column(length = 45)
+    @Column(name = "telefono")
     private String telefono;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "direccion")
     private String direccion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricantesidFabricante", fetch = FetchType.LAZY)
     private List<Equipodetalle> equipodetalleList;

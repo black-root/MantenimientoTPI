@@ -15,7 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,10 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "Personal")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Personal.findAll", query = "SELECT p FROM Personal p")
@@ -47,33 +46,33 @@ public class Personal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idPersonal", nullable = false)
+    @Column(name = "pk_idPersonal")
     private Integer pkidPersonal;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "dui")
     private String dui;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "nit")
     private String nit;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "estado")
     private boolean estado;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "empleadoEstudiante")
     private boolean empleadoEstudiante;
-    @Column(length = 45)
+    @Column(name = "due")
     private String due;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "domicilio")
     private String domicilio;
-    @ManyToMany(mappedBy = "personalList", fetch = FetchType.LAZY)
-    private List<Estado> estadoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personal", fetch = FetchType.LAZY)
+    private List<Estadodetalle> estadodetalleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
     private List<HistorialTrabajo> historialTrabajoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
@@ -170,12 +169,12 @@ public class Personal implements Serializable {
     }
 
     @XmlTransient
-    public List<Estado> getEstadoList() {
-        return estadoList;
+    public List<Estadodetalle> getEstadodetalleList() {
+        return estadodetalleList;
     }
 
-    public void setEstadoList(List<Estado> estadoList) {
-        this.estadoList = estadoList;
+    public void setEstadodetalleList(List<Estadodetalle> estadodetalleList) {
+        this.estadodetalleList = estadodetalleList;
     }
 
     @XmlTransient

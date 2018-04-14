@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "HistorialTrabajo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "HistorialTrabajo.findAll", query = "SELECT h FROM HistorialTrabajo h")
@@ -41,18 +41,19 @@ public class HistorialTrabajo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idHistorialTrabajo", nullable = false)
+    @Column(name = "pk_idHistorialTrabajo")
     private Integer pkidHistorialTrabajo;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "fechaInicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
+    @Column(name = "fechaFin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal", nullable = false)
+    @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Personal personalpkidPersonal;
-    @JoinColumn(name = "Rol_pk_idRol", referencedColumnName = "pk_idRol", nullable = false)
+    @JoinColumn(name = "Rol_pk_idRol", referencedColumnName = "pk_idRol")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Rol rolpkidRol;
 

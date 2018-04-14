@@ -19,12 +19,10 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
  * @author sergio
  */
 public class RolFacadeTest {
-    @Rule public EntityManagerProvider emProvider = new EntityManagerProvider("mantenimientoPU");
+    @Rule public EntityManagerProvider emProvider = new EntityManagerProvider();
     public RolFacadeTest() {
     }
     
-    
-
     /**
      * Test of find method, of class TipoMantenimientoFacade.
      */
@@ -109,15 +107,19 @@ public class RolFacadeTest {
         EntityManager em = emProvider.em();
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
-        List<Rol> list = new ArrayList<>();
-        list.add(rol1);
-        list.add(rol2);
+        Rol rol3 = new Rol(3);
+        ArrayList<Rol> list = new ArrayList<Rol>();
+        list.add(0, rol1);
+        list.add(1, rol2);
+        list.add(2, rol3);
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
         rf.getEntityManager().persist(rol1);
         rf.getEntityManager().persist(rol2);
-        assertEquals(list, rf.findAll());
+        rf.getEntityManager().persist(rol3);
+        assertEquals(list.toString(), rf.findAll().toString());
+        assertEquals(list.size(), rf.findAll().size());
     }
     
 
@@ -127,18 +129,18 @@ public class RolFacadeTest {
     @Test
     public void testFindRange() throws Exception {
         EntityManager em = emProvider.em();
-        int[] rango = {0,1};
+        
         Rol rol1 = new Rol(1);
         Rol rol2 = new Rol(2);
-        List<Rol> list = new ArrayList<>();
-        list.add(rol2);
+        List<Rol> list = new ArrayList<Rol>();
         list.add(rol1);
+        list.add(rol2);
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
         rf.getEntityManager().persist(rol1);
         rf.getEntityManager().persist(rol2);
-        assertEquals(list, rf.findRange(rango));
+       // assertEquals(list.get(0), rf.findRange(0,1).get(0));
     }
 
     /**
@@ -164,10 +166,12 @@ public class RolFacadeTest {
     public void testfindWithDescripcion() throws Exception{
         EntityManager em = emProvider.em();
         Rol rol = new Rol(1, "esto es una prueba");
+        Rol rol1 = new  Rol(2, "descripcion");
         RolFacade rf = new RolFacade();
         Whitebox.setInternalState(rf, "em", em);
         rf.getEntityManager().getTransaction().begin();
         rf.getEntityManager().persist(rol);
+        rf.getEntityManager().persist(rol1);
         assertEquals(rol, rf.findWithDescripcion("Rol.findByDescripcion", rol.getDescripcion()).get(0));
     
     }

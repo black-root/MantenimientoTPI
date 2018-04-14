@@ -12,16 +12,16 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Embeddable
 public class DiagnosticoPK implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "pK_idDiagnostico", nullable = false)
+    @Column(name = "pK_idDiagnostico")
     private int pKidDiagnostico;
     @Basic(optional = false)
-    @Column(name = "OrdenTrabajo_pk_idOrdenTrabajo", nullable = false)
+    @Column(name = "OrdenTrabajo_pk_idOrdenTrabajo")
     private int ordenTrabajopkidOrdenTrabajo;
 
     public DiagnosticoPK() {

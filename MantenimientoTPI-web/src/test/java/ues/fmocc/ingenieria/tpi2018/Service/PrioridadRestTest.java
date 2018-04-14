@@ -15,7 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.times;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -52,7 +54,8 @@ public class PrioridadRestTest {
         listaprioridad.add(p);
         listaprioridad.add(p1);
         Mockito.when(mokPrioridadRest.findall()).thenReturn(listaprioridad);
-        Mockito.when(mokPrioridadRest.findById(1)).thenReturn(p);
+        Mockito.when(mokPrioridadRest.findById(1)).thenReturn(p1);     
+     
     }
     
     @After
@@ -93,14 +96,42 @@ public class PrioridadRestTest {
         System.out.println("findById");
         Integer id = 1;
         PrioridadRest instance = mokPrioridadRest;
-        Prioridad expResult = new Prioridad(1,"1");
+        Prioridad expResult = new Prioridad(1);
         Prioridad result = instance.findById(id);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
-    //    fail("The test case is a prototype.");    
+  
+    @Test
+    public void testRemove() {
+        Mockito.doNothing().when(mokPrioridadRest).remove((Integer) Matchers.anyObject());
+        
+        mokPrioridadRest.remove(Integer.SIZE);
+        Mockito.verify(mokPrioridadRest, times(1)).remove(Integer.SIZE);
+        
+        Mockito.doThrow(Exception.class).when(mokPrioridadRest).remove(Integer.SIZE);
+    }
+       
+    
+    @Test
+    public void testCreate() {
+        Mockito.doNothing().when(mokPrioridadRest).create(mokPrioridad);
+        mokPrioridadRest.create(mokPrioridad);
+        Mockito.verify(mokPrioridadRest, times(1)).create(mokPrioridad);
+        Mockito.doThrow(Exception.class).when(mokPrioridadRest).create(mokPrioridad);
+        
+    }
+   
+    @Test
+    public void testEdit() {
+       Mockito.doNothing().when(mokPrioridadRest).edit(Integer.SIZE, mokPrioridad);
+        mokPrioridadRest.edit(Integer.SIZE, mokPrioridad);
+        Mockito.verify(mokPrioridadRest, times(1)).edit(Integer.SIZE, mokPrioridad);
+        Mockito.doThrow(Exception.class).when(mokPrioridadRest).edit(Integer.SIZE, mokPrioridad);
+       
+    }
+    
 }
     
 

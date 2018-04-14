@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
-@Table(name = "Equipo_detalle", catalog = "mantenimientoPC", schema = "")
+@Table(name = "Equipo_detalle")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Equipodetalle.findAll", query = "SELECT e FROM Equipodetalle e")
@@ -46,34 +46,36 @@ public class Equipodetalle implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "pk_EDnoSerie", nullable = false, length = 15)
+    @Column(name = "pk_EDnoSerie")
     private String pkEDnoSerie;
-    @Column(length = 30)
+    @Column(name = "noInventario")
     private String noInventario;
-    @Column(length = 20)
+    @Column(name = "partNumber")
     private String partNumber;
-    @Column(length = 45)
+    @Column(name = "modelo")
     private String modelo;
     @Basic(optional = false)
-    @Column(name = "hardware_sofware", nullable = false)
+    @Column(name = "hardware_sofware")
     private boolean hardwareSofware;
-    @Column(length = 45)
+    @Column(name = "sofware")
     private String sofware;
-    @Column(length = 20)
+    @Column(name = "version")
     private String version;
+    @Column(name = "arquitectura3264")
     private Boolean arquitectura3264;
+    @Column(name = "licencia")
     private Boolean licencia;
     @Lob
-    @Column(length = 65535)
+    @Column(name = "observaciones")
     private String observaciones;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)
     private List<Dianosticoparte> dianosticoparteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)
     private List<Equipodetalle> equipodetalleList;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie", nullable = false)
+    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Equipodetalle equipodetallepkEDnoSerie;
-    @JoinColumn(name = "fabricantes_idFabricante", referencedColumnName = "idFabricante", nullable = false)
+    @JoinColumn(name = "fabricantes_idFabricante", referencedColumnName = "idFabricante")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Fabricantes fabricantesidFabricante;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)

@@ -5,6 +5,7 @@
  */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
+import java.util.List;
 import javax.ejb.Local;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Calendario;
 
@@ -13,6 +14,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Calendario;
  * @author yisusdebian
  */
 @Local
-public interface CalendarioFacadeLocal extends AbstractFacadeInterface<Calendario>{
-    
+public interface CalendarioFacadeLocal   extends AbstractFacadeInterface<Calendario>{
+   
 }

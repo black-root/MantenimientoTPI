@@ -26,10 +26,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sergio
+ * @author yisusdebian
  */
 @Entity
-@Table(catalog = "mantenimientoPC", schema = "")
+@Table(name = "TipoMantenimiento")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipoMantenimiento.findAll", query = "SELECT t FROM TipoMantenimiento t")
@@ -41,14 +41,14 @@ public class TipoMantenimiento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_idTipoMantenimiento", nullable = false)
+    @Column(name = "pk_idTipoMantenimiento")
     private Integer pkidTipoMantenimiento;
     @Basic(optional = false)
-    @Column(nullable = false, length = 70)
+    @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoMantenimientopkidTipoMantenimiento", fetch = FetchType.LAZY)
     private List<OrdenTrabajo> ordenTrabajoList;
-    @JoinColumn(name = "Sub_TipoMantenimiento_pk_idSub_TipoMantenimiento", referencedColumnName = "pk_idSub_TipoMantenimiento", nullable = false)
+    @JoinColumn(name = "Sub_TipoMantenimiento_pk_idSub_TipoMantenimiento", referencedColumnName = "pk_idSub_TipoMantenimiento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private SubTipoMantenimiento subTipoMantenimientopkidSubTipoMantenimiento;
 

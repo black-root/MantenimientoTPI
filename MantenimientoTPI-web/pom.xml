@@ -11,6 +11,7 @@
     <artifactId>MantenimientoTPI-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    
 
     <name>MantenimientoTPI-web</name>
 
@@ -144,11 +145,86 @@
             <artifactId>javassist</artifactId>
             <version>3.22.0-GA</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>removiendomariamicero</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker</executable>
+                            <commandlineArgs>rm mariamicro</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>rmi -f mariadbtpi</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>build -t mariadbtpi ./MariaDB</commandlineArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>removiendopaymicros</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker</executable>
+                            <commandlineArgs>rm paymicro</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>rmi -f sergiopa</commandlineArgs>
+                            <executable>docker</executable>
+                            <commandlineArgs>build -t sergiopa ./Payaramicro</commandlineArgs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warName>MantenimientoTPI-web</warName>
+                    <outputDirectory>${project.basedir}/Payaramicro</outputDirectory>
+                </configuration>
+            </plugin>    
+            
+        <plugin>
+            <groupId>com.dkanejs.maven.plugins</groupId>
+            <artifactId>docker-compose-maven-plugin</artifactId>
+            <version>1.0.3</version>
+            <executions>
+                <execution>
+                    <id>up</id>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>up</goal>
+                    </goals>
+                    <configuration>
+                        <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                        <detachedMode>true</detachedMode>
+                        
+                    </configuration>
+                </execution>
+            </executions>    
+        </plugin>
+    
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId> 
+                 <artifactId>maven-surefire-plugin</artifactId>
+                 <version>2.5</version>
+                 <configuration>
+                     <parallel>classes</parallel>
+                 </configuration>
+             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
