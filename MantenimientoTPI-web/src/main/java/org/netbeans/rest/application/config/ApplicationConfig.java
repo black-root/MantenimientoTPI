@@ -31,12 +31,13 @@ public class ApplicationConfig extends Application {
         resources.add(RolRest.class);
         resources.add(MantenimientoDetalleRest.class);
         resources.add(PersonalRest.class);
-
+        
         resources.add(PasosRest.class);
         resources.add(TipoProcedimientoRest.class);
         resources.add(FabricantesRest.class);
         resources.add(Estado_detalleRest.class);
 //Daniel metodos distintos 
+    resources.add(Equipo_detalleRest.class);
         resources.add(EstadoRest.class);
         resources.add(ProcedimientosRest.class);
         resources.add(DiagnosticoRest.class);
