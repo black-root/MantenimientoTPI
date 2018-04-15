@@ -49,7 +49,7 @@ public class FabricantesRestTest {
        listaFabricantes.add(d1);
        Mockito.when(mokFabricantesRest.findall()).thenReturn(listaFabricantes);
        Mockito.when(mokFabricantesRest.findById(1)).thenReturn(d);
-       Mockito.when(mokFabricantesRest.findByDescripcion("descripcion")).thenReturn(listaFabricantes);
+       Mockito.when(mokFabricantesRest.findByNombre("nombre")).thenReturn(listaFabricantes);
     }
     
     @After
@@ -101,7 +101,7 @@ public class FabricantesRestTest {
     public void testFindByDescripcion() {
         FabricantesRest instance = mokFabricantesRest;
         Fabricantes expResult = new Fabricantes(1);
-        List<Fabricantes> result = instance.findByDescripcion("descripcion");
+        List<Fabricantes> result = instance.findByNombre("nombre");
         assertThat(result, CoreMatchers.hasItem(expResult));
         assertNotNull(result);
     }

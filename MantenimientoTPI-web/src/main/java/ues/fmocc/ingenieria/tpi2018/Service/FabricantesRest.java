@@ -82,12 +82,12 @@ public class FabricantesRest implements Serializable{
     }
     
     @GET
-    @Path("/{descripcion}")
+    @Path("/{nombre}")
     @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<Fabricantes> findByDescripcion(@PathParam("descripcion") String descripcion){
+    public List<Fabricantes> findByNombre(@PathParam("nombre") String nombre){
         try {
             if (ejbFabricante != null) {
-                return ejbFabricante.findWithDescripcion("Fabricantes.findByDescripcion", descripcion);
+                return ejbFabricante.findWithNombre("Fabricantes.findByNombre", nombre);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
