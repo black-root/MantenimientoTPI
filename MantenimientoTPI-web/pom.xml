@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>MantenimientoTPI</artifactId>
-    <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>MantenimientoTPI</artifactId>
+        <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>ues.fmoocc.ingenieria.tpi2018</groupId>
     <artifactId>MantenimientoTPI-web</artifactId>
@@ -155,6 +155,28 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
+                        <id>permisosDomain</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>chmod</executable>
+                            <commandlineArgs>777 Payaramicro/domain.xml </commandlineArgs>                         
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>composedown</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker-compose</executable>
+                            <commandlineArgs>down</commandlineArgs>                         
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>removiendomariamicero</id>
                         <phase>install</phase>
                         <goals>
@@ -197,34 +219,34 @@
                 </configuration>
             </plugin>    
             
-        <plugin>
-            <groupId>com.dkanejs.maven.plugins</groupId>
-            <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>1.0.3</version>
-            <executions>
-                <execution>
-                    <id>up</id>
-                    <phase>install</phase>
-                    <goals>
-                        <goal>up</goal>
-                    </goals>
-                    <configuration>
-                        <composeFile>${project.basedir}/docker-compose.yml</composeFile>
-                        <detachedMode>true</detachedMode>
+            <plugin>
+                <groupId>com.dkanejs.maven.plugins</groupId>
+                <artifactId>docker-compose-maven-plugin</artifactId>
+                <version>1.0.3</version>
+                <executions>
+                    <execution>
+                        <id>up</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>up</goal>
+                        </goals>
+                        <configuration>
+                            <composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                            <detachedMode>true</detachedMode>
                         
-                    </configuration>
-                </execution>
-            </executions>    
-        </plugin>
+                        </configuration>
+                    </execution>
+                </executions>    
+            </plugin>
     
             <plugin>
-                 <groupId>org.apache.maven.plugins</groupId> 
-                 <artifactId>maven-surefire-plugin</artifactId>
-                 <version>2.5</version>
-                 <configuration>
-                     <parallel>classes</parallel>
-                 </configuration>
-             </plugin>
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <parallel>classes</parallel>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
