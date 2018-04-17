@@ -1,4 +1,4 @@
-FROM payara/micro:181
+FROM payara/micro:5.181
 MAINTAINER sergio9508 <gm13006@ues.edu.sv>
 EXPOSE 4848 8009 8080 8181
 ADD  MantenimientoTPI-web.war $PAYARA_PATH/deployments/
