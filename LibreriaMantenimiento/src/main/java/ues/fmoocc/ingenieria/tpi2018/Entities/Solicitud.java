@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,8 +50,8 @@ public class Solicitud implements Serializable {
     private String descripcion;
     @Column(name = "correo")
     private String correo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudpkidSolicitud", fetch = FetchType.LAZY)
-    private List<OrdenTrabajo> ordenTrabajoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudpkidSolicitud")
+    private Collection<OrdenTrabajo> ordenTrabajoCollection;
 
     public Solicitud() {
     }
@@ -99,12 +98,12 @@ public class Solicitud implements Serializable {
     }
 
     @XmlTransient
-    public List<OrdenTrabajo> getOrdenTrabajoList() {
-        return ordenTrabajoList;
+    public Collection<OrdenTrabajo> getOrdenTrabajoCollection() {
+        return ordenTrabajoCollection;
     }
 
-    public void setOrdenTrabajoList(List<OrdenTrabajo> ordenTrabajoList) {
-        this.ordenTrabajoList = ordenTrabajoList;
+    public void setOrdenTrabajoCollection(Collection<OrdenTrabajo> ordenTrabajoCollection) {
+        this.ordenTrabajoCollection = ordenTrabajoCollection;
     }
 
     @Override

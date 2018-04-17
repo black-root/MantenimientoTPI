@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import org.powermock.api.mockito.PowerMockito;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte;
 
 /**
  *
@@ -27,7 +27,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
  */
 public class Diagnostico_parteRestTest {
     final Diagnostico_parteRest mokDiagnostico_parteRest = Mockito.mock(Diagnostico_parteRest.class);
-    final Dianosticoparte mokDianosticoparte = Mockito.mock(Dianosticoparte.class); 
+    final Diagnosticoparte mokDianosticoparte = Mockito.mock(Diagnosticoparte.class); 
     public Diagnostico_parteRestTest() {
     }
     
@@ -41,10 +41,10 @@ public class Diagnostico_parteRestTest {
     
     @Before
     public void setUp() throws Exception {
-        PowerMockito.whenNew(Dianosticoparte.class).withAnyArguments().thenReturn(mokDianosticoparte);
-        Dianosticoparte d = new Dianosticoparte(1, "descripcion");
-        Dianosticoparte d2 = new Dianosticoparte(2, "descripcion");
-        List<Dianosticoparte> listadianosticoparte = new ArrayList<>();
+        PowerMockito.whenNew(Diagnosticoparte.class).withAnyArguments().thenReturn(mokDianosticoparte);
+        Diagnosticoparte d = new Diagnosticoparte(1, "descripcion");
+        Diagnosticoparte d2 = new Diagnosticoparte(2, "descripcion");
+        List<Diagnosticoparte> listadianosticoparte = new ArrayList<>();
         listadianosticoparte.add(d);
         listadianosticoparte.add(d2);
         Mockito.when(mokDiagnostico_parteRest.findAll()).thenReturn(listadianosticoparte);
@@ -63,8 +63,8 @@ public class Diagnostico_parteRestTest {
     public void testFindAll() throws Exception {
         System.out.println("findAll");
         Diagnostico_parteRest rest = mokDiagnostico_parteRest;
-        List<Dianosticoparte> result = rest.findAll();
-        Dianosticoparte diagParte = new Dianosticoparte(1, "descripcion");
+        List<Diagnosticoparte> result = rest.findAll();
+        Diagnosticoparte diagParte = new Diagnosticoparte(1, "descripcion");
         assertThat(result, CoreMatchers.hasItem(diagParte));
         assertNotNull(rest);
     }
@@ -77,8 +77,8 @@ public class Diagnostico_parteRestTest {
         System.out.println("findById");
         int id = 1;
         Diagnostico_parteRest instance = mokDiagnostico_parteRest;
-        Dianosticoparte expResult = new Dianosticoparte(1, "descripcion");
-        Dianosticoparte result = instance.findById(id);
+        Diagnosticoparte expResult = new Diagnosticoparte(1, "descripcion");
+        Diagnosticoparte result = instance.findById(id);
         //assertNotNull(result);
         assertEquals(expResult, result);
     }
@@ -91,7 +91,7 @@ public class Diagnostico_parteRestTest {
         System.out.println("borrarDiagnosticoparte");
         Integer id = null;
         Diagnostico_parteRest instance = mokDiagnostico_parteRest;
-        Dianosticoparte expResult = null;
+        Diagnosticoparte expResult = null;
         Response result = instance.borrarDiagnosticoparte(id);
         assertEquals(expResult, result);
         assertNull(result);
@@ -106,7 +106,7 @@ public class Diagnostico_parteRestTest {
         System.out.println("guardarDiagnosticoparte");
         int id = 1;
         Diagnostico_parteRest instance = mokDiagnostico_parteRest;
-        Dianosticoparte expResult = null;
+        Diagnosticoparte expResult = null;
         Response result= instance.guardarDiagnosticoparte(mokDianosticoparte);
         assertEquals(expResult, result);
         assertNull(result);
@@ -121,7 +121,7 @@ public class Diagnostico_parteRestTest {
     public void testEditarDiagnosticoparte() throws Exception {
      int id=1;
         Diagnostico_parteRest instance = mokDiagnostico_parteRest;
-        Dianosticoparte expResult = null;
+        Diagnosticoparte expResult = null;
         Response result= instance.editarDiagnosticoparte(id, expResult);
         assertEquals(expResult, result);
         assertNull(result);

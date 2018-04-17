@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,8 +47,8 @@ public class Tipoprocedimiento implements Serializable {
     @Lob
     @Column(name = "observacion")
     private String observacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoprocedimiento", fetch = FetchType.LAZY)
-    private List<Procedimientos> procedimientosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoprocedimiento")
+    private Collection<Procedimientos> procedimientosCollection;
 
     public Tipoprocedimiento() {
     }
@@ -88,12 +87,12 @@ public class Tipoprocedimiento implements Serializable {
     }
 
     @XmlTransient
-    public List<Procedimientos> getProcedimientosList() {
-        return procedimientosList;
+    public Collection<Procedimientos> getProcedimientosCollection() {
+        return procedimientosCollection;
     }
 
-    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
-        this.procedimientosList = procedimientosList;
+    public void setProcedimientosCollection(Collection<Procedimientos> procedimientosCollection) {
+        this.procedimientosCollection = procedimientosCollection;
     }
 
     @Override

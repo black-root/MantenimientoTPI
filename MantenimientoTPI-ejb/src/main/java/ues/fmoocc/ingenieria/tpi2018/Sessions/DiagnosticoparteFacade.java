@@ -8,14 +8,14 @@ package ues.fmoocc.ingenieria.tpi2018.Sessions;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte;
 
 /**
  *
  * @author yisusdebian
  */
 @Stateless
-public class DianosticoparteFacade extends AbstractFacade<Dianosticoparte> implements DianosticoparteFacadeLocal {
+public class DiagnosticoparteFacade extends AbstractFacade<Diagnosticoparte> implements DiagnosticoparteFacadeLocal {
 
     @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class DianosticoparteFacade extends AbstractFacade<Dianosticoparte> imple
         return em;
     }
 
-    public DianosticoparteFacade() {
-        super(Dianosticoparte.class);
+    public DiagnosticoparteFacade() {
+        super(Diagnosticoparte.class);
     }
     
 }

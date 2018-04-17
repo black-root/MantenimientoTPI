@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Procedimientos.findByNombreProcedimiento", query = "SELECT p FROM Procedimientos p WHERE p.nombreProcedimiento = :nombreProcedimiento")
     , @NamedQuery(name = "Procedimientos.findByTipoprocedimientopkidTipoprocedimiento", query = "SELECT p FROM Procedimientos p WHERE p.procedimientosPK.tipoprocedimientopkidTipoprocedimiento = :tipoprocedimientopkidTipoprocedimiento")
     , @NamedQuery(name = "Procedimientos.findByPasospkidPaso", query = "SELECT p FROM Procedimientos p WHERE p.procedimientosPK.pasospkidPaso = :pasospkidPaso")
-    , @NamedQuery(name = "Procedimientos.findByDianosticopartepkidDianosticoparte", query = "SELECT p FROM Procedimientos p WHERE p.procedimientosPK.dianosticopartepkidDianosticoparte = :dianosticopartepkidDianosticoparte")})
+    , @NamedQuery(name = "Procedimientos.findByDiagnosticopartepkidDianosticoparte", query = "SELECT p FROM Procedimientos p WHERE p.procedimientosPK.diagnosticopartepkidDianosticoparte = :diagnosticopartepkidDianosticoparte")})
 public class Procedimientos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,16 +40,16 @@ public class Procedimientos implements Serializable {
     protected ProcedimientosPK procedimientosPK;
     @Column(name = "nombre_Procedimiento")
     private String nombreProcedimiento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procedimientos", fetch = FetchType.LAZY)
-    private List<Estado> estadoList;
-    @JoinColumn(name = "Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "pk_idDianostico_parte", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Dianosticoparte dianosticoparte;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "procedimientos")
+    private Collection<Estado> estadoCollection;
+    @JoinColumn(name = "Diagnostico_parte_pk_idDianostico_parte", referencedColumnName = "pk_idDianostico_parte", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Diagnosticoparte diagnosticoparte;
     @JoinColumn(name = "Pasos_pk_idPaso", referencedColumnName = "pk_idPaso", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pasos pasos;
     @JoinColumn(name = "Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "pk_idTipo_procedimiento", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Tipoprocedimiento tipoprocedimiento;
 
     public Procedimientos() {
@@ -60,8 +59,8 @@ public class Procedimientos implements Serializable {
         this.procedimientosPK = procedimientosPK;
     }
 
-    public Procedimientos(int tipoprocedimientopkidTipoprocedimiento, int pasospkidPaso, int dianosticopartepkidDianosticoparte) {
-        this.procedimientosPK = new ProcedimientosPK(tipoprocedimientopkidTipoprocedimiento, pasospkidPaso, dianosticopartepkidDianosticoparte);
+    public Procedimientos(int tipoprocedimientopkidTipoprocedimiento, int pasospkidPaso, int diagnosticopartepkidDianosticoparte) {
+        this.procedimientosPK = new ProcedimientosPK(tipoprocedimientopkidTipoprocedimiento, pasospkidPaso, diagnosticopartepkidDianosticoparte);
     }
 
     public ProcedimientosPK getProcedimientosPK() {
@@ -81,20 +80,20 @@ public class Procedimientos implements Serializable {
     }
 
     @XmlTransient
-    public List<Estado> getEstadoList() {
-        return estadoList;
+    public Collection<Estado> getEstadoCollection() {
+        return estadoCollection;
     }
 
-    public void setEstadoList(List<Estado> estadoList) {
-        this.estadoList = estadoList;
+    public void setEstadoCollection(Collection<Estado> estadoCollection) {
+        this.estadoCollection = estadoCollection;
     }
 
-    public Dianosticoparte getDianosticoparte() {
-        return dianosticoparte;
+    public Diagnosticoparte getDiagnosticoparte() {
+        return diagnosticoparte;
     }
 
-    public void setDianosticoparte(Dianosticoparte dianosticoparte) {
-        this.dianosticoparte = dianosticoparte;
+    public void setDiagnosticoparte(Diagnosticoparte diagnosticoparte) {
+        this.diagnosticoparte = diagnosticoparte;
     }
 
     public Pasos getPasos() {

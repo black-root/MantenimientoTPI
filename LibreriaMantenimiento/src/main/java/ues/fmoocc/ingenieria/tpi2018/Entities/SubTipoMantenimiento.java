@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,8 +43,8 @@ public class SubTipoMantenimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subTipoMantenimientopkidSubTipoMantenimiento", fetch = FetchType.LAZY)
-    private List<TipoMantenimiento> tipoMantenimientoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subTipoMantenimientopkidSubTipoMantenimiento")
+    private Collection<TipoMantenimiento> tipoMantenimientoCollection;
 
     public SubTipoMantenimiento() {
     }
@@ -76,12 +75,12 @@ public class SubTipoMantenimiento implements Serializable {
     }
 
     @XmlTransient
-    public List<TipoMantenimiento> getTipoMantenimientoList() {
-        return tipoMantenimientoList;
+    public Collection<TipoMantenimiento> getTipoMantenimientoCollection() {
+        return tipoMantenimientoCollection;
     }
 
-    public void setTipoMantenimientoList(List<TipoMantenimiento> tipoMantenimientoList) {
-        this.tipoMantenimientoList = tipoMantenimientoList;
+    public void setTipoMantenimientoCollection(Collection<TipoMantenimiento> tipoMantenimientoCollection) {
+        this.tipoMantenimientoCollection = tipoMantenimientoCollection;
     }
 
     @Override

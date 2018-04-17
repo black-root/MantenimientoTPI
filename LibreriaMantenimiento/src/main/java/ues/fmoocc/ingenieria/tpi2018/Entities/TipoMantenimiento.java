@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,10 +45,10 @@ public class TipoMantenimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoMantenimientopkidTipoMantenimiento", fetch = FetchType.LAZY)
-    private List<OrdenTrabajo> ordenTrabajoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoMantenimientopkidTipoMantenimiento")
+    private Collection<OrdenTrabajo> ordenTrabajoCollection;
     @JoinColumn(name = "Sub_TipoMantenimiento_pk_idSub_TipoMantenimiento", referencedColumnName = "pk_idSub_TipoMantenimiento")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private SubTipoMantenimiento subTipoMantenimientopkidSubTipoMantenimiento;
 
     public TipoMantenimiento() {
@@ -81,12 +80,12 @@ public class TipoMantenimiento implements Serializable {
     }
 
     @XmlTransient
-    public List<OrdenTrabajo> getOrdenTrabajoList() {
-        return ordenTrabajoList;
+    public Collection<OrdenTrabajo> getOrdenTrabajoCollection() {
+        return ordenTrabajoCollection;
     }
 
-    public void setOrdenTrabajoList(List<OrdenTrabajo> ordenTrabajoList) {
-        this.ordenTrabajoList = ordenTrabajoList;
+    public void setOrdenTrabajoCollection(Collection<OrdenTrabajo> ordenTrabajoCollection) {
+        this.ordenTrabajoCollection = ordenTrabajoCollection;
     }
 
     public SubTipoMantenimiento getSubTipoMantenimientopkidSubTipoMantenimiento() {

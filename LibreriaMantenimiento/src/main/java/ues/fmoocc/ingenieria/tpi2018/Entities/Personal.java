@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,12 +70,12 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "domicilio")
     private String domicilio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personal", fetch = FetchType.LAZY)
-    private List<Estadodetalle> estadodetalleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
-    private List<HistorialTrabajo> historialTrabajoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal", fetch = FetchType.LAZY)
-    private List<Telefono> telefonoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personal")
+    private Collection<Estadodetalle> estadodetalleCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal")
+    private Collection<HistorialTrabajo> historialTrabajoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personalpkidPersonal")
+    private Collection<Telefono> telefonoCollection;
 
     public Personal() {
     }
@@ -169,30 +168,30 @@ public class Personal implements Serializable {
     }
 
     @XmlTransient
-    public List<Estadodetalle> getEstadodetalleList() {
-        return estadodetalleList;
+    public Collection<Estadodetalle> getEstadodetalleCollection() {
+        return estadodetalleCollection;
     }
 
-    public void setEstadodetalleList(List<Estadodetalle> estadodetalleList) {
-        this.estadodetalleList = estadodetalleList;
-    }
-
-    @XmlTransient
-    public List<HistorialTrabajo> getHistorialTrabajoList() {
-        return historialTrabajoList;
-    }
-
-    public void setHistorialTrabajoList(List<HistorialTrabajo> historialTrabajoList) {
-        this.historialTrabajoList = historialTrabajoList;
+    public void setEstadodetalleCollection(Collection<Estadodetalle> estadodetalleCollection) {
+        this.estadodetalleCollection = estadodetalleCollection;
     }
 
     @XmlTransient
-    public List<Telefono> getTelefonoList() {
-        return telefonoList;
+    public Collection<HistorialTrabajo> getHistorialTrabajoCollection() {
+        return historialTrabajoCollection;
     }
 
-    public void setTelefonoList(List<Telefono> telefonoList) {
-        this.telefonoList = telefonoList;
+    public void setHistorialTrabajoCollection(Collection<HistorialTrabajo> historialTrabajoCollection) {
+        this.historialTrabajoCollection = historialTrabajoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Telefono> getTelefonoCollection() {
+        return telefonoCollection;
+    }
+
+    public void setTelefonoCollection(Collection<Telefono> telefonoCollection) {
+        this.telefonoCollection = telefonoCollection;
     }
 
     @Override

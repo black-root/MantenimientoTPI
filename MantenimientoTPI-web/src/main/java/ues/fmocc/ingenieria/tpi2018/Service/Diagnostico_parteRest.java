@@ -18,8 +18,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.DianosticoparteFacadeLocal;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte;
+import ues.fmoocc.ingenieria.tpi2018.Sessions.DiagnosticoparteFacadeLocal;
 
 /**
  *
@@ -30,7 +30,7 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.DianosticoparteFacadeLocal;
 public class Diagnostico_parteRest implements Serializable{
     
     @EJB
-    private DianosticoparteFacadeLocal dpFacade;
+    private DiagnosticoparteFacadeLocal dpFacade;
     
        
     @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
@@ -39,7 +39,7 @@ public class Diagnostico_parteRest implements Serializable{
     //Obtener lista de Diagnostico_parte en formato Json
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Dianosticoparte> findAll() {
+    public List<Diagnosticoparte> findAll() {
         List salida = null;
         try {
             if (dpFacade != null) {
@@ -55,8 +55,8 @@ public class Diagnostico_parteRest implements Serializable{
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Dianosticoparte findById(@PathParam("id") int id){
-        Dianosticoparte salida = new Dianosticoparte();
+    public Diagnosticoparte findById(@PathParam("id") int id){
+        Diagnosticoparte salida = new Diagnosticoparte();
         try{
            if(dpFacade!=null){
                return dpFacade.find(id);
@@ -89,7 +89,7 @@ public class Diagnostico_parteRest implements Serializable{
     //Guardar un Diagnostico_parte en la base de datos
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarDiagnosticoparte(Dianosticoparte dp){
+    public Response guardarDiagnosticoparte(Diagnosticoparte dp){
         try{
             if(this.dpFacade!=null){
              dpFacade.create(dp);
@@ -105,7 +105,7 @@ public class Diagnostico_parteRest implements Serializable{
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarDiagnosticoparte(@PathParam("id") Integer id, Dianosticoparte dp) {
+    public Response editarDiagnosticoparte(@PathParam("id") Integer id, Diagnosticoparte dp) {
         try {
             if (this.dpFacade != null) {
                 dpFacade.edit(dp);

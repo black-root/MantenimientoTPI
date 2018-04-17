@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
@@ -34,7 +33,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mantenimientodetalle.findAll", query = "SELECT m FROM Mantenimientodetalle m")
     , @NamedQuery(name = "Mantenimientodetalle.findByPkidMantenimientodetallecol", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.pkidMantenimientodetallecol = :pkidMantenimientodetallecol")
     , @NamedQuery(name = "Mantenimientodetalle.findByFecha", query = "SELECT m FROM Mantenimientodetalle m WHERE m.fecha = :fecha")
-    , @NamedQuery(name = "Mantenimientodetalle.findByOrdenTrabajopkidOrdenTrabajo", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.ordenTrabajopkidOrdenTrabajo = :ordenTrabajopkidOrdenTrabajo")})
+    , @NamedQuery(name = "Mantenimientodetalle.findByOrdenTrabajopkidOrdenTrabajo", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.ordenTrabajopkidOrdenTrabajo = :ordenTrabajopkidOrdenTrabajo")
+    , @NamedQuery(name = "Mantenimientodetalle.findByEstadopkidEstado", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.estadopkidEstado = :estadopkidEstado")
+    , @NamedQuery(name = "Mantenimientodetalle.findByEstadoProcedimientosTipoprocedimientopkidTipoprocedimiento", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.estadoProcedimientosTipoprocedimientopkidTipoprocedimiento = :estadoProcedimientosTipoprocedimientopkidTipoprocedimiento")
+    , @NamedQuery(name = "Mantenimientodetalle.findByEstadoProcedimientosPasospkidPaso", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.estadoProcedimientosPasospkidPaso = :estadoProcedimientosPasospkidPaso")
+    , @NamedQuery(name = "Mantenimientodetalle.findByEstadoProcedimientosDiagnosticopartepkidDianosticoparte", query = "SELECT m FROM Mantenimientodetalle m WHERE m.mantenimientodetallePK.estadoProcedimientosDiagnosticopartepkidDianosticoparte = :estadoProcedimientosDiagnosticopartepkidDianosticoparte")})
 public class Mantenimientodetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,18 +50,18 @@ public class Mantenimientodetalle implements Serializable {
     @Lob
     @Column(name = "observaciones")
     private String observaciones;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Equipodetalle equipodetallepkEDnoSerie;
+    @JoinColumn(name = "Equipo_detalle_pk_idEquipoDetalle", referencedColumnName = "pk_idEquipoDetalle")
+    @ManyToOne(optional = false)
+    private Equipodetalle equipodetallepkidEquipoDetalle;
     @JoinColumns({
-        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado")
-        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento")
-        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso")
-        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte")})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado", insertable = false, updatable = false)
+        , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", insertable = false, updatable = false)
+        , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso", insertable = false, updatable = false)
+        , @JoinColumn(name = "Estado_Procedimientos_Diagnostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Diagnostico_parte_pk_idDianostico_parte", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
     private Estado estado;
     @JoinColumn(name = "OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "pk_idOrdenTrabajo", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private OrdenTrabajo ordenTrabajo;
 
     public Mantenimientodetalle() {
@@ -73,8 +76,8 @@ public class Mantenimientodetalle implements Serializable {
         this.fecha = fecha;
     }
 
-    public Mantenimientodetalle(int pkidMantenimientodetallecol, int ordenTrabajopkidOrdenTrabajo) {
-        this.mantenimientodetallePK = new MantenimientodetallePK(pkidMantenimientodetallecol, ordenTrabajopkidOrdenTrabajo);
+    public Mantenimientodetalle(int pkidMantenimientodetallecol, int ordenTrabajopkidOrdenTrabajo, int estadopkidEstado, int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, int estadoProcedimientosPasospkidPaso, int estadoProcedimientosDiagnosticopartepkidDianosticoparte) {
+        this.mantenimientodetallePK = new MantenimientodetallePK(pkidMantenimientodetallecol, ordenTrabajopkidOrdenTrabajo, estadopkidEstado, estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, estadoProcedimientosPasospkidPaso, estadoProcedimientosDiagnosticopartepkidDianosticoparte);
     }
 
     public MantenimientodetallePK getMantenimientodetallePK() {
@@ -101,12 +104,12 @@ public class Mantenimientodetalle implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Equipodetalle getEquipodetallepkEDnoSerie() {
-        return equipodetallepkEDnoSerie;
+    public Equipodetalle getEquipodetallepkidEquipoDetalle() {
+        return equipodetallepkidEquipoDetalle;
     }
 
-    public void setEquipodetallepkEDnoSerie(Equipodetalle equipodetallepkEDnoSerie) {
-        this.equipodetallepkEDnoSerie = equipodetallepkEDnoSerie;
+    public void setEquipodetallepkidEquipoDetalle(Equipodetalle equipodetallepkidEquipoDetalle) {
+        this.equipodetallepkidEquipoDetalle = equipodetallepkidEquipoDetalle;
     }
 
     public Estado getEstado() {

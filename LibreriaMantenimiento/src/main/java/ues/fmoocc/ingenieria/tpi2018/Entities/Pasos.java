@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,8 +50,8 @@ public class Pasos implements Serializable {
     private String observacion;
     @Column(name = "duracion_Paso")
     private String duracionPaso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasos", fetch = FetchType.LAZY)
-    private List<Procedimientos> procedimientosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pasos")
+    private Collection<Procedimientos> procedimientosCollection;
 
     public Pasos() {
     }
@@ -99,12 +98,12 @@ public class Pasos implements Serializable {
     }
 
     @XmlTransient
-    public List<Procedimientos> getProcedimientosList() {
-        return procedimientosList;
+    public Collection<Procedimientos> getProcedimientosCollection() {
+        return procedimientosCollection;
     }
 
-    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
-        this.procedimientosList = procedimientosList;
+    public void setProcedimientosCollection(Collection<Procedimientos> procedimientosCollection) {
+        this.procedimientosCollection = procedimientosCollection;
     }
 
     @Override

@@ -7,13 +7,13 @@ package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
 import java.util.List;
 import javax.ejb.Local;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte;
+import ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte;
 
 /**
  *
  * @author yisusdebian
  */
 @Local
-public interface DianosticoparteFacadeLocal extends AbstractFacadeInterface<Dianosticoparte>{
+public interface DiagnosticoparteFacadeLocal extends AbstractFacadeInterface<Diagnosticoparte>{
 
 }

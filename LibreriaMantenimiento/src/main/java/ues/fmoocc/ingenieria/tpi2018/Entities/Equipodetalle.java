@@ -6,12 +6,13 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Equipodetalle.findAll", query = "SELECT e FROM Equipodetalle e")
-    , @NamedQuery(name = "Equipodetalle.findByPkEDnoSerie", query = "SELECT e FROM Equipodetalle e WHERE e.pkEDnoSerie = :pkEDnoSerie")
+    , @NamedQuery(name = "Equipodetalle.findByPkidEquipoDetalle", query = "SELECT e FROM Equipodetalle e WHERE e.pkidEquipoDetalle = :pkidEquipoDetalle")
+    , @NamedQuery(name = "Equipodetalle.findByNoSerie", query = "SELECT e FROM Equipodetalle e WHERE e.noSerie = :noSerie")
     , @NamedQuery(name = "Equipodetalle.findByNoInventario", query = "SELECT e FROM Equipodetalle e WHERE e.noInventario = :noInventario")
     , @NamedQuery(name = "Equipodetalle.findByPartNumber", query = "SELECT e FROM Equipodetalle e WHERE e.partNumber = :partNumber")
     , @NamedQuery(name = "Equipodetalle.findByModelo", query = "SELECT e FROM Equipodetalle e WHERE e.modelo = :modelo")
@@ -45,9 +47,12 @@ public class Equipodetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pk_EDnoSerie")
-    private String pkEDnoSerie;
+    @Column(name = "pk_idEquipoDetalle")
+    private Integer pkidEquipoDetalle;
+    @Column(name = "noSerie")
+    private String noSerie;
     @Column(name = "noInventario")
     private String noInventario;
     @Column(name = "partNumber")
@@ -68,37 +73,45 @@ public class Equipodetalle implements Serializable {
     @Lob
     @Column(name = "observaciones")
     private String observaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)
-    private List<Dianosticoparte> dianosticoparteList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)
-    private List<Equipodetalle> equipodetalleList;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Equipodetalle equipodetallepkEDnoSerie;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkidEquipoDetalle")
+    private Collection<Equipodetalle> equipodetalleCollection;
+    @JoinColumn(name = "Equipo_detalle_pk_idEquipoDetalle", referencedColumnName = "pk_idEquipoDetalle")
+    @ManyToOne(optional = false)
+    private Equipodetalle equipodetallepkidEquipoDetalle;
     @JoinColumn(name = "fabricantes_idFabricante", referencedColumnName = "idFabricante")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Fabricantes fabricantesidFabricante;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkEDnoSerie", fetch = FetchType.LAZY)
-    private List<Mantenimientodetalle> mantenimientodetalleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkidEquipoDetalle")
+    private Collection<Mantenimientodetalle> mantenimientodetalleCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "equipodetallepkidEquipoDetalle")
+    private Collection<Diagnosticoparte> diagnosticoparteCollection;
 
     public Equipodetalle() {
     }
 
-    public Equipodetalle(String pkEDnoSerie) {
-        this.pkEDnoSerie = pkEDnoSerie;
+    public Equipodetalle(Integer pkidEquipoDetalle) {
+        this.pkidEquipoDetalle = pkidEquipoDetalle;
     }
 
-    public Equipodetalle(String pkEDnoSerie, boolean hardwareSofware) {
-        this.pkEDnoSerie = pkEDnoSerie;
+    public Equipodetalle(Integer pkidEquipoDetalle, boolean hardwareSofware) {
+        this.pkidEquipoDetalle = pkidEquipoDetalle;
         this.hardwareSofware = hardwareSofware;
     }
 
-    public String getPkEDnoSerie() {
-        return pkEDnoSerie;
+    public Integer getPkidEquipoDetalle() {
+        return pkidEquipoDetalle;
     }
 
-    public void setPkEDnoSerie(String pkEDnoSerie) {
-        this.pkEDnoSerie = pkEDnoSerie;
+    public void setPkidEquipoDetalle(Integer pkidEquipoDetalle) {
+        this.pkidEquipoDetalle = pkidEquipoDetalle;
+    }
+
+    public String getNoSerie() {
+        return noSerie;
+    }
+
+    public void setNoSerie(String noSerie) {
+        this.noSerie = noSerie;
     }
 
     public String getNoInventario() {
@@ -174,29 +187,20 @@ public class Equipodetalle implements Serializable {
     }
 
     @XmlTransient
-    public List<Dianosticoparte> getDianosticoparteList() {
-        return dianosticoparteList;
+    public Collection<Equipodetalle> getEquipodetalleCollection() {
+        return equipodetalleCollection;
     }
 
-    public void setDianosticoparteList(List<Dianosticoparte> dianosticoparteList) {
-        this.dianosticoparteList = dianosticoparteList;
+    public void setEquipodetalleCollection(Collection<Equipodetalle> equipodetalleCollection) {
+        this.equipodetalleCollection = equipodetalleCollection;
     }
 
-    @XmlTransient
-    public List<Equipodetalle> getEquipodetalleList() {
-        return equipodetalleList;
+    public Equipodetalle getEquipodetallepkidEquipoDetalle() {
+        return equipodetallepkidEquipoDetalle;
     }
 
-    public void setEquipodetalleList(List<Equipodetalle> equipodetalleList) {
-        this.equipodetalleList = equipodetalleList;
-    }
-
-    public Equipodetalle getEquipodetallepkEDnoSerie() {
-        return equipodetallepkEDnoSerie;
-    }
-
-    public void setEquipodetallepkEDnoSerie(Equipodetalle equipodetallepkEDnoSerie) {
-        this.equipodetallepkEDnoSerie = equipodetallepkEDnoSerie;
+    public void setEquipodetallepkidEquipoDetalle(Equipodetalle equipodetallepkidEquipoDetalle) {
+        this.equipodetallepkidEquipoDetalle = equipodetallepkidEquipoDetalle;
     }
 
     public Fabricantes getFabricantesidFabricante() {
@@ -208,18 +212,27 @@ public class Equipodetalle implements Serializable {
     }
 
     @XmlTransient
-    public List<Mantenimientodetalle> getMantenimientodetalleList() {
-        return mantenimientodetalleList;
+    public Collection<Mantenimientodetalle> getMantenimientodetalleCollection() {
+        return mantenimientodetalleCollection;
     }
 
-    public void setMantenimientodetalleList(List<Mantenimientodetalle> mantenimientodetalleList) {
-        this.mantenimientodetalleList = mantenimientodetalleList;
+    public void setMantenimientodetalleCollection(Collection<Mantenimientodetalle> mantenimientodetalleCollection) {
+        this.mantenimientodetalleCollection = mantenimientodetalleCollection;
+    }
+
+    @XmlTransient
+    public Collection<Diagnosticoparte> getDiagnosticoparteCollection() {
+        return diagnosticoparteCollection;
+    }
+
+    public void setDiagnosticoparteCollection(Collection<Diagnosticoparte> diagnosticoparteCollection) {
+        this.diagnosticoparteCollection = diagnosticoparteCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (pkEDnoSerie != null ? pkEDnoSerie.hashCode() : 0);
+        hash += (pkidEquipoDetalle != null ? pkidEquipoDetalle.hashCode() : 0);
         return hash;
     }
 
@@ -230,7 +243,7 @@ public class Equipodetalle implements Serializable {
             return false;
         }
         Equipodetalle other = (Equipodetalle) object;
-        if ((this.pkEDnoSerie == null && other.pkEDnoSerie != null) || (this.pkEDnoSerie != null && !this.pkEDnoSerie.equals(other.pkEDnoSerie))) {
+        if ((this.pkidEquipoDetalle == null && other.pkidEquipoDetalle != null) || (this.pkidEquipoDetalle != null && !this.pkidEquipoDetalle.equals(other.pkidEquipoDetalle))) {
             return false;
         }
         return true;
@@ -238,7 +251,7 @@ public class Equipodetalle implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle[ pkEDnoSerie=" + pkEDnoSerie + " ]";
+        return "ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle[ pkidEquipoDetalle=" + pkidEquipoDetalle + " ]";
     }
     
 }

@@ -24,16 +24,16 @@ public class ProcedimientosPK implements Serializable {
     @Column(name = "Pasos_pk_idPaso")
     private int pasospkidPaso;
     @Basic(optional = false)
-    @Column(name = "Dianostico_parte_pk_idDianostico_parte")
-    private int dianosticopartepkidDianosticoparte;
+    @Column(name = "Diagnostico_parte_pk_idDianostico_parte")
+    private int diagnosticopartepkidDianosticoparte;
 
     public ProcedimientosPK() {
     }
 
-    public ProcedimientosPK(int tipoprocedimientopkidTipoprocedimiento, int pasospkidPaso, int dianosticopartepkidDianosticoparte) {
+    public ProcedimientosPK(int tipoprocedimientopkidTipoprocedimiento, int pasospkidPaso, int diagnosticopartepkidDianosticoparte) {
         this.tipoprocedimientopkidTipoprocedimiento = tipoprocedimientopkidTipoprocedimiento;
         this.pasospkidPaso = pasospkidPaso;
-        this.dianosticopartepkidDianosticoparte = dianosticopartepkidDianosticoparte;
+        this.diagnosticopartepkidDianosticoparte = diagnosticopartepkidDianosticoparte;
     }
 
     public int getTipoprocedimientopkidTipoprocedimiento() {
@@ -52,12 +52,12 @@ public class ProcedimientosPK implements Serializable {
         this.pasospkidPaso = pasospkidPaso;
     }
 
-    public int getDianosticopartepkidDianosticoparte() {
-        return dianosticopartepkidDianosticoparte;
+    public int getDiagnosticopartepkidDianosticoparte() {
+        return diagnosticopartepkidDianosticoparte;
     }
 
-    public void setDianosticopartepkidDianosticoparte(int dianosticopartepkidDianosticoparte) {
-        this.dianosticopartepkidDianosticoparte = dianosticopartepkidDianosticoparte;
+    public void setDiagnosticopartepkidDianosticoparte(int diagnosticopartepkidDianosticoparte) {
+        this.diagnosticopartepkidDianosticoparte = diagnosticopartepkidDianosticoparte;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ProcedimientosPK implements Serializable {
         int hash = 0;
         hash += (int) tipoprocedimientopkidTipoprocedimiento;
         hash += (int) pasospkidPaso;
-        hash += (int) dianosticopartepkidDianosticoparte;
+        hash += (int) diagnosticopartepkidDianosticoparte;
         return hash;
     }
 
@@ -82,7 +82,7 @@ public class ProcedimientosPK implements Serializable {
         if (this.pasospkidPaso != other.pasospkidPaso) {
             return false;
         }
-        if (this.dianosticopartepkidDianosticoparte != other.dianosticopartepkidDianosticoparte) {
+        if (this.diagnosticopartepkidDianosticoparte != other.diagnosticopartepkidDianosticoparte) {
             return false;
         }
         return true;
@@ -90,7 +90,7 @@ public class ProcedimientosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.ProcedimientosPK[ tipoprocedimientopkidTipoprocedimiento=" + tipoprocedimientopkidTipoprocedimiento + ", pasospkidPaso=" + pasospkidPaso + ", dianosticopartepkidDianosticoparte=" + dianosticopartepkidDianosticoparte + " ]";
+        return "ues.fmoocc.ingenieria.tpi2018.Entities.ProcedimientosPK[ tipoprocedimientopkidTipoprocedimiento=" + tipoprocedimientopkidTipoprocedimiento + ", pasospkidPaso=" + pasospkidPaso + ", diagnosticopartepkidDianosticoparte=" + diagnosticopartepkidDianosticoparte + " ]";
     }
     
 }

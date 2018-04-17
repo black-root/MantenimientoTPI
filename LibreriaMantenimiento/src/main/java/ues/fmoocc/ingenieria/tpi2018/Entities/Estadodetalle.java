@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -28,11 +27,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Estadodetalle.findAll", query = "SELECT e FROM Estadodetalle e")
     , @NamedQuery(name = "Estadodetalle.findByPersonalpkidPersonal", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.personalpkidPersonal = :personalpkidPersonal")
+    , @NamedQuery(name = "Estadodetalle.findByDescripcion", query = "SELECT e FROM Estadodetalle e WHERE e.descripcion = :descripcion")
     , @NamedQuery(name = "Estadodetalle.findByEstadopkidEstado", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadopkidEstado = :estadopkidEstado")
+    , @NamedQuery(name = "Estadodetalle.findByEstadoEstadopkidEstado", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadoEstadopkidEstado = :estadoEstadopkidEstado")
     , @NamedQuery(name = "Estadodetalle.findByEstadoProcedimientosTipoprocedimientopkidTipoprocedimiento", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadoProcedimientosTipoprocedimientopkidTipoprocedimiento = :estadoProcedimientosTipoprocedimientopkidTipoprocedimiento")
     , @NamedQuery(name = "Estadodetalle.findByEstadoProcedimientosPasospkidPaso", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadoProcedimientosPasospkidPaso = :estadoProcedimientosPasospkidPaso")
-    , @NamedQuery(name = "Estadodetalle.findByEstadoProcedimientosDianosticopartepkidDianosticoparte", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadoProcedimientosDianosticopartepkidDianosticoparte = :estadoProcedimientosDianosticopartepkidDianosticoparte")
-    , @NamedQuery(name = "Estadodetalle.findByDescripcion", query = "SELECT e FROM Estadodetalle e WHERE e.descripcion = :descripcion")})
+    , @NamedQuery(name = "Estadodetalle.findByEstadoProcedimientosDiagnosticopartepkidDianosticoparte", query = "SELECT e FROM Estadodetalle e WHERE e.estadodetallePK.estadoProcedimientosDiagnosticopartepkidDianosticoparte = :estadoProcedimientosDiagnosticopartepkidDianosticoparte")})
 public class Estadodetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,11 +44,11 @@ public class Estadodetalle implements Serializable {
         @JoinColumn(name = "Estado_pk_idEstado", referencedColumnName = "pk_idEstado", insertable = false, updatable = false)
         , @JoinColumn(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", referencedColumnName = "Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento", insertable = false, updatable = false)
         , @JoinColumn(name = "Estado_Procedimientos_Pasos_pk_idPaso", referencedColumnName = "Procedimientos_Pasos_pk_idPaso", insertable = false, updatable = false)
-        , @JoinColumn(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Dianostico_parte_pk_idDianostico_parte", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        , @JoinColumn(name = "Estado_Procedimientos_Diagnostico_parte_pk_idDianostico_parte", referencedColumnName = "Procedimientos_Diagnostico_parte_pk_idDianostico_parte", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
     private Estado estado;
     @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Personal personal;
 
     public Estadodetalle() {
@@ -58,8 +58,8 @@ public class Estadodetalle implements Serializable {
         this.estadodetallePK = estadodetallePK;
     }
 
-    public Estadodetalle(int personalpkidPersonal, int estadopkidEstado, int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, int estadoProcedimientosPasospkidPaso, int estadoProcedimientosDianosticopartepkidDianosticoparte) {
-        this.estadodetallePK = new EstadodetallePK(personalpkidPersonal, estadopkidEstado, estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, estadoProcedimientosPasospkidPaso, estadoProcedimientosDianosticopartepkidDianosticoparte);
+    public Estadodetalle(int personalpkidPersonal, int estadopkidEstado, int estadoEstadopkidEstado, int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, int estadoProcedimientosPasospkidPaso, int estadoProcedimientosDiagnosticopartepkidDianosticoparte) {
+        this.estadodetallePK = new EstadodetallePK(personalpkidPersonal, estadopkidEstado, estadoEstadopkidEstado, estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, estadoProcedimientosPasospkidPaso, estadoProcedimientosDiagnosticopartepkidDianosticoparte);
     }
 
     public EstadodetallePK getEstadodetallePK() {

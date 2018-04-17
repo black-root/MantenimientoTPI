@@ -27,17 +27,17 @@ public class EstadoPK implements Serializable {
     @Column(name = "Procedimientos_Pasos_pk_idPaso")
     private int procedimientosPasospkidPaso;
     @Basic(optional = false)
-    @Column(name = "Procedimientos_Dianostico_parte_pk_idDianostico_parte")
-    private int procedimientosDianosticopartepkidDianosticoparte;
+    @Column(name = "Procedimientos_Diagnostico_parte_pk_idDianostico_parte")
+    private int procedimientosDiagnosticopartepkidDianosticoparte;
 
     public EstadoPK() {
     }
 
-    public EstadoPK(int pkidEstado, int procedimientosTipoprocedimientopkidTipoprocedimiento, int procedimientosPasospkidPaso, int procedimientosDianosticopartepkidDianosticoparte) {
+    public EstadoPK(int pkidEstado, int procedimientosTipoprocedimientopkidTipoprocedimiento, int procedimientosPasospkidPaso, int procedimientosDiagnosticopartepkidDianosticoparte) {
         this.pkidEstado = pkidEstado;
         this.procedimientosTipoprocedimientopkidTipoprocedimiento = procedimientosTipoprocedimientopkidTipoprocedimiento;
         this.procedimientosPasospkidPaso = procedimientosPasospkidPaso;
-        this.procedimientosDianosticopartepkidDianosticoparte = procedimientosDianosticopartepkidDianosticoparte;
+        this.procedimientosDiagnosticopartepkidDianosticoparte = procedimientosDiagnosticopartepkidDianosticoparte;
     }
 
     public int getPkidEstado() {
@@ -64,12 +64,12 @@ public class EstadoPK implements Serializable {
         this.procedimientosPasospkidPaso = procedimientosPasospkidPaso;
     }
 
-    public int getProcedimientosDianosticopartepkidDianosticoparte() {
-        return procedimientosDianosticopartepkidDianosticoparte;
+    public int getProcedimientosDiagnosticopartepkidDianosticoparte() {
+        return procedimientosDiagnosticopartepkidDianosticoparte;
     }
 
-    public void setProcedimientosDianosticopartepkidDianosticoparte(int procedimientosDianosticopartepkidDianosticoparte) {
-        this.procedimientosDianosticopartepkidDianosticoparte = procedimientosDianosticopartepkidDianosticoparte;
+    public void setProcedimientosDiagnosticopartepkidDianosticoparte(int procedimientosDiagnosticopartepkidDianosticoparte) {
+        this.procedimientosDiagnosticopartepkidDianosticoparte = procedimientosDiagnosticopartepkidDianosticoparte;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class EstadoPK implements Serializable {
         hash += (int) pkidEstado;
         hash += (int) procedimientosTipoprocedimientopkidTipoprocedimiento;
         hash += (int) procedimientosPasospkidPaso;
-        hash += (int) procedimientosDianosticopartepkidDianosticoparte;
+        hash += (int) procedimientosDiagnosticopartepkidDianosticoparte;
         return hash;
     }
 
@@ -98,7 +98,7 @@ public class EstadoPK implements Serializable {
         if (this.procedimientosPasospkidPaso != other.procedimientosPasospkidPaso) {
             return false;
         }
-        if (this.procedimientosDianosticopartepkidDianosticoparte != other.procedimientosDianosticopartepkidDianosticoparte) {
+        if (this.procedimientosDiagnosticopartepkidDianosticoparte != other.procedimientosDiagnosticopartepkidDianosticoparte) {
             return false;
         }
         return true;
@@ -106,7 +106,7 @@ public class EstadoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.EstadoPK[ pkidEstado=" + pkidEstado + ", procedimientosTipoprocedimientopkidTipoprocedimiento=" + procedimientosTipoprocedimientopkidTipoprocedimiento + ", procedimientosPasospkidPaso=" + procedimientosPasospkidPaso + ", procedimientosDianosticopartepkidDianosticoparte=" + procedimientosDianosticopartepkidDianosticoparte + " ]";
+        return "ues.fmoocc.ingenieria.tpi2018.Entities.EstadoPK[ pkidEstado=" + pkidEstado + ", procedimientosTipoprocedimientopkidTipoprocedimiento=" + procedimientosTipoprocedimientopkidTipoprocedimiento + ", procedimientosPasospkidPaso=" + procedimientosPasospkidPaso + ", procedimientosDiagnosticopartepkidDianosticoparte=" + procedimientosDiagnosticopartepkidDianosticoparte + " ]";
     }
     
 }

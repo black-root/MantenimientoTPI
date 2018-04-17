@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
 import java.util.List;
@@ -11,7 +6,7 @@ import java.util.List;
  *
  * @author yisusdebian
  */
-public interface AbstractFacadeInterface<T> {
+public interface AbstractFacadeInterface <T> {
 
     T create(T entity);
 
@@ -27,13 +22,13 @@ public interface AbstractFacadeInterface<T> {
 
     T find(Object id);
 
-    List<T> findAll();
+    List <T> findAll();
 
-    List<T> findRange(int lower, int higher);
+    List <T> findRange(int lower, int higher);
 
     int count();
 
-    List<T> findWithDescripcion(String namedQueryName, String name);
+    List <T> findWithDescripcion(String namedQueryName, String name);
 
-    List<T> findWithNombre(String namedQueryName, String name);  
+    List <T> findWithNombre(String namedQueryName, String name);  
 }

@@ -6,11 +6,14 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,8 +37,14 @@ public class Diagnostico implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DiagnosticoPK diagnosticoPK;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diagnostico", fetch = FetchType.LAZY)
-    private List<Dianosticoparte> dianosticoparteList;
+    @Lob
+    @Column(name = "descripcionGeneral")
+    private String descripcionGeneral;
+    @JoinColumn(name = "OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "pk_idOrdenTrabajo", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private OrdenTrabajo ordenTrabajo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diagnostico")
+    private Collection<Diagnosticoparte> diagnosticoparteCollection;
 
     public Diagnostico() {
     }
@@ -56,13 +65,29 @@ public class Diagnostico implements Serializable {
         this.diagnosticoPK = diagnosticoPK;
     }
 
-    @XmlTransient
-    public List<Dianosticoparte> getDianosticoparteList() {
-        return dianosticoparteList;
+    public String getDescripcionGeneral() {
+        return descripcionGeneral;
     }
 
-    public void setDianosticoparteList(List<Dianosticoparte> dianosticoparteList) {
-        this.dianosticoparteList = dianosticoparteList;
+    public void setDescripcionGeneral(String descripcionGeneral) {
+        this.descripcionGeneral = descripcionGeneral;
+    }
+
+    public OrdenTrabajo getOrdenTrabajo() {
+        return ordenTrabajo;
+    }
+
+    public void setOrdenTrabajo(OrdenTrabajo ordenTrabajo) {
+        this.ordenTrabajo = ordenTrabajo;
+    }
+
+    @XmlTransient
+    public Collection<Diagnosticoparte> getDiagnosticoparteCollection() {
+        return diagnosticoparteCollection;
+    }
+
+    public void setDiagnosticoparteCollection(Collection<Diagnosticoparte> diagnosticoparteCollection) {
+        this.diagnosticoparteCollection = diagnosticoparteCollection;
     }
 
     @Override

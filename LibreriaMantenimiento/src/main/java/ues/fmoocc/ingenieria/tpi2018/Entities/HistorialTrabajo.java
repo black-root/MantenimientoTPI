@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,10 +50,10 @@ public class HistorialTrabajo implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @JoinColumn(name = "Personal_pk_idPersonal", referencedColumnName = "pk_idPersonal")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Personal personalpkidPersonal;
     @JoinColumn(name = "Rol_pk_idRol", referencedColumnName = "pk_idRol")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Rol rolpkidRol;
 
     public HistorialTrabajo() {

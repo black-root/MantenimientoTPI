@@ -24,24 +24,28 @@ public class EstadodetallePK implements Serializable {
     @Column(name = "Estado_pk_idEstado")
     private int estadopkidEstado;
     @Basic(optional = false)
+    @Column(name = "Estado_Estado_pk_idEstado")
+    private int estadoEstadopkidEstado;
+    @Basic(optional = false)
     @Column(name = "Estado_Procedimientos_Tipo_procedimiento_pk_idTipo_procedimiento")
     private int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento;
     @Basic(optional = false)
     @Column(name = "Estado_Procedimientos_Pasos_pk_idPaso")
     private int estadoProcedimientosPasospkidPaso;
     @Basic(optional = false)
-    @Column(name = "Estado_Procedimientos_Dianostico_parte_pk_idDianostico_parte")
-    private int estadoProcedimientosDianosticopartepkidDianosticoparte;
+    @Column(name = "Estado_Procedimientos_Diagnostico_parte_pk_idDianostico_parte")
+    private int estadoProcedimientosDiagnosticopartepkidDianosticoparte;
 
     public EstadodetallePK() {
     }
 
-    public EstadodetallePK(int personalpkidPersonal, int estadopkidEstado, int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, int estadoProcedimientosPasospkidPaso, int estadoProcedimientosDianosticopartepkidDianosticoparte) {
+    public EstadodetallePK(int personalpkidPersonal, int estadopkidEstado, int estadoEstadopkidEstado, int estadoProcedimientosTipoprocedimientopkidTipoprocedimiento, int estadoProcedimientosPasospkidPaso, int estadoProcedimientosDiagnosticopartepkidDianosticoparte) {
         this.personalpkidPersonal = personalpkidPersonal;
         this.estadopkidEstado = estadopkidEstado;
+        this.estadoEstadopkidEstado = estadoEstadopkidEstado;
         this.estadoProcedimientosTipoprocedimientopkidTipoprocedimiento = estadoProcedimientosTipoprocedimientopkidTipoprocedimiento;
         this.estadoProcedimientosPasospkidPaso = estadoProcedimientosPasospkidPaso;
-        this.estadoProcedimientosDianosticopartepkidDianosticoparte = estadoProcedimientosDianosticopartepkidDianosticoparte;
+        this.estadoProcedimientosDiagnosticopartepkidDianosticoparte = estadoProcedimientosDiagnosticopartepkidDianosticoparte;
     }
 
     public int getPersonalpkidPersonal() {
@@ -60,6 +64,14 @@ public class EstadodetallePK implements Serializable {
         this.estadopkidEstado = estadopkidEstado;
     }
 
+    public int getEstadoEstadopkidEstado() {
+        return estadoEstadopkidEstado;
+    }
+
+    public void setEstadoEstadopkidEstado(int estadoEstadopkidEstado) {
+        this.estadoEstadopkidEstado = estadoEstadopkidEstado;
+    }
+
     public int getEstadoProcedimientosTipoprocedimientopkidTipoprocedimiento() {
         return estadoProcedimientosTipoprocedimientopkidTipoprocedimiento;
     }
@@ -76,12 +88,12 @@ public class EstadodetallePK implements Serializable {
         this.estadoProcedimientosPasospkidPaso = estadoProcedimientosPasospkidPaso;
     }
 
-    public int getEstadoProcedimientosDianosticopartepkidDianosticoparte() {
-        return estadoProcedimientosDianosticopartepkidDianosticoparte;
+    public int getEstadoProcedimientosDiagnosticopartepkidDianosticoparte() {
+        return estadoProcedimientosDiagnosticopartepkidDianosticoparte;
     }
 
-    public void setEstadoProcedimientosDianosticopartepkidDianosticoparte(int estadoProcedimientosDianosticopartepkidDianosticoparte) {
-        this.estadoProcedimientosDianosticopartepkidDianosticoparte = estadoProcedimientosDianosticopartepkidDianosticoparte;
+    public void setEstadoProcedimientosDiagnosticopartepkidDianosticoparte(int estadoProcedimientosDiagnosticopartepkidDianosticoparte) {
+        this.estadoProcedimientosDiagnosticopartepkidDianosticoparte = estadoProcedimientosDiagnosticopartepkidDianosticoparte;
     }
 
     @Override
@@ -89,9 +101,10 @@ public class EstadodetallePK implements Serializable {
         int hash = 0;
         hash += (int) personalpkidPersonal;
         hash += (int) estadopkidEstado;
+        hash += (int) estadoEstadopkidEstado;
         hash += (int) estadoProcedimientosTipoprocedimientopkidTipoprocedimiento;
         hash += (int) estadoProcedimientosPasospkidPaso;
-        hash += (int) estadoProcedimientosDianosticopartepkidDianosticoparte;
+        hash += (int) estadoProcedimientosDiagnosticopartepkidDianosticoparte;
         return hash;
     }
 
@@ -108,13 +121,16 @@ public class EstadodetallePK implements Serializable {
         if (this.estadopkidEstado != other.estadopkidEstado) {
             return false;
         }
+        if (this.estadoEstadopkidEstado != other.estadoEstadopkidEstado) {
+            return false;
+        }
         if (this.estadoProcedimientosTipoprocedimientopkidTipoprocedimiento != other.estadoProcedimientosTipoprocedimientopkidTipoprocedimiento) {
             return false;
         }
         if (this.estadoProcedimientosPasospkidPaso != other.estadoProcedimientosPasospkidPaso) {
             return false;
         }
-        if (this.estadoProcedimientosDianosticopartepkidDianosticoparte != other.estadoProcedimientosDianosticopartepkidDianosticoparte) {
+        if (this.estadoProcedimientosDiagnosticopartepkidDianosticoparte != other.estadoProcedimientosDiagnosticopartepkidDianosticoparte) {
             return false;
         }
         return true;
@@ -122,7 +138,7 @@ public class EstadodetallePK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.EstadodetallePK[ personalpkidPersonal=" + personalpkidPersonal + ", estadopkidEstado=" + estadopkidEstado + ", estadoProcedimientosTipoprocedimientopkidTipoprocedimiento=" + estadoProcedimientosTipoprocedimientopkidTipoprocedimiento + ", estadoProcedimientosPasospkidPaso=" + estadoProcedimientosPasospkidPaso + ", estadoProcedimientosDianosticopartepkidDianosticoparte=" + estadoProcedimientosDianosticopartepkidDianosticoparte + " ]";
+        return "ues.fmoocc.ingenieria.tpi2018.Entities.EstadodetallePK[ personalpkidPersonal=" + personalpkidPersonal + ", estadopkidEstado=" + estadopkidEstado + ", estadoEstadopkidEstado=" + estadoEstadopkidEstado + ", estadoProcedimientosTipoprocedimientopkidTipoprocedimiento=" + estadoProcedimientosTipoprocedimientopkidTipoprocedimiento + ", estadoProcedimientosPasospkidPaso=" + estadoProcedimientosPasospkidPaso + ", estadoProcedimientosDiagnosticopartepkidDianosticoparte=" + estadoProcedimientosDiagnosticopartepkidDianosticoparte + " ]";
     }
     
 }

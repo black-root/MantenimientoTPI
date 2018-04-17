@@ -6,13 +6,12 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -80,19 +79,21 @@ public class OrdenTrabajo implements Serializable {
     @Column(name = "posibleFechaEntrega")
     @Temporal(TemporalType.DATE)
     private Date posibleFechaEntrega;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenTrabajo", fetch = FetchType.LAZY)
-    private List<Mantenimientodetalle> mantenimientodetalleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenTrabajo")
+    private Collection<Diagnostico> diagnosticoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenTrabajo")
+    private Collection<Mantenimientodetalle> mantenimientodetalleCollection;
     @JoinColumn(name = "Prioridad_pk_idPrioridad", referencedColumnName = "pk_idPrioridad")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Prioridad prioridadpkidPrioridad;
     @JoinColumn(name = "Solicitud_pk_idSolicitud", referencedColumnName = "pk_idSolicitud")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Solicitud solicitudpkidSolicitud;
     @JoinColumn(name = "TipoMantenimiento_pk_idTipoMantenimiento", referencedColumnName = "pk_idTipoMantenimiento")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private TipoMantenimiento tipoMantenimientopkidTipoMantenimiento;
     @JoinColumn(name = "Unidad_pk_idUnidad", referencedColumnName = "pk_idUnidad")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Unidad unidadpkidUnidad;
 
     public OrdenTrabajo() {
@@ -196,12 +197,21 @@ public class OrdenTrabajo implements Serializable {
     }
 
     @XmlTransient
-    public List<Mantenimientodetalle> getMantenimientodetalleList() {
-        return mantenimientodetalleList;
+    public Collection<Diagnostico> getDiagnosticoCollection() {
+        return diagnosticoCollection;
     }
 
-    public void setMantenimientodetalleList(List<Mantenimientodetalle> mantenimientodetalleList) {
-        this.mantenimientodetalleList = mantenimientodetalleList;
+    public void setDiagnosticoCollection(Collection<Diagnostico> diagnosticoCollection) {
+        this.diagnosticoCollection = diagnosticoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mantenimientodetalle> getMantenimientodetalleCollection() {
+        return mantenimientodetalleCollection;
+    }
+
+    public void setMantenimientodetalleCollection(Collection<Mantenimientodetalle> mantenimientodetalleCollection) {
+        this.mantenimientodetalleCollection = mantenimientodetalleCollection;
     }
 
     public Prioridad getPrioridadpkidPrioridad() {

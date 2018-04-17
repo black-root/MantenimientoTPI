@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Calendario</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Diagnostico</class>
-    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Equipodetalle</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Estado</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Estadodetalle</class>
@@ -23,6 +22,7 @@
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Unidad</class>
+    <class>ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3300/mantenimientoPC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -14,6 +14,5 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Calendario;
  * @author yisusdebian
  */
 @Local
-public interface CalendarioFacadeLocal   extends AbstractFacadeInterface<Calendario>{
-   
+public interface CalendarioFacadeLocal extends AbstractFacadeInterface<Calendario>{   
 }

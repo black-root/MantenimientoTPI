@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,8 +43,8 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolpkidRol", fetch = FetchType.LAZY)
-    private List<HistorialTrabajo> historialTrabajoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolpkidRol")
+    private Collection<HistorialTrabajo> historialTrabajoCollection;
 
     public Rol() {
     }
@@ -76,12 +75,12 @@ public class Rol implements Serializable {
     }
 
     @XmlTransient
-    public List<HistorialTrabajo> getHistorialTrabajoList() {
-        return historialTrabajoList;
+    public Collection<HistorialTrabajo> getHistorialTrabajoCollection() {
+        return historialTrabajoCollection;
     }
 
-    public void setHistorialTrabajoList(List<HistorialTrabajo> historialTrabajoList) {
-        this.historialTrabajoList = historialTrabajoList;
+    public void setHistorialTrabajoCollection(Collection<HistorialTrabajo> historialTrabajoCollection) {
+        this.historialTrabajoCollection = historialTrabajoCollection;
     }
 
     @Override

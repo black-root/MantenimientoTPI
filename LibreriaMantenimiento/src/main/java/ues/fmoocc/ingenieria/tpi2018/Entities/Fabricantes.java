@@ -6,14 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -40,7 +37,6 @@ public class Fabricantes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idFabricante")
     private Integer idFabricante;
@@ -57,8 +53,8 @@ public class Fabricantes implements Serializable {
     @Lob
     @Column(name = "direccion")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricantesidFabricante", fetch = FetchType.LAZY)
-    private List<Equipodetalle> equipodetalleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricantesidFabricante")
+    private Collection<Equipodetalle> equipodetalleCollection;
 
     public Fabricantes() {
     }
@@ -121,12 +117,12 @@ public class Fabricantes implements Serializable {
     }
 
     @XmlTransient
-    public List<Equipodetalle> getEquipodetalleList() {
-        return equipodetalleList;
+    public Collection<Equipodetalle> getEquipodetalleCollection() {
+        return equipodetalleCollection;
     }
 
-    public void setEquipodetalleList(List<Equipodetalle> equipodetalleList) {
-        this.equipodetalleList = equipodetalleList;
+    public void setEquipodetalleCollection(Collection<Equipodetalle> equipodetalleCollection) {
+        this.equipodetalleCollection = equipodetalleCollection;
     }
 
     @Override

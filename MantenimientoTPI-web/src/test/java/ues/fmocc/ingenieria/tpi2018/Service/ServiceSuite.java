@@ -17,7 +17,23 @@ import org.junit.runners.Suite;
  * @author viktor
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ues.fmocc.ingenieria.tpi2018.Service.FabricantesRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.RolRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.EstadoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.HistorialTrabajoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.MantenimientoDetalleRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.OrdenTrabajoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.TelefonoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.PrioridadRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.PersonalRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.PasosRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.TipoMantenimientoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.SolicitudRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.UnidadRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.SubTipoMantenimientoRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.Equipo_detalleRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.ProcedimientosRestTest.class, ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRestTest.class})
+@Suite.SuiteClasses({ues.fmocc.ingenieria.tpi2018.Service.FabricantesRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.RolRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.EstadoRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.HistorialTrabajoRestTest.class,  
+    ues.fmocc.ingenieria.tpi2018.Service.OrdenTrabajoRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.TelefonoRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.PrioridadRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.TipoProcedimientoRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.PersonalRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.PasosRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.TipoMantenimientoRestTest.class,
+    ues.fmocc.ingenieria.tpi2018.Service.SolicitudRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.UnidadRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.SubTipoMantenimientoRestTest.class, 
+    ues.fmocc.ingenieria.tpi2018.Service.ProcedimientosRestTest.class,
+    ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRestTest.class})
 public class ServiceSuite {
 
     @BeforeClass

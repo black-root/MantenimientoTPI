@@ -6,12 +6,11 @@
 package ues.fmoocc.ingenieria.tpi2018.Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -28,13 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author yisusdebian
  */
 @Entity
-@Table(name = "Dianostico_parte")
+@Table(name = "Diagnostico_parte")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Dianosticoparte.findAll", query = "SELECT d FROM Dianosticoparte d")
-    , @NamedQuery(name = "Dianosticoparte.findByPkidDianosticoparte", query = "SELECT d FROM Dianosticoparte d WHERE d.pkidDianosticoparte = :pkidDianosticoparte")
-    , @NamedQuery(name = "Dianosticoparte.findByDescripcion", query = "SELECT d FROM Dianosticoparte d WHERE d.descripcion = :descripcion")})
-public class Dianosticoparte implements Serializable {
+    @NamedQuery(name = "Diagnosticoparte.findAll", query = "SELECT d FROM Diagnosticoparte d")
+    , @NamedQuery(name = "Diagnosticoparte.findByPkidDianosticoparte", query = "SELECT d FROM Diagnosticoparte d WHERE d.pkidDianosticoparte = :pkidDianosticoparte")
+    , @NamedQuery(name = "Diagnosticoparte.findByDescripcion", query = "SELECT d FROM Diagnosticoparte d WHERE d.descripcion = :descripcion")})
+public class Diagnosticoparte implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,25 +43,25 @@ public class Dianosticoparte implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
+    @JoinColumn(name = "Equipo_detalle_pk_idEquipoDetalle", referencedColumnName = "pk_idEquipoDetalle")
+    @ManyToOne(optional = false)
+    private Equipodetalle equipodetallepkidEquipoDetalle;
     @JoinColumns({
         @JoinColumn(name = "Diagnostico_pK_idDiagnostico", referencedColumnName = "pK_idDiagnostico")
         , @JoinColumn(name = "Diagnostico_OrdenTrabajo_pk_idOrdenTrabajo", referencedColumnName = "OrdenTrabajo_pk_idOrdenTrabajo")})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Diagnostico diagnostico;
-    @JoinColumn(name = "Equipo_detalle_pk_EDnoSerie", referencedColumnName = "pk_EDnoSerie")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Equipodetalle equipodetallepkEDnoSerie;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dianosticoparte", fetch = FetchType.LAZY)
-    private List<Procedimientos> procedimientosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diagnosticoparte")
+    private Collection<Procedimientos> procedimientosCollection;
 
-    public Dianosticoparte() {
+    public Diagnosticoparte() {
     }
 
-    public Dianosticoparte(Integer pkidDianosticoparte) {
+    public Diagnosticoparte(Integer pkidDianosticoparte) {
         this.pkidDianosticoparte = pkidDianosticoparte;
     }
 
-    public Dianosticoparte(Integer pkidDianosticoparte, String descripcion) {
+    public Diagnosticoparte(Integer pkidDianosticoparte, String descripcion) {
         this.pkidDianosticoparte = pkidDianosticoparte;
         this.descripcion = descripcion;
     }
@@ -83,6 +82,14 @@ public class Dianosticoparte implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Equipodetalle getEquipodetallepkidEquipoDetalle() {
+        return equipodetallepkidEquipoDetalle;
+    }
+
+    public void setEquipodetallepkidEquipoDetalle(Equipodetalle equipodetallepkidEquipoDetalle) {
+        this.equipodetallepkidEquipoDetalle = equipodetallepkidEquipoDetalle;
+    }
+
     public Diagnostico getDiagnostico() {
         return diagnostico;
     }
@@ -91,21 +98,13 @@ public class Dianosticoparte implements Serializable {
         this.diagnostico = diagnostico;
     }
 
-    public Equipodetalle getEquipodetallepkEDnoSerie() {
-        return equipodetallepkEDnoSerie;
-    }
-
-    public void setEquipodetallepkEDnoSerie(Equipodetalle equipodetallepkEDnoSerie) {
-        this.equipodetallepkEDnoSerie = equipodetallepkEDnoSerie;
-    }
-
     @XmlTransient
-    public List<Procedimientos> getProcedimientosList() {
-        return procedimientosList;
+    public Collection<Procedimientos> getProcedimientosCollection() {
+        return procedimientosCollection;
     }
 
-    public void setProcedimientosList(List<Procedimientos> procedimientosList) {
-        this.procedimientosList = procedimientosList;
+    public void setProcedimientosCollection(Collection<Procedimientos> procedimientosCollection) {
+        this.procedimientosCollection = procedimientosCollection;
     }
 
     @Override
@@ -118,10 +117,10 @@ public class Dianosticoparte implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dianosticoparte)) {
+        if (!(object instanceof Diagnosticoparte)) {
             return false;
         }
-        Dianosticoparte other = (Dianosticoparte) object;
+        Diagnosticoparte other = (Diagnosticoparte) object;
         if ((this.pkidDianosticoparte == null && other.pkidDianosticoparte != null) || (this.pkidDianosticoparte != null && !this.pkidDianosticoparte.equals(other.pkidDianosticoparte))) {
             return false;
         }
@@ -130,7 +129,7 @@ public class Dianosticoparte implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Dianosticoparte[ pkidDianosticoparte=" + pkidDianosticoparte + " ]";
+        return "ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte[ pkidDianosticoparte=" + pkidDianosticoparte + " ]";
     }
     
 }
