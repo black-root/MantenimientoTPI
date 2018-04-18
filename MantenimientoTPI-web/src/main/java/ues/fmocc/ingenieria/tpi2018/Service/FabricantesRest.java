@@ -49,7 +49,7 @@ public class FabricantesRest implements Serializable{
 
     @Path("count")
     @GET
-   @Produces({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.TEXT_PLAIN})
     public Integer count() {
 
         try {
@@ -99,41 +99,33 @@ public class FabricantesRest implements Serializable{
     
     @DELETE
     @Path("/{id:\\d+}")
-    public void remove(@PathParam("id") int id) {
-        try {
-            if (this.ejbFabricante != null) {
-                ejbFabricante.remove(ejbFabricante.find(id));
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response remove(@PathParam("id") int id) {
+        if (ejbFabricante.eliminar(ejbFabricante.find(id))) {
+            return Response.status(Response.Status.OK).header("objeto eliminado", this).build();
         }
+        
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo borrar", this).build();
     }
 
     @POST
-    @Path("/crear/{id:\\d+}")
+    @Path("/crear")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(@PathParam("id") int id, Fabricantes entity) {
-
-        try {
-            if (this.ejbFabricante != null) {
-                ejbFabricante.create(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(Fabricantes entity) {
+        if (ejbFabricante.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("objeto no creado", this).build();
     }
 
     @PUT
     @Path("/{id:\\d+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") int id, Fabricantes entity) {
-
-        try {
-            if (this.ejbFabricante != null) {
-                ejbFabricante.edit(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id") int id, Fabricantes entity) {
+        if (ejbFabricante.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo editar", this).build();
     }
 }

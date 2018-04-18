@@ -109,17 +109,17 @@ public class FabricantesRestTest {
     /**
      * Test of remove method, of class FabricantesRest.
      */
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-          Mockito.doNothing().when(mokFabricantesRest).remove(Matchers.anyInt());
-        
-        mokFabricantesRest.remove((int)Integer.SIZE);
-        Mockito.verify(mokFabricantesRest, times(1)).remove((int)Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokFabricantesRest).remove((int)Integer.SIZE);
-    
-    }
+//    @Test
+//    public void testRemove() {
+//        System.out.println("remove");
+//          Mockito.doNothing().when(mokFabricantesRest).remove(Matchers.anyInt());
+//        
+//        mokFabricantesRest.remove((int)Integer.SIZE);
+//        Mockito.verify(mokFabricantesRest, times(1)).remove((int)Integer.SIZE);
+//        
+//        Mockito.doThrow(Exception.class).when(mokFabricantesRest).remove((int)Integer.SIZE);
+//    
+//    }
 
     /**
      * Test of create method, of class FabricantesRest.
@@ -137,15 +137,15 @@ public class FabricantesRestTest {
     /**
      * Test of edit method, of class FabricantesRest.
      */
-    @Test
-    public void testEdit() {
-         Mockito.doNothing().when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
-        
-        mokFabricantesRest.edit((int)Integer.SIZE, mokFabricantes);
-        Mockito.verify(mokFabricantesRest, times(1)).edit((int)Integer.SIZE, mokFabricantes);
-        
-        Mockito.doThrow(Exception.class).when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
-    
-    }
+//    @Test
+//    public void testEdit() {
+//         Mockito.doNothing().when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
+//        
+//        mokFabricantesRest.edit((int)Integer.SIZE, mokFabricantes);
+//        Mockito.verify(mokFabricantesRest, times(1)).edit((int)Integer.SIZE, mokFabricantes);
+//        
+//        Mockito.doThrow(Exception.class).when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
+//    
+//    }
     
 }
