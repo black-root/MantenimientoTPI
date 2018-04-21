@@ -85,7 +85,7 @@ public class PersonalRest implements Serializable {
     public List<Personal> findByNombre(@PathParam("nombre") String nombre) {
         try {
             if (ejbPersonal != null) {
-                return ejbPersonal.findWithNombre("Personal.findByNombre", nombre);
+                return ejbPersonal.findWithNombre(nombre);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);

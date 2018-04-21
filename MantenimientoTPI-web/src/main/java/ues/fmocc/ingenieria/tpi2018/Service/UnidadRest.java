@@ -83,7 +83,7 @@ public class UnidadRest implements Serializable {
     public List<Unidad> findByNombre(@PathParam("nombre") String nombre) {
         try {
             if (ejbUnidad != null) {
-                return ejbUnidad.findWithNombre("Unidad.findByNombre", nombre);
+                return ejbUnidad.findWithNombre(nombre);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);

@@ -5,6 +5,7 @@ import java.util.List;
 /**
  *
  * @author yisusdebian
+ * @param <T>
  */
 public interface AbstractFacadeInterface <T> {
 
@@ -28,7 +29,5 @@ public interface AbstractFacadeInterface <T> {
 
     int count();
 
-    List <T> findWithDescripcion(String namedQueryName, String name);
-
-    List <T> findWithNombre(String namedQueryName, String name);  
+    List <T> findWithNombre(String name);  
 }

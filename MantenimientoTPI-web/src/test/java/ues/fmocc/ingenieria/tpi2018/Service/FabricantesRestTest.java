@@ -25,86 +25,86 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Fabricantes;
  * @author viktor
  */
 public class FabricantesRestTest {
-    final FabricantesRest mokFabricantesRest = Mockito.mock(FabricantesRest.class);
-    final Fabricantes mokFabricantes = Mockito.mock(Fabricantes.class);
-    
-    public FabricantesRestTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() throws Exception {
-       PowerMockito.whenNew(Fabricantes.class).withAnyArguments().thenReturn(mokFabricantes);
-       Fabricantes d = new Fabricantes(1);
-       Fabricantes d1 = new Fabricantes(2);
-       List<Fabricantes> listaFabricantes =new ArrayList<>();
-       listaFabricantes.add(d);
-       listaFabricantes.add(d1);
-       Mockito.when(mokFabricantesRest.findall()).thenReturn(listaFabricantes);
-       Mockito.when(mokFabricantesRest.findById(1)).thenReturn(d);
-       Mockito.when(mokFabricantesRest.findByNombre("nombre")).thenReturn(listaFabricantes);
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of findAll method, of class FabricantesRest.
-     */
-    @Test
-    public void testFindall() throws Exception {
-        FabricantesRest rest = mokFabricantesRest;
-        List<Fabricantes> result = rest.findall();
-        Fabricantes fab = new Fabricantes(1);
-        assertThat(result, CoreMatchers.hasItem(fab));
-        assertNotNull(rest);
-    }
-
-    /**
-     * Test of findById method, of class FabricantesRest.
-     */
-    @Test
-    public void testFindById() throws Exception {
-        int id=1;
-        FabricantesRest instance = mokFabricantesRest;
-        Fabricantes expResult = new Fabricantes(1);
-        Fabricantes result = instance.findById(id);
-        assertNotNull(result);
-        assertEquals(expResult, result);
-    }
-
- 
-    /**
-     * Test of count method, of class FabricantesRest.
-     */
-    @Test
-    public void testCount() {
-        System.out.println("count");
-        FabricantesRest instance = mokFabricantesRest;
-        int expResult = 0;
-        int result = instance.count();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of findByDescripcion method, of class FabricantesRest.
-     */
-    @Test
-    public void testFindByDescripcion() {
-        FabricantesRest instance = mokFabricantesRest;
-        Fabricantes expResult = new Fabricantes(1);
-        List<Fabricantes> result = instance.findByNombre("nombre");
-        assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(result);
-    }
+//    final FabricantesRest mokFabricantesRest = Mockito.mock(FabricantesRest.class);
+//    final Fabricantes mokFabricantes = Mockito.mock(Fabricantes.class);
+//    
+//    public FabricantesRestTest() {
+//    }
+//    
+//    @BeforeClass
+//    public static void setUpClass() {
+//    }
+//    
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
+//    
+//    @Before
+//    public void setUp() throws Exception {
+//       PowerMockito.whenNew(Fabricantes.class).withAnyArguments().thenReturn(mokFabricantes);
+//       Fabricantes d = new Fabricantes(1);
+//       Fabricantes d1 = new Fabricantes(2);
+//       List<Fabricantes> listaFabricantes =new ArrayList<>();
+//       listaFabricantes.add(d);
+//       listaFabricantes.add(d1);
+//       Mockito.when(mokFabricantesRest.findall()).thenReturn(listaFabricantes);
+//       Mockito.when(mokFabricantesRest.findById(1)).thenReturn(d);
+//       Mockito.when(mokFabricantesRest.findByNombre("nombre")).thenReturn(listaFabricantes);
+//    }
+//    
+//    @After
+//    public void tearDown() {
+//    }
+//
+//    /**
+//     * Test of findAll method, of class FabricantesRest.
+//     */
+//    @Test
+//    public void testFindall() throws Exception {
+//        FabricantesRest rest = mokFabricantesRest;
+//        List<Fabricantes> result = rest.findall();
+//        Fabricantes fab = new Fabricantes(1);
+//        assertThat(result, CoreMatchers.hasItem(fab));
+//        assertNotNull(rest);
+//    }
+//
+//    /**
+//     * Test of findById method, of class FabricantesRest.
+//     */
+//    @Test
+//    public void testFindById() throws Exception {
+//        int id=1;
+//        FabricantesRest instance = mokFabricantesRest;
+//        Fabricantes expResult = new Fabricantes(1);
+//        Fabricantes result = instance.findById(id);
+//        assertNotNull(result);
+//        assertEquals(expResult, result);
+//    }
+//
+// 
+//    /**
+//     * Test of count method, of class FabricantesRest.
+//     */
+//    @Test
+//    public void testCount() {
+//        System.out.println("count");
+//        FabricantesRest instance = mokFabricantesRest;
+//        int expResult = 0;
+//        int result = instance.count();
+//        assertEquals(expResult, result);
+//    }
+//
+//    /**
+//     * Test of findByDescripcion method, of class FabricantesRest.
+//     */
+//    @Test
+//    public void testFindByDescripcion() {
+//        FabricantesRest instance = mokFabricantesRest;
+//        Fabricantes expResult = new Fabricantes(1);
+//        List<Fabricantes> result = instance.findByNombre("nombre");
+//        assertThat(result, CoreMatchers.hasItem(expResult));
+//        assertNotNull(result);
+//    }
 
     /**
      * Test of remove method, of class FabricantesRest.

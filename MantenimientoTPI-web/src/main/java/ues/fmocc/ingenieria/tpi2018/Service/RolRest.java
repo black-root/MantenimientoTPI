@@ -78,22 +78,6 @@ public class RolRest implements Serializable {
         return new Rol();
     }
     
-    @GET
-    @Path("/{descripcion}")
-    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<Rol> findByDescripcion(@PathParam("descripcion") String descripcion){
-        try {
-            if (ejbRol != null) {
-                return ejbRol.findWithDescripcion("Rol.findByDescripcion", descripcion);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-
-        }
-        return null;
-    }
-    
-    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

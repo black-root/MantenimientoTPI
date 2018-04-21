@@ -76,23 +76,7 @@ public class Estado_detalleRest implements Serializable {
         }
         return new Estadodetalle();
     }
-    
-    @GET
-    @Path("/{descripcion}")
-    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<Estadodetalle> findByDescripcion(@PathParam("descripcion") String descripcion){
-        try {
-            if (ejbEstadoDetalle != null) {
-                return ejbEstadoDetalle.findWithDescripcion("Estadodetalle.findByDescripcion", descripcion);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-
-        }
-        return null;
-    }
-    
-    
+     
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

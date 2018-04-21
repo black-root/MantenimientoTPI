@@ -25,8 +25,9 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.FabricantesFacadeLocal;
  *
  * @author Daniel Murillo
  */
+@Stateless
 @Path("fabricantes")
-public class FabricantesRest implements Serializable{
+public class FabricantesRest{
     
     @EJB
     private FabricantesFacadeLocal ejbFabricante;
@@ -87,7 +88,7 @@ public class FabricantesRest implements Serializable{
     public List<Fabricantes> findByNombre(@PathParam("nombre") String nombre){
         try {
             if (ejbFabricante != null) {
-                return ejbFabricante.findWithNombre("Fabricantes.findByNombre", nombre);
+                return ejbFabricante.findWithNombre(nombre);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -128,4 +129,5 @@ public class FabricantesRest implements Serializable{
         }
         return Response.status(Response.Status.NOT_FOUND).header("no se pudo editar", this).build();
     }
+
 }

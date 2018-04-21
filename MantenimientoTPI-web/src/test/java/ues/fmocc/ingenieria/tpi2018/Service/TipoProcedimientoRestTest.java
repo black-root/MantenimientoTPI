@@ -51,7 +51,7 @@ public class TipoProcedimientoRestTest {
         listTp.add(tp1);
         Mockito.when(mokTPRest.findall()).thenReturn(listTp);
         Mockito.when(mokTPRest.findById(1)).thenReturn(tp);
-        Mockito.when(mokTPRest.findByDescripcion("descripcion")).thenReturn(listTp);
+       // Mockito.when(mokTPRest.findByDescripcion("descripcion")).thenReturn(listTp);
     }
     
     @After
@@ -101,15 +101,15 @@ public class TipoProcedimientoRestTest {
     /**
      * Test of findByDescripcion method, of class TipoProcedimientoRest.
      */
-    @Test
-    public void testFindByDescripcion() {
-        System.out.println("findByDescripcion");
-        TipoProcedimientoRest instance = mokTPRest;
-         Tipoprocedimiento expResult = new  Tipoprocedimiento(1);
-        List<Tipoprocedimiento> result = instance.findByDescripcion("descripcion");
-        assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(result);
-    }
+//    @Test
+//    public void testFindByDescripcion() {
+//        System.out.println("findByDescripcion");
+//        TipoProcedimientoRest instance = mokTPRest;
+//         Tipoprocedimiento expResult = new  Tipoprocedimiento(1);
+//        List<Tipoprocedimiento> result = instance.findByDescripcion("descripcion");
+//        assertThat(result, CoreMatchers.hasItem(expResult));
+//        assertNotNull(result);
+//    }
 
     /**
      * Test of remove method, of class TipoProcedimientoRest.

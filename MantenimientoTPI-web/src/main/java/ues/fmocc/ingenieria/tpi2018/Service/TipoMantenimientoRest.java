@@ -77,21 +77,6 @@ public class TipoMantenimientoRest implements Serializable{
         return new TipoMantenimiento();
     }
     
-    @GET
-    @Path("/{descripcion}")
-    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<TipoMantenimiento> findByDescripcion(@PathParam("descripcion") String descripcion){
-        try {
-            if (ejbTipoMantenimiento != null) {
-                return ejbTipoMantenimiento.findWithDescripcion("TipoMantenimiento.findByDescripcion", descripcion);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-
-        }
-        return null;
-    }
-    
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {

@@ -81,22 +81,6 @@ public class SubTipoMantenimientoRest implements Serializable {
         return new SubTipoMantenimiento();
     }
 
-    @GET
-    @Path("/{descripcion}")
-    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
-    public List<SubTipoMantenimiento> findByDescripcion(@PathParam("descripcion") String descripcion
-    ) {
-        try {
-            if (ejbSubTipoMantenimiento != null) {
-                return ejbSubTipoMantenimiento.findWithDescripcion("SubTipoDescripcion.findByDescripcion", descripcion);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-
-        }
-        return null;
-    }
-
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id

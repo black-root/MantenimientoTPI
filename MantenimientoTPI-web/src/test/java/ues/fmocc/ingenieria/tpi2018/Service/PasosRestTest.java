@@ -51,7 +51,7 @@ public class PasosRestTest {
         listaPasos.add(p1);
         Mockito.when(mokPasosRest.findall()).thenReturn(listaPasos);
         Mockito.when(mokPasosRest.findById(1)).thenReturn(p);
-        Mockito.when(mokPasosRest.findByDescripcion("descripcion")).thenReturn(listaPasos);
+        //Mockito.when(mokPasosRest.findByDescripcion("descripcion")).thenReturn(listaPasos);
             
         
     }
@@ -97,15 +97,15 @@ public class PasosRestTest {
     /**
      * Test of findByDescripcion method, of class PasosRest.
      */
-    @Test
-    public void testFindByDescripcion() {
-        System.out.println("findByDescripcion");
-        PasosRest instance = mokPasosRest;
-        Pasos expResult = new Pasos(1);
-        List<Pasos> result = instance.findByDescripcion("descripcion");
-        assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(result);
-    }
+//    @Test
+//    public void testFindByDescripcion() {
+//        System.out.println("findByDescripcion");
+//        PasosRest instance = mokPasosRest;
+//        Pasos expResult = new Pasos(1);
+//        List<Pasos> result = instance.findByDescripcion("descripcion");
+//        assertThat(result, CoreMatchers.hasItem(expResult));
+//        assertNotNull(result);
+//    }
 
     /**
      * Test of remove method, of class PasosRest.

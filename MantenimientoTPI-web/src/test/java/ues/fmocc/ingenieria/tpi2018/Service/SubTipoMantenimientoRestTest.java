@@ -50,7 +50,7 @@ public class SubTipoMantenimientoRestTest {
         listaSTM.add(st1);
         Mockito.when(mokSTMRest.findall()).thenReturn(listaSTM);
         Mockito.when(mokSTMRest.findById(1)).thenReturn(st);
-        Mockito.when(mokSTMRest.findByDescripcion("descripcion")).thenReturn(listaSTM);
+        //Mockito.when(mokSTMRest.findByDescripcion("descripcion")).thenReturn(listaSTM);
     }
     
     @After
@@ -99,15 +99,15 @@ public class SubTipoMantenimientoRestTest {
     /**
      * Test of findByDescripcion method, of class SubTipoMantenimientoRest.
      */
-    @Test
-    public void testFindByDescripcion() {
-        System.out.println("findByDescripcion");
-        SubTipoMantenimientoRest instance = mokSTMRest;
-        SubTipoMantenimiento expResult = new SubTipoMantenimiento(1);
-        List<SubTipoMantenimiento> result = instance.findByDescripcion("descripcion");
-        assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(result);
-    }
+//    @Test
+//    public void testFindByDescripcion() {
+//        System.out.println("findByDescripcion");
+//        SubTipoMantenimientoRest instance = mokSTMRest;
+//        SubTipoMantenimiento expResult = new SubTipoMantenimiento(1);
+//        List<SubTipoMantenimiento> result = instance.findByDescripcion("descripcion");
+//        assertThat(result, CoreMatchers.hasItem(expResult));
+//        assertNotNull(result);
+//    }
 
     /**
      * Test of remove method, of class SubTipoMantenimientoRest.

@@ -77,7 +77,7 @@ public class SolicitudRest implements Serializable {
     public List<Solicitud> findBySolicitud(@PathParam("nombre") String nombre){
         try {
             if (ejbSolicitud != null) {
-                return ejbSolicitud.findWithNombre("Solicitud.findByNombre", nombre);
+                return ejbSolicitud.findWithNombre(nombre);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);

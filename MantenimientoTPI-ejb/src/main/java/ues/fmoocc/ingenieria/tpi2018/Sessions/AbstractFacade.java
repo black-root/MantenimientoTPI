@@ -7,6 +7,11 @@ package ues.fmoocc.ingenieria.tpi2018.Sessions;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -89,12 +94,15 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<T> findWithDescripcion(String namedQueryName, String name) {
-        return getEntityManager().createNamedQuery(namedQueryName).setParameter("descripcion", name).getResultList();
-    }
-
-    public List<T> findWithNombre(String namedQueryName, String name) {
-        return getEntityManager().createNamedQuery(namedQueryName).setParameter("nombre", name).getResultList();
+    public List<T> findWithNombre(String name) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(entityClass);
+        Root<T> en = query.from(entityClass);
+        
+        Predicate condicion = builder.like(en.<String>get("nombre"), name);
+        query.where(condicion);
+        TypedQuery<T> q = getEntityManager().createQuery(query);
+        return q.getResultList();
     }
     
     public List<T> findRange(int lower, int higher) {

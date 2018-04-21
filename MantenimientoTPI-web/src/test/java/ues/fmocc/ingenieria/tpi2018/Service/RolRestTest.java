@@ -50,7 +50,7 @@ public class RolRestTest {
       listaRol.add(r1);
       Mockito.when(mokRolRest.findall()).thenReturn(listaRol);
       Mockito.when(mokRolRest.findById(1)).thenReturn(r);
-      Mockito.when(mokRolRest.findByDescripcion("descripcion")).thenReturn(listaRol);
+      //Mockito.when(mokRolRest.findByDescripcion("descripcion")).thenReturn(listaRol);
     }
     
     @After
@@ -96,16 +96,16 @@ public class RolRestTest {
     /**
      * Test of findByDescripcion method, of class RolRest.
      */
-    @Test
-    public void testFindByDescripcion() {
-        System.out.println("findByDescripcion");
-        int id =1;
-        RolRest instance = mokRolRest;
-        Rol expResult = new Rol(1);
-        List<Rol> result = instance.findByDescripcion("descripcion");
-        assertThat(result, CoreMatchers.hasItem(expResult));
-        assertNotNull(result);
-    }
+//    @Test
+//    public void testFindByDescripcion() {
+//        System.out.println("findByDescripcion");
+//        int id =1;
+//        RolRest instance = mokRolRest;
+//        Rol expResult = new Rol(1);
+//        List<Rol> result = instance.findByDescripcion("descripcion");
+//        assertThat(result, CoreMatchers.hasItem(expResult));
+//        assertNotNull(result);
+//    }
 
     /**
      * Test of remove method, of class RolRest.
