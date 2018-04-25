@@ -66,58 +66,32 @@ public class DiagnosticoRest implements Serializable{
         }
         return salida;
     }
-    
-    
-    //Elimina un diagnostico de la base de datos
     @DELETE
-    @Path("/{id}")
-    public Response borrarDiagnostico(@PathParam("id") Integer id){
-        Response salida = Response.status(Response.Status.NOT_FOUND).build();
-       try{
-           if(id!=null && diagnosticoFacade!=null){
-               diagnosticoFacade.remove(diagnosticoFacade.find(id));
-               salida = Response.status(Response.Status.OK).build();
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (diagnosticoFacade.eliminar(diagnosticoFacade.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
-        //findAll();
-        return salida;
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
-    
-    
-    //Guardar un diagnostico en la base de datos
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarDiagnostico(Diagnostico diagnostico){
-        try{
-            if(this.diagnosticoFacade!=null){
-             diagnosticoFacade.create(diagnostico);
-        return Response.status(Response.Status.CREATED).entity(diagnostico).build();  
+    @Path("crea")
+    public Response create(Diagnostico entity) {
+        if (diagnosticoFacade.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
-    
+
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarDiagnostico(@PathParam("id") Integer id, Diagnostico diagnostico) {
-        try {
-            if (this.diagnosticoFacade != null) {
-                diagnosticoFacade.edit(diagnostico);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(Diagnostico entity) {
+        if (diagnosticoFacade.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    
-    
-    
-    
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 }

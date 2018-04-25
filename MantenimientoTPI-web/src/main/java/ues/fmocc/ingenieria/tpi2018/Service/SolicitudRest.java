@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
 
 /**
@@ -85,44 +86,33 @@ public class SolicitudRest implements Serializable {
         }
         return null;
     }
-    
+   
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        try {
-            if (id != null && this.ejbSolicitud != null) {
-                ejbSolicitud.remove(ejbSolicitud.find(id));
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (ejbSolicitud.eliminar(ejbSolicitud.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Solicitud entity) {
-
-        try {
-            if (this.ejbSolicitud != null) {
-                ejbSolicitud.create(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("crea")
+    public Response create(Solicitud entity) {
+        if (ejbSolicitud.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
 
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Solicitud entity) {
-
-        try {
-            if (this.ejbSolicitud != null) {
-                ejbSolicitud.edit(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(Solicitud entity) {
+        if (ejbSolicitud.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-    }
-
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 }

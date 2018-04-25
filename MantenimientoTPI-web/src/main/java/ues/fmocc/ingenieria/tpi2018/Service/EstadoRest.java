@@ -19,9 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
-import ues.fmoocc.ingenieria.tpi2018.Entities.Pasos;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.EstadoFacadeLocal;
-import ues.fmoocc.ingenieria.tpi2018.Sessions.PasosFacadeLocal;
 
 /**
  *
@@ -29,15 +27,14 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.PasosFacadeLocal;
  */
 @Stateless
 @Path("estado")
-public class EstadoRest implements Serializable{
-    
+public class EstadoRest implements Serializable {
+
     @EJB
     private EstadoFacadeLocal estadoFacade;
-    
-       
+
     @PersistenceContext(unitName = "ues.fmoocc.ingenieria.tpi2018_MantenimientoTPI-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em = null;
-    
+
     //Obtener lista de estados en formato Json
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -57,69 +54,63 @@ public class EstadoRest implements Serializable{
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Estado findById(@PathParam("id") int id){
+    public Estado findById(@PathParam("id") int id) {
         Estado salida = new Estado();
-        try{
-           if(estadoFacade!=null){
-               return estadoFacade.find(id);
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        return salida;
-    }
-    
-    
-    //Elimina un estado de la base de datos
-    @DELETE
-    @Path("/{id}")
-    public Response borrarEstado(@PathParam("id") Integer id){
-        Response salida = Response.status(Response.Status.NOT_FOUND).build();
-       try{
-           if(id!=null && estadoFacade!=null){
-               estadoFacade.remove(estadoFacade.find(id));
-               salida = Response.status(Response.Status.OK).build();
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return salida;
-    }
-    
-    
-    //Guardar un estado en la base de datos
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarEstado(Estado estado){
-       try{
-            if(this.estadoFacade!=null){
-             estadoFacade.create(estado);
-        return Response.status(Response.Status.CREATED).entity(estado).build();  
-        }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarEstado(@PathParam("id") Integer id, Estado estado) {
         try {
-            if (this.estadoFacade != null) {
-                estadoFacade.edit(estado);
-                return Response.status(Response.Status.OK).build();
+            if (estadoFacade != null) {
+                return estadoFacade.find(id);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return salida;
     }
-    
-    
-    
-    
+
+    @GET
+    @Path("/{nombre}")
+    @Produces({MediaType.APPLICATION_JSON + "; charset=utf-8"})
+    public List<Estado> findByNombre(@PathParam("nombre") String nombre) {
+        try {
+            if (estadoFacade != null) {
+                return estadoFacade.findWithNombre(nombre);
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+
+        }
+        return null;
+    }
+
+    @DELETE
+    @Path("eliminar/{id:\\d+}")
+    public Response remove(@PathParam("id") int id) {
+        if (estadoFacade.eliminar(estadoFacade.find(id))) {
+            return Response.status(Response.Status.OK).header("objeto eliminado", this).build();
+        }
+
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo borrar", this).build();
+    }
+
+    @POST
+    @Path("/crear")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(Estado entity) {
+        if (estadoFacade.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("objeto no creado", this).build();
+    }
+
+    @PUT
+    @Path("/editar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response edit(Estado entity) {
+        if (estadoFacade.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo editar", this).build();
+    }
+
 }

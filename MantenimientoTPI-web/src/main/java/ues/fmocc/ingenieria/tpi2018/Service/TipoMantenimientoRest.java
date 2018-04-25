@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.TipoMantenimientoFacadeLocal;
 
@@ -77,42 +78,33 @@ public class TipoMantenimientoRest implements Serializable{
         return new TipoMantenimiento();
     }
     
+   
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        try {
-            if (id != null && this.ejbTipoMantenimiento != null) {
-                ejbTipoMantenimiento.remove(ejbTipoMantenimiento.find(id));
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (ejbTipoMantenimiento.eliminar(ejbTipoMantenimiento.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(TipoMantenimiento entity) {
-
-        try {
-            if (this.ejbTipoMantenimiento != null) {
-                ejbTipoMantenimiento.create(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("crea")
+    public Response create(TipoMantenimiento entity) {
+        if (ejbTipoMantenimiento.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
 
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, TipoMantenimiento entity) {
-
-        try {
-            if (this.ejbTipoMantenimiento != null) {
-                ejbTipoMantenimiento.edit(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(TipoMantenimiento entity) {
+        if (ejbTipoMantenimiento.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-    }
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 }

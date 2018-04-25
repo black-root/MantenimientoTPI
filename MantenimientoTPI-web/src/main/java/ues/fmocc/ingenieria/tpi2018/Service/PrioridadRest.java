@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.PrioridadFacadeLocal;
 
@@ -77,43 +78,34 @@ public class PrioridadRest implements Serializable{
         return new Prioridad();
     }
     
+    
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        try {
-            if (id != null && this.ejbPrioridad != null) {
-                ejbPrioridad.remove(ejbPrioridad.find(id));
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (ejbPrioridad.eliminar(ejbPrioridad.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Prioridad entity) {
-
-        try {
-            if (this.ejbPrioridad != null) {
-                ejbPrioridad.create(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("crea")
+    public Response create(Prioridad entity) {
+        if (ejbPrioridad.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
 
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Prioridad entity) {
-
-        try {
-            if (this.ejbPrioridad != null) {
-                ejbPrioridad.edit(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(Prioridad entity) {
+        if (ejbPrioridad.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-    }
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 
 }

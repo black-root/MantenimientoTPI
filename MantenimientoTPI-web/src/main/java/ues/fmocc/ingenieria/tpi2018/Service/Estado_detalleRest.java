@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import ues.fmoocc.ingenieria.tpi2018.Entities.Estadodetalle;
 import ues.fmoocc.ingenieria.tpi2018.Sessions.EstadodetalleFacadeLocal;
 
@@ -78,41 +79,31 @@ public class Estado_detalleRest implements Serializable {
     }
      
     @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        try {
-            if (id != null && this.ejbEstadoDetalle != null) {
-                ejbEstadoDetalle.remove(ejbEstadoDetalle.find(id));
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (ejbEstadoDetalle.eliminar(ejbEstadoDetalle.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Estadodetalle entity) {
-
-        try {
-            if (this.ejbEstadoDetalle != null) {
-                ejbEstadoDetalle.create(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("crea")
+    public Response create(Estadodetalle entity) {
+        if (ejbEstadoDetalle.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
 
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Integer id, Estadodetalle entity) {
-
-        try {
-            if (this.ejbEstadoDetalle != null) {
-                ejbEstadoDetalle.edit(entity);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(Estadodetalle entity) {
+        if (ejbEstadoDetalle.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
     } 
 }

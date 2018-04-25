@@ -6,8 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,7 +25,7 @@ import ues.fmoocc.ingenieria.tpi2018.Sessions.FabricantesFacadeLocal;
  */
 @Stateless
 @Path("fabricantes")
-public class FabricantesRest{
+public class FabricantesRest implements Serializable{
     
     @EJB
     private FabricantesFacadeLocal ejbFabricante;
@@ -99,7 +97,7 @@ public class FabricantesRest{
     
     
     @DELETE
-    @Path("/{id:\\d+}")
+    @Path("eliminar/{id:\\d+}")
     public Response remove(@PathParam("id") int id) {
         if (ejbFabricante.eliminar(ejbFabricante.find(id))) {
             return Response.status(Response.Status.OK).header("objeto eliminado", this).build();

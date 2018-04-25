@@ -66,58 +66,32 @@ public class Diagnostico_parteRest implements Serializable{
         }
         return salida;
     }
-    
-    
-    //Elimina un Diagnostico_parte de la base de datos
     @DELETE
-    @Path("/{id}")
-    public Response borrarDiagnosticoparte(@PathParam("id") Integer id){
-        Response salida = Response.status(Response.Status.NOT_FOUND).build();
-       try{
-           if(id!=null && dpFacade!=null){
-               dpFacade.remove(dpFacade.find(id));
-               salida = Response.status(Response.Status.OK).build();
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (dpFacade.eliminar(dpFacade.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
-        //findAll();
-        return salida;
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
-    
-    
-    //Guardar un Diagnostico_parte en la base de datos
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarDiagnosticoparte(Diagnosticoparte dp){
-        try{
-            if(this.dpFacade!=null){
-             dpFacade.create(dp);
-        return Response.status(Response.Status.CREATED).entity(dp).build();  
+    @Path("crea")
+    public Response create(Diagnosticoparte entity) {
+        if (dpFacade.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
     }
-    
+
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarDiagnosticoparte(@PathParam("id") Integer id, Diagnosticoparte dp) {
-        try {
-            if (this.dpFacade != null) {
-                dpFacade.edit(dp);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    public Response edit(Diagnosticoparte entity) {
+        if (dpFacade.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    
-    
-    
-    
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 }

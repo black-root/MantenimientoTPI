@@ -84,40 +84,35 @@ public class Equipo_detalleRest implements Serializable{
         //findAll();
         return salida;
     }
-    
-    
-    //Guardar un equipodetalle en la base de datos
+    @DELETE
+    @Path("eliminar/{id:\\d+}")
+    public Response remove(@PathParam("id") int id) {
+        if (edFacade.eliminar(edFacade.find(id))) {
+            return Response.status(Response.Status.OK).header("objeto eliminado", this).build();
+        }
+
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo borrar", this).build();
+    }
+
     @POST
+    @Path("/crear")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarEquipodetalle(Equipodetalle ed){
-       try{
-            if(this.edFacade!=null){
-             edFacade.create(ed);
-        return Response.status(Response.Status.CREATED).entity(ed).build();  
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response create(Equipodetalle entity) {
+        if (edFacade.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
         }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.NOT_FOUND).header("objeto no creado", this).build();
     }
-    
+
     @PUT
-    @Path("{id}")
+    @Path("editar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarEquipodetalle(@PathParam("id") Integer id, Equipodetalle ed) {
-        try {
-            if (this.edFacade != null) {
-                edFacade.edit(ed);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response edit(Equipodetalle entity) {
+        if (edFacade.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
         }
-        return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.status(Response.Status.NOT_FOUND).header("no se pudo editar", this).build();
     }
-    
-    
-    
-    
 }

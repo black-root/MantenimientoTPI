@@ -67,55 +67,32 @@ public class ProcedimientosRest implements Serializable{
         return salida;
     }
     
-    
-    //Elimina un procedimiento de la base de datos
     @DELETE
-    @Path("/{id}")
-    public Response borrarProcedimiento(@PathParam("id") Integer id){
-        Response salida = Response.status(Response.Status.NOT_FOUND).build();
-       try{
-           if(id!=null && procFacade!=null){
-               procFacade.remove(procFacade.find(id));
-               salida = Response.status(Response.Status.OK).build();
-           }
-        }    catch(Exception e){
-           Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return salida;
-    }
-    
-    
-    //Guardar un procedimiento en la base de datos
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarProcedimimento(Procedimientos proc){
-        try{
-            if(this.procFacade!=null){
-             procFacade.create(proc);
-        return Response.status(Response.Status.CREATED).entity(proc).build();  
-        }
-        }catch(Exception e){
-             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }
-        //findAll();
-        return Response.status(Response.Status.NOT_FOUND).build();
-    }
-    
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response editarProcedimiento(@PathParam("id") Integer id, Procedimientos proc) {
-        try {
-            if (this.procFacade != null) {
-                procFacade.edit(proc);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+    @Path("/eliminar/{id:\\+d}")
+    public Response remove(@PathParam("id") Integer id) {
+        if (procFacade.eliminar(procFacade.find(id))) {
+            Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
-    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("crea")
+    public Response create(Procedimientos entity) {
+        if (procFacade.crear(entity)) {
+            return Response.status(Response.Status.CREATED).entity(entity).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("no creado", this).build();
+    }
+
+    @PUT
+    @Path("editar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(Procedimientos entity) {
+        if (procFacade.modificar(entity)) {
+            return Response.status(Response.Status.OK).entity(entity).build();
+        }
+       return Response.status(Response.Status.NOT_FOUND).header("no se edito", null).build();
+    } 
 }
