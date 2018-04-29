@@ -20,7 +20,7 @@ class TablaDinamica extends HTMLElement{
                     font-weight:bold;
                 }
                  </style>
-                <div> <slot name = 'text'></slot></div>`;
+                <div> <slot name = 'entidad'></slot></div>`;
         const contenedor = document.createElement('div');
         contenedor.id = 'tbl';
 
@@ -90,7 +90,7 @@ class TablaDinamica extends HTMLElement{
 
       }
 
-        let userAction = function(entidad) {
+        let userAction = function(entidad = 'fabricantes') {
 
                 let xhttp = new XMLHttpRequest();
 
@@ -107,8 +107,9 @@ class TablaDinamica extends HTMLElement{
                 xhttp.open("GET", `http://localhost:8080/MantenimientoTPI-web/webresources/${entidad}`, true);
                 xhttp.send();
 
+
         }
-        userAction(this.getAttribute('text'));
+        userAction(this.getAttribute('entidad'));
 
     }
 }
