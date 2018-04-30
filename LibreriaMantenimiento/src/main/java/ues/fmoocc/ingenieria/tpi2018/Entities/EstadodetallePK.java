@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Embeddable
 public class EstadodetallePK implements Serializable {
@@ -138,7 +138,7 @@ public class EstadodetallePK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.EstadodetallePK[ personalpkidPersonal=" + personalpkidPersonal + ", estadopkidEstado=" + estadopkidEstado + ", estadoEstadopkidEstado=" + estadoEstadopkidEstado + ", estadoProcedimientosTipoprocedimientopkidTipoprocedimiento=" + estadoProcedimientosTipoprocedimientopkidTipoprocedimiento + ", estadoProcedimientosPasospkidPaso=" + estadoProcedimientosPasospkidPaso + ", estadoProcedimientosDiagnosticopartepkidDianosticoparte=" + estadoProcedimientosDiagnosticopartepkidDianosticoparte + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.EstadodetallePK[ personalpkidPersonal=" + personalpkidPersonal + ", estadopkidEstado=" + estadopkidEstado + ", estadoEstadopkidEstado=" + estadoEstadopkidEstado + ", estadoProcedimientosTipoprocedimientopkidTipoprocedimiento=" + estadoProcedimientosTipoprocedimientopkidTipoprocedimiento + ", estadoProcedimientosPasospkidPaso=" + estadoProcedimientosPasospkidPaso + ", estadoProcedimientosDiagnosticopartepkidDianosticoparte=" + estadoProcedimientosDiagnosticopartepkidDianosticoparte + " ]";
     }
     
 }

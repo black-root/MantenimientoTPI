@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Sub_TipoMantenimiento")
@@ -105,7 +105,7 @@ public class SubTipoMantenimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento[ pkidSubTipoMantenimiento=" + pkidSubTipoMantenimiento + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento[ pkidSubTipoMantenimiento=" + pkidSubTipoMantenimiento + " ]";
     }
     
 }

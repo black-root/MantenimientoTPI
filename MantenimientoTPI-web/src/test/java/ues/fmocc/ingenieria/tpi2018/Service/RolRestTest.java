@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
@@ -24,6 +25,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Rol;
  *
  * @author viktor
  */
+@Ignore
 public class RolRestTest {
     final RolRest mokRolRest = Mockito.mock(RolRest.class);
     final Rol mokRol = Mockito.mock(Rol.class);
@@ -137,14 +139,14 @@ public class RolRestTest {
     /**
      * Test of edit method, of class RolRest.
      */
-    @Test
-    public void testEdit() {
-        System.out.println("edit");
-        Mockito.doNothing().when(mokRolRest).edit(Integer.SIZE, mokRol);
-        mokRolRest.edit(Integer.SIZE, mokRol);
-        Mockito.verify(mokRolRest, times(1)).edit(Integer.SIZE, mokRol);
-        Mockito.doThrow(Exception.class).when(mokRolRest).edit(Integer.SIZE, mokRol);
-   
-    }
+//    @Test
+//    public void testEdit() {
+//        System.out.println("edit");
+//        Mockito.doNothing().when(mokRolRest).edit(Integer.SIZE, mokRol);
+//        mokRolRest.edit(Integer.SIZE, mokRol);
+//        Mockito.verify(mokRolRest, times(1)).edit(Integer.SIZE, mokRol);
+//        Mockito.doThrow(Exception.class).when(mokRolRest).edit(Integer.SIZE, mokRol);
+//   
+//    }
     
 }

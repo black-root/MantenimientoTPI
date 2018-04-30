@@ -60,7 +60,16 @@ public class RolRest implements Serializable {
         }
         return 0;
     }
-
+    @GET
+    @Path("{id:\\+d}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Rol findById(@PathParam("id") int id){
+        if (ejbRol != null) {
+            return ejbRol.find(id);
+        }
+        
+        return null;
+    }
     
     @DELETE
     @Path("/eliminar/{id:\\+d}")

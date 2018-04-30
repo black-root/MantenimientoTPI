@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Telefono")
@@ -103,7 +103,7 @@ public class Telefono implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Telefono[ pkidTelefono=" + pkidTelefono + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Telefono[ pkidTelefono=" + pkidTelefono + " ]";
     }
     
 }

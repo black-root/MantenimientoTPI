@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Mantenimiento_detalle")
@@ -150,7 +150,7 @@ public class Mantenimientodetalle implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Mantenimientodetalle[ mantenimientodetallePK=" + mantenimientodetallePK + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Mantenimientodetalle[ mantenimientodetallePK=" + mantenimientodetallePK + " ]";
     }
     
 }

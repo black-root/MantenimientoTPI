@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "OrdenTrabajo")
@@ -268,7 +268,7 @@ public class OrdenTrabajo implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo[ pkidOrdenTrabajo=" + pkidOrdenTrabajo + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.OrdenTrabajo[ pkidOrdenTrabajo=" + pkidOrdenTrabajo + " ]";
     }
     
 }

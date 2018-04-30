@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
@@ -24,6 +25,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo;
  *
  * @author viktor
  */
+@Ignore
 public class HistorialTrabajoRestTest {
     final HistorialTrabajoRest mokHistorialTrabajoRest = Mockito.mock(HistorialTrabajoRest.class);
     final HistorialTrabajo mokHistorialTrabajo = Mockito.mock(HistorialTrabajo.class);
@@ -119,10 +121,10 @@ public class HistorialTrabajoRestTest {
      */
     @Test
     public void testEdit() {
-        Mockito.doNothing().when(mokHistorialTrabajoRest).edit(Integer.SIZE, mokHistorialTrabajo);
-        mokHistorialTrabajoRest.edit(Integer.SIZE, mokHistorialTrabajo);
-        Mockito.verify(mokHistorialTrabajoRest, times(1)).edit(Integer.SIZE, mokHistorialTrabajo);
-         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).edit(Integer.SIZE, mokHistorialTrabajo);
+        Mockito.doNothing().when(mokHistorialTrabajoRest).edit(mokHistorialTrabajo);
+        mokHistorialTrabajoRest.edit(mokHistorialTrabajo);
+        Mockito.verify(mokHistorialTrabajoRest, times(1)).edit(mokHistorialTrabajo);
+         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).edit(mokHistorialTrabajo);
     }
     
 }

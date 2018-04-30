@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Pasos")
@@ -128,7 +128,7 @@ public class Pasos implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Pasos[ pkidPaso=" + pkidPaso + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Pasos[ pkidPaso=" + pkidPaso + " ]";
     }
     
 }

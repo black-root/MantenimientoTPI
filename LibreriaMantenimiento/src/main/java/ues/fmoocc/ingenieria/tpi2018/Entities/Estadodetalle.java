@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Estado_detalle")
@@ -116,7 +116,7 @@ public class Estadodetalle implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Estadodetalle[ estadodetallePK=" + estadodetallePK + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Estadodetalle[ estadodetallePK=" + estadodetallePK + " ]";
     }
     
 }

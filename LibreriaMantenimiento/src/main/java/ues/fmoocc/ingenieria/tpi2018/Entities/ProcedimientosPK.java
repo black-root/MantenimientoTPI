@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Embeddable
 public class ProcedimientosPK implements Serializable {
@@ -90,7 +90,7 @@ public class ProcedimientosPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.ProcedimientosPK[ tipoprocedimientopkidTipoprocedimiento=" + tipoprocedimientopkidTipoprocedimiento + ", pasospkidPaso=" + pasospkidPaso + ", diagnosticopartepkidDianosticoparte=" + diagnosticopartepkidDianosticoparte + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.ProcedimientosPK[ tipoprocedimientopkidTipoprocedimiento=" + tipoprocedimientopkidTipoprocedimiento + ", pasospkidPaso=" + pasospkidPaso + ", diagnosticopartepkidDianosticoparte=" + diagnosticopartepkidDianosticoparte + " ]";
     }
     
 }

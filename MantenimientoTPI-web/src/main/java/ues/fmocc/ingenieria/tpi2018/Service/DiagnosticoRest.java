@@ -70,7 +70,7 @@ public class DiagnosticoRest implements Serializable{
     @Path("/eliminar/{id:\\+d}")
     public Response remove(@PathParam("id") Integer id) {
         if (diagnosticoFacade.eliminar(diagnosticoFacade.find(id))) {
-            Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }

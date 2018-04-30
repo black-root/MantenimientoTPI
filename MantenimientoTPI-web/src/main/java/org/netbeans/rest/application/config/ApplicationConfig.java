@@ -49,6 +49,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(org.netbeans.rest.application.config.NewCrossOriginResourceSharingFilter.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.DiagnosticoRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Diagnostico_parteRest.class);
         resources.add(ues.fmocc.ingenieria.tpi2018.Service.Equipo_detalleRest.class);

@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Embeddable
 public class DiagnosticoPK implements Serializable {
@@ -74,7 +74,7 @@ public class DiagnosticoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.DiagnosticoPK[ pKidDiagnostico=" + pKidDiagnostico + ", ordenTrabajopkidOrdenTrabajo=" + ordenTrabajopkidOrdenTrabajo + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.DiagnosticoPK[ pKidDiagnostico=" + pKidDiagnostico + ", ordenTrabajopkidOrdenTrabajo=" + ordenTrabajopkidOrdenTrabajo + " ]";
     }
     
 }

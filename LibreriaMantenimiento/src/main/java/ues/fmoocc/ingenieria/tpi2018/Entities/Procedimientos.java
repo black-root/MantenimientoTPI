@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Procedimientos")
@@ -134,7 +134,7 @@ public class Procedimientos implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos[ procedimientosPK=" + procedimientosPK + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Procedimientos[ procedimientosPK=" + procedimientosPK + " ]";
     }
     
 }

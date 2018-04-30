@@ -49,14 +49,15 @@ public class DiagnosticoRestTest {
         PowerMockito.whenNew(Diagnostico.class).withAnyArguments().thenReturn(mokDiagnostico);
         Diagnostico d = new Diagnostico(1, 2);
         Diagnostico d1 = new Diagnostico(3, 4);
+        Diagnostico d2 = new Diagnostico(3,5);
         List<Diagnostico> listadiagnostico = new ArrayList<>();
         listadiagnostico.add(d);
         listadiagnostico.add(d1);
         Mockito.when(mokDiagnosticoRest.findAll()).thenReturn(listadiagnostico);
         Mockito.when(mokDiagnosticoRest.findById(1)).thenReturn(d);
-        
-        
-        
+        Mockito.when(mokDiagnosticoRest.create(d1)).thenReturn(Response.status(Response.Status.CREATED).entity(d1).build());
+        Mockito.when(mokDiagnosticoRest.edit(d2)).thenReturn(Response.status(Response.Status.OK).entity(d2).build());
+        Mockito.when(mokDiagnosticoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -97,13 +98,13 @@ public class DiagnosticoRestTest {
      */
     @Test
     public void testBorrarDiagnostico() throws Exception {
-        int id = 1;
+        
         DiagnosticoRest instance = mokDiagnosticoRest;
-        Diagnostico expResult = null;
-        Response result = instance.borrarDiagnostico(id);
-        assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokDiagnosticoRest, times(1)).borrarDiagnostico(id);
+        Response expResult = Response.status(Response.Status.OK).build();
+        Response result = instance.remove(1);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).remove(1);
 }
 
     /**
@@ -114,11 +115,11 @@ public class DiagnosticoRestTest {
     public void testGuardarDiagnostico() throws Exception {
         int id = 1;
         DiagnosticoRest instance = mokDiagnosticoRest;
-        Diagnostico expResult = null;
-        Response result = instance.guardarDiagnostico(mokDiagnostico);
-        assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokDiagnosticoRest, times(1)).guardarDiagnostico(mokDiagnostico);
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokDiagnostico);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).create(mokDiagnostico);
 }
     
 
@@ -129,11 +130,11 @@ public class DiagnosticoRestTest {
     public void testEditarDiagnostico() throws Exception {
         int id = 1;
         DiagnosticoRest instance = mokDiagnosticoRest;
-        Diagnostico expResult = null;
-        Response result = instance.editarDiagnostico(id, mokDiagnostico);
-        assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokDiagnosticoRest, times(1)).editarDiagnostico(id, mokDiagnostico);
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokDiagnostico);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
+        Mockito.verify(mokDiagnosticoRest, times(1)).edit(mokDiagnostico);
 
     
     }

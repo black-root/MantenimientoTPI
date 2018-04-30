@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "Estado")
@@ -147,7 +147,7 @@ public class Estado implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.Estado[ estadoPK=" + estadoPK + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.Estado[ estadoPK=" + estadoPK + " ]";
     }
     
 }

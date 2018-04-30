@@ -23,6 +23,27 @@
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Unidad</class>
     <class>ues.fmoocc.ingenieria.tpi2018.Entities.Diagnosticoparte</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Diagnostico</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Mantenimientodetalle</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Diagnosticoparte</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Solicitud</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.SubTipoMantenimiento</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Estadodetalle</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Personal</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.HistorialTrabajo</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Unidad</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Pasos</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Prioridad</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Estado</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Procedimientos</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Rol</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Fabricantes</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.OrdenTrabajo</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Equipodetalle</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Tipoprocedimiento</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.TipoMantenimiento</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Calendario</class>
+    <class>ues.fmocc.ingenieria.tpi2018.Entity.Telefono</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3300/mantenimientoPC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

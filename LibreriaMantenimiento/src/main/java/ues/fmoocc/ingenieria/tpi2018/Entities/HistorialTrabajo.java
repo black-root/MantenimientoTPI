@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yisusdebian
+ * @author sergio
  */
 @Entity
 @Table(name = "HistorialTrabajo")
@@ -130,7 +130,7 @@ public class HistorialTrabajo implements Serializable {
 
     @Override
     public String toString() {
-        return "ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo[ pkidHistorialTrabajo=" + pkidHistorialTrabajo + " ]";
+        return "ues.fmocc.ingenieria.tpi2018.Entities.HistorialTrabajo[ pkidHistorialTrabajo=" + pkidHistorialTrabajo + " ]";
     }
     
 }
