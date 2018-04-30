@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Unidad;
  *
  * @author viktor
  */
-@Ignore
+
 public class UnidadRestTest {
     final UnidadRest mokUnidadRest = Mockito.mock(UnidadRest.class);
     final Unidad mokUnidad = Mockito.mock(Unidad.class);
@@ -53,6 +54,9 @@ public class UnidadRestTest {
         Mockito.when(mokUnidadRest.findall()).thenReturn(listaU);
         Mockito.when(mokUnidadRest.findById(1)).thenReturn(u);
         Mockito.when(mokUnidadRest.findByNombre("nombre")).thenReturn(listaU);
+        Mockito.when(mokUnidadRest.create(mokUnidad)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokUnidadRest.edit(mokUnidad)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokUnidadRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -115,39 +119,44 @@ public class UnidadRestTest {
      * Test of remove method, of class UnidadRest.
      */
     @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Mockito.doNothing().when(mokUnidadRest).remove((Integer) Matchers.anyObject());
-        mokUnidadRest.remove(Integer.SIZE);
-        Mockito.verify(mokUnidadRest, times(1)).remove(Integer.SIZE);
-        Mockito.doThrow(Exception.class).when(mokUnidadRest).remove(Integer.SIZE);
-   
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        UnidadRest instance = mokUnidadRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokUnidadRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class UnidadRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-         Mockito.doNothing().when(mokUnidadRest).create(mokUnidad);
-        mokUnidadRest.create(mokUnidad);
-        Mockito.verify(mokUnidadRest, times(1)).create(mokUnidad);
-        Mockito.doThrow(Exception.class).when(mokUnidadRest).create(mokUnidad);
-   
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        UnidadRest instance = mokUnidadRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokUnidad);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
+
     }
 
     /**
-     * Test of edit method, of class UnidadRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-//    @Test
-//    public void testEdit() {
-//        System.out.println("edit");
-//        Mockito.doNothing().when(mokUnidadRest).edit(Integer.SIZE, mokUnidad);
-//        mokUnidadRest.edit(Integer.SIZE, mokUnidad);
-//        Mockito.verify(mokUnidadRest, times(1)).edit(Integer.SIZE, mokUnidad);
-//        Mockito.doThrow(Exception.class).when(mokUnidadRest).edit(Integer.SIZE, mokUnidad);
-//   
-//    }
-    
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        UnidadRest instance = mokUnidadRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokUnidad);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokUnidadRest, times(1)).edit(mokUnidad);
+
+    }
 }

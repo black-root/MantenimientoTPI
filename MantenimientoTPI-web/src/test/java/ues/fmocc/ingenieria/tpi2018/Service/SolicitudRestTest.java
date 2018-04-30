@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Solicitud;
  *
  * @author viktor
  */
-@Ignore
+
 public class SolicitudRestTest {
     final SolicitudRest mokSolicitudRest = Mockito.mock(SolicitudRest.class);
     final Solicitud mokSolicitud = Mockito.mock(Solicitud.class);    
@@ -51,7 +52,9 @@ public class SolicitudRestTest {
         listaSol.add(s1);
         Mockito.when(mokSolicitudRest.findall()).thenReturn(listaSol);
         Mockito.when(mokSolicitudRest.findById(1)).thenReturn(s);
-        Mockito.when(mokSolicitudRest.findBySolicitud("nombre")).thenReturn(listaSol);
+        Mockito.when(mokSolicitudRest.findBySolicitud("nombre")).thenReturn(listaSol);Mockito.when(mokSolicitudRest.create(mokSolicitud)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokSolicitudRest.edit(mokSolicitud)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokSolicitudRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
         
         
     }
@@ -114,42 +117,46 @@ public class SolicitudRestTest {
      * Test of remove method, of class SolicitudRest.
      */
     @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Mockito.doNothing().when(mokSolicitudRest).remove((Integer) Matchers.anyObject());
-        mokSolicitudRest.remove(Integer.SIZE);
-        Mockito.verify(mokSolicitudRest, times(1)).remove(Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokSolicitudRest).remove(Integer.SIZE);
-   
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        SolicitudRest instance = mokSolicitudRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokSolicitudRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class SolicitudRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        Mockito.doNothing().when(mokSolicitudRest).create(mokSolicitud);
-        mokSolicitudRest.create(mokSolicitud);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        SolicitudRest instance = mokSolicitudRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokSolicitud);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokSolicitudRest, times(1)).create(mokSolicitud);
-        
-        Mockito.doThrow(Exception.class).when(mokSolicitudRest).create(mokSolicitud);
-   
+
     }
 
     /**
-     * Test of edit method, of class SolicitudRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-//    @Test
-//    public void testEdit() {
-//        System.out.println("edit");
-//        Mockito.doNothing().when(mokSolicitudRest).edit(Integer.SIZE, mokSolicitud);
-//        mokSolicitudRest.edit(Integer.SIZE, mokSolicitud);
-//        Mockito.verify(mokSolicitudRest, times(1)).edit(Integer.SIZE, mokSolicitud);
-//        
-//        Mockito.doThrow(Exception.class).when(mokSolicitudRest).edit(Integer.SIZE, mokSolicitud);
-//   
-//    }
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        SolicitudRest instance = mokSolicitudRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokSolicitud);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokSolicitudRest, times(1)).edit(mokSolicitud);
+
+    }
     
 }

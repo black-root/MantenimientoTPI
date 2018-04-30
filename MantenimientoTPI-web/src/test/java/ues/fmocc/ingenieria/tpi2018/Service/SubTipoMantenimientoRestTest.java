@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.SubTipoMantenimiento;
  *
  * @author viktor
  */
-@Ignore
+
 public class SubTipoMantenimientoRestTest {
     final SubTipoMantenimientoRest mokSTMRest = Mockito.mock(SubTipoMantenimientoRest.class);
     final SubTipoMantenimiento mokSTM = Mockito.mock(SubTipoMantenimiento.class);
@@ -52,6 +53,9 @@ public class SubTipoMantenimientoRestTest {
         listaSTM.add(st1);
         Mockito.when(mokSTMRest.findall()).thenReturn(listaSTM);
         Mockito.when(mokSTMRest.findById(1)).thenReturn(st);
+        Mockito.when(mokSTMRest.create(mokSTM)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokSTMRest.edit(mokSTM)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokSTMRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
         //Mockito.when(mokSTMRest.findByDescripcion("descripcion")).thenReturn(listaSTM);
     }
     
@@ -98,56 +102,47 @@ public class SubTipoMantenimientoRestTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of findByDescripcion method, of class SubTipoMantenimientoRest.
-     */
-//    @Test
-//    public void testFindByDescripcion() {
-//        System.out.println("findByDescripcion");
-//        SubTipoMantenimientoRest instance = mokSTMRest;
-//        SubTipoMantenimiento expResult = new SubTipoMantenimiento(1);
-//        List<SubTipoMantenimiento> result = instance.findByDescripcion("descripcion");
-//        assertThat(result, CoreMatchers.hasItem(expResult));
-//        assertNotNull(result);
-//    }
-
-    /**
-     * Test of remove method, of class SubTipoMantenimientoRest.
-     */
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Mockito.doNothing().when(mokSTMRest).remove((Integer) Matchers.anyObject());
-        mokSTMRest.remove(Integer.SIZE);
-        Mockito.verify(mokSTMRest, times(1)).remove(Integer.SIZE);
-        Mockito.doThrow(Exception.class).when(mokSTMRest).remove(Integer.SIZE);
-   
+     @Test
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        SubTipoMantenimientoRest instance = mokSTMRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokSTMRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class SubTipoMantenimientoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        Mockito.doNothing().when(mokSTMRest).create(mokSTM);
-        mokSTMRest.create(mokSTM);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        SubTipoMantenimientoRest instance = mokSTMRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokSTM);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokSTMRest, times(1)).create(mokSTM);
-        Mockito.doThrow(Exception.class).when(mokSTMRest).create(mokSTM);
-   
+
     }
 
     /**
-     * Test of edit method, of class SubTipoMantenimientoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-//    @Test
-//    public void testEdit() {
-//        System.out.println("edit");
-//        Mockito.doNothing().when(mokSTMRest).edit(Integer.SIZE, mokSTM);
-//        mokSTMRest.edit(Integer.SIZE, mokSTM);
-//        Mockito.verify(mokSTMRest, times(1)).edit(Integer.SIZE, mokSTM);
-//        Mockito.doThrow(Exception.class).when(mokSTMRest).edit(Integer.SIZE, mokSTM);
-//   
-//    }
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        SubTipoMantenimientoRest instance = mokSTMRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokSTM);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokSTMRest, times(1)).edit(mokSTM);
+
+    }
     
 }

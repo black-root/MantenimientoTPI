@@ -26,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Procedimientos;
  *
  * @author viktor
  */
-@Ignore
+
 public class ProcedimientosRestTest {
     final ProcedimientosRest mokProcedimientosRest = Mockito.mock(ProcedimientosRest.class);
     final Procedimientos mokProcedimientos = Mockito.mock(Procedimientos.class);
@@ -51,6 +51,9 @@ public class ProcedimientosRestTest {
         listaProcedimientos.add(p1);
         Mockito.when(mokProcedimientosRest.findAll()).thenReturn(listaProcedimientos);
         Mockito.when(mokProcedimientosRest.findById(1)).thenReturn(p);
+        Mockito.when(mokProcedimientosRest.create(mokProcedimientos)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokProcedimientosRest.edit(mokProcedimientos)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokProcedimientosRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -86,45 +89,46 @@ public class ProcedimientosRestTest {
     /**
      * Test of borrarProcedimiento method, of class ProcedimientosRest.
      */
-    @Test
-    public void testBorrarProcedimiento() throws Exception {
-      int id = 1;
-      ProcedimientosRest instance = mokProcedimientosRest;
-       Procedimientos expResult = null;
-       Response result = instance.remove(id);
-       assertNull(result);
-       assertEquals(expResult, result);
-       Mockito.verify(mokProcedimientosRest, times(1)).remove(id);
-
-    }
-
-    /**
-     * Test of guardarProcedimimento method, of class ProcedimientosRest.
-     */
-    @Test
-    public void testGuardarProcedimimento() throws Exception {
-        int id = 1;
-      ProcedimientosRest instance = mokProcedimientosRest;
-       Procedimientos expResult = null;
-       Response result = instance.create(mokProcedimientos);
-       assertNull(result);
-       assertEquals(expResult, result);
-       Mockito.verify(mokProcedimientosRest, times(1)).create(mokProcedimientos);
-
-    }
-
-    /**
-     * Test of editarProcedimiento method, of class ProcedimientosRest.
-     */
-    @Test
-    public void testEditarProcedimiento() throws Exception {
-       int id = 1;
+     @Test
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
         ProcedimientosRest instance = mokProcedimientosRest;
-       Procedimientos expResult = null;
-       Response result = instance.edit(mokProcedimientos);
-       assertNull(result);
-       assertEquals(expResult, result);
-       Mockito.verify(mokProcedimientosRest, times(1)).edit(mokProcedimientos);
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokProcedimientosRest, times(1)).remove(id);
+    }
+
+    /**
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
+    @Test
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        ProcedimientosRest instance = mokProcedimientosRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokProcedimientos);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
+        Mockito.verify(mokProcedimientosRest, times(1)).create(mokProcedimientos);
+
+    }
+
+    /**
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        ProcedimientosRest instance = mokProcedimientosRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokProcedimientos);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokProcedimientosRest, times(1)).edit(mokProcedimientos);
 
     }
     

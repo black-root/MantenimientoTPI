@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.TipoMantenimiento;
  *
  * @author viktor
  */
-@Ignore
+
 public class TipoMantenimientoRestTest {
     final TipoMantenimientoRest mokTMRest = Mockito.mock(TipoMantenimientoRest.class);
     final TipoMantenimiento mokTM = Mockito.mock(TipoMantenimiento.class);
@@ -52,6 +53,9 @@ public class TipoMantenimientoRestTest {
         listaTM.add(tm1);
         Mockito.when(mokTMRest.findall()).thenReturn(listaTM);
         Mockito.when(mokTMRest.findById(1)).thenReturn(tm);
+        Mockito.when(mokTMRest.create(mokTM)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokTMRest.edit(mokTM)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokTMRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
        // Mockito.when(mokTMRest.findByDescripcion("descripcion")).thenReturn(listaTM);
     }
     
@@ -96,57 +100,47 @@ public class TipoMantenimientoRestTest {
         TipoMantenimiento result = instance.findById(id);
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of findByDescripcion method, of class TipoMantenimientoRest.
-     */
-//    @Test
-//    public void testFindByDescripcion() {
-//        System.out.println("findByDescripcion");
-//        TipoMantenimientoRest instance = mokTMRest;
-//        TipoMantenimiento expResult = new TipoMantenimiento(1);
-//        List<TipoMantenimiento> result = instance.findByDescripcion("descripcion");
-//        assertThat(result, CoreMatchers.hasItem(expResult));
-//        assertNotNull(result);
-//    }
-
-    /**
-     * Test of remove method, of class TipoMantenimientoRest.
-     */
-    @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokTMRest).remove((Integer) Matchers.anyObject());
-        mokTMRest.remove(Integer.SIZE);
-        Mockito.verify(mokTMRest, times(1)).remove(Integer.SIZE);
-        Mockito.doThrow(Exception.class).when(mokTMRest).remove(Integer.SIZE);
-   
+@Test
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        TipoMantenimientoRest instance = mokTMRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokTMRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class TipoMantenimientoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-        Mockito.doNothing().when(mokTMRest).create(mokTM);
-        mokTMRest.create(mokTM);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        TipoMantenimientoRest instance = mokTMRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokTM);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokTMRest, times(1)).create(mokTM);
-        Mockito.doThrow(Exception.class).when(mokTMRest).create(mokTM);
-  
+
     }
 
     /**
-     * Test of edit method, of class TipoMantenimientoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-//    @Test
-//    public void testEdit() {
-//        System.out.println("edit");
-//        Mockito.doNothing().when(mokTMRest).edit(Integer.SIZE, mokTM);
-//        mokTMRest.edit(Integer.SIZE, mokTM);
-//        Mockito.verify(mokTMRest, times(1)).edit(Integer.SIZE, mokTM);
-//        Mockito.doThrow(Exception.class).when(mokTMRest).edit(Integer.SIZE, mokTM);
-//  
-//        
-//    }
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        TipoMantenimientoRest instance = mokTMRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokTM);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokTMRest, times(1)).edit(mokTM);
+
+    }
     
 }

@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,7 +29,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Prioridad;
  *
  * @author sergio
  */
-@Ignore
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(PrioridadRest.class)
 public class PrioridadRestTest {
@@ -50,13 +51,16 @@ public class PrioridadRestTest {
     public void setUp() throws Exception {
         PowerMockito.whenNew(Prioridad.class).withAnyArguments().thenReturn(mokPrioridad);
         Mockito.when(mokPrioridadRest.count()).thenReturn(1);
-        Prioridad p = new Prioridad(1, "1");    
+        Prioridad p = new Prioridad(1);    
         Prioridad p1 = new Prioridad(2);
         List<Prioridad> listaprioridad = new ArrayList<>();   
         listaprioridad.add(p);
         listaprioridad.add(p1);
         Mockito.when(mokPrioridadRest.findall()).thenReturn(listaprioridad);
-        Mockito.when(mokPrioridadRest.findById(1)).thenReturn(p1);     
+        Mockito.when(mokPrioridadRest.findById(1)).thenReturn(p); 
+        Mockito.when(mokPrioridadRest.create(mokPrioridad)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokPrioridadRest.edit(mokPrioridad)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokPrioridadRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
      
     }
     
@@ -73,7 +77,7 @@ public class PrioridadRestTest {
         System.out.println("findall");      
         PrioridadRest rest = mokPrioridadRest;
         List<Prioridad> result = rest.findall();
-        Prioridad prioridad = new Prioridad(1, "1");
+        Prioridad prioridad = new Prioridad(1);
         assertThat(result, CoreMatchers.hasItems(prioridad));
     }
 
@@ -105,33 +109,47 @@ public class PrioridadRestTest {
     }
 
   
-    @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokPrioridadRest).remove((Integer) Matchers.anyObject());
-        
-        mokPrioridadRest.remove(Integer.SIZE);
-        Mockito.verify(mokPrioridadRest, times(1)).remove(Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokPrioridadRest).remove(Integer.SIZE);
+     @Test
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        PrioridadRest instance = mokPrioridadRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokPrioridadRest, times(1)).remove(id);
     }
-       
-    
+
+    /**
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
     @Test
-    public void testCreate() {
-        Mockito.doNothing().when(mokPrioridadRest).create(mokPrioridad);
-        mokPrioridadRest.create(mokPrioridad);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        PrioridadRest instance = mokPrioridadRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokPrioridad);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokPrioridadRest, times(1)).create(mokPrioridad);
-        Mockito.doThrow(Exception.class).when(mokPrioridadRest).create(mokPrioridad);
-        
+
     }
-   
+
+    /**
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
     @Test
-    public void testEdit() {
-       Mockito.doNothing().when(mokPrioridadRest).edit(mokPrioridad);
-        mokPrioridadRest.edit(mokPrioridad);
+    public void testEditar() throws Exception {
+        int id = 1;
+        PrioridadRest instance = mokPrioridadRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokPrioridad);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
         Mockito.verify(mokPrioridadRest, times(1)).edit(mokPrioridad);
-        Mockito.doThrow(Exception.class).when(mokPrioridadRest).edit( mokPrioridad);
-       
+
     }
     
 }

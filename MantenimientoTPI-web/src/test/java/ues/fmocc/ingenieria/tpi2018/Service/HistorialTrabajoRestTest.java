@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.HistorialTrabajo;
  *
  * @author viktor
  */
-@Ignore
 public class HistorialTrabajoRestTest {
     final HistorialTrabajoRest mokHistorialTrabajoRest = Mockito.mock(HistorialTrabajoRest.class);
     final HistorialTrabajo mokHistorialTrabajo = Mockito.mock(HistorialTrabajo.class);
@@ -52,6 +52,9 @@ public class HistorialTrabajoRestTest {
         listaHistorialTrabajo.add(h1);
         Mockito.when(mokHistorialTrabajoRest.findall()).thenReturn(listaHistorialTrabajo);
         Mockito.when(mokHistorialTrabajoRest.findById(1)).thenReturn(h);
+        Mockito.when(mokHistorialTrabajoRest.create(mokHistorialTrabajo)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokHistorialTrabajoRest.edit(mokHistorialTrabajo)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokHistorialTrabajoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -92,39 +95,50 @@ public class HistorialTrabajoRestTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of remove method, of class HistorialTrabajoRest.
+   /**
+     * Test of borrarEstado method, of class EstadoRest.
      */
     @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokHistorialTrabajoRest).remove((Integer) Matchers.anyObject());
-        mokHistorialTrabajoRest.remove(Integer.SIZE);
-        Mockito.verify(mokHistorialTrabajoRest, times(1)).remove(Integer.SIZE);
-         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).remove(Integer.SIZE);
-
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        HistorialTrabajoRest instance = mokHistorialTrabajoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokHistorialTrabajoRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class HistorialTrabajoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        Mockito.doNothing().when(mokHistorialTrabajoRest).create(mokHistorialTrabajo);
-        mokHistorialTrabajoRest.create(mokHistorialTrabajo);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        HistorialTrabajoRest instance = mokHistorialTrabajoRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokHistorialTrabajo);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokHistorialTrabajoRest, times(1)).create(mokHistorialTrabajo);
-        Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).create(mokHistorialTrabajo);
 
     }
 
     /**
-     * Test of edit method, of class HistorialTrabajoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testEdit() {
-        Mockito.doNothing().when(mokHistorialTrabajoRest).edit(mokHistorialTrabajo);
-        mokHistorialTrabajoRest.edit(mokHistorialTrabajo);
+    public void testEditar() throws Exception {
+        int id = 1;
+        HistorialTrabajoRest instance = mokHistorialTrabajoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokHistorialTrabajo);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
         Mockito.verify(mokHistorialTrabajoRest, times(1)).edit(mokHistorialTrabajo);
-         Mockito.doThrow(Exception.class).when(mokHistorialTrabajoRest).edit(mokHistorialTrabajo);
+
     }
     
 }

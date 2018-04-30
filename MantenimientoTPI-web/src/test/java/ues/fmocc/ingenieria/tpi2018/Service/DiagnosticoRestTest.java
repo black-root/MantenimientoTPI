@@ -55,8 +55,8 @@ public class DiagnosticoRestTest {
         listadiagnostico.add(d1);
         Mockito.when(mokDiagnosticoRest.findAll()).thenReturn(listadiagnostico);
         Mockito.when(mokDiagnosticoRest.findById(1)).thenReturn(d);
-        Mockito.when(mokDiagnosticoRest.create(d1)).thenReturn(Response.status(Response.Status.CREATED).entity(d1).build());
-        Mockito.when(mokDiagnosticoRest.edit(d2)).thenReturn(Response.status(Response.Status.OK).entity(d2).build());
+        Mockito.when(mokDiagnosticoRest.create(mokDiagnostico)).thenReturn(Response.status(Response.Status.CREATED).entity(d1).build());
+        Mockito.when(mokDiagnosticoRest.edit(mokDiagnostico)).thenReturn(Response.status(Response.Status.OK).entity(d2).build());
         Mockito.when(mokDiagnosticoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
@@ -88,7 +88,7 @@ public class DiagnosticoRestTest {
         DiagnosticoRest instance = mokDiagnosticoRest;
         Diagnostico expResult = new Diagnostico(1,2);
         Diagnostico result = instance.findById(id);
-        assertNotNull(result);
+        //assertNotNull(result);
         assertEquals(expResult, result);
     }
 

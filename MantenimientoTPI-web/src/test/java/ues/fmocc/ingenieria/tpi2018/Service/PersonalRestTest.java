@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Personal;
  *
  * @author viktor
  */
-@Ignore
+
 public class PersonalRestTest {
     final PersonalRest mokPersonalRest = Mockito.mock(PersonalRest.class);
     final Personal mokPersonal = Mockito.mock(Personal.class);
@@ -53,6 +54,9 @@ public class PersonalRestTest {
         Mockito.when(mokPersonalRest.findall()).thenReturn(listaPersonal);
         Mockito.when(mokPersonalRest.findById(1)).thenReturn(p1);
         Mockito.when(mokPersonalRest.findByNombre("nombre")).thenReturn(listaPersonal);
+        Mockito.when(mokPersonalRest.create(mokPersonal)).thenReturn(Response.status(Response.Status.CREATED).entity(p).build());
+        Mockito.when(mokPersonalRest.edit(mokPersonal)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokPersonalRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -111,37 +115,46 @@ public class PersonalRestTest {
      * Test of remove method, of class PersonalRest.
      */
     @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokPersonalRest).remove((Integer) Matchers.anyObject());
-        mokPersonalRest.remove(Integer.SIZE);
-        Mockito.verify(mokPersonalRest, times(1)).remove(Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokPersonalRest).remove(Integer.SIZE);
-   
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        PersonalRest instance = mokPersonalRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokPersonalRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class PersonalRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        Mockito.doNothing().when(mokPersonalRest).create(mokPersonal);
-        mokPersonalRest.create(mokPersonal);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        PersonalRest instance = mokPersonalRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokPersonal);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokPersonalRest, times(1)).create(mokPersonal);
-        Mockito.doThrow(Exception.class).when(mokPersonalRest).create(mokPersonal);
-       
+
     }
 
     /**
-     * Test of edit method, of class PersonalRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testEdit() {
-       Mockito.doNothing().when(mokPersonalRest).edit(mokPersonal);
-        mokPersonalRest.edit(mokPersonal);
+    public void testEditar() throws Exception {
+        int id = 1;
+        PersonalRest instance = mokPersonalRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokPersonal);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
         Mockito.verify(mokPersonalRest, times(1)).edit(mokPersonal);
-        Mockito.doThrow(Exception.class).when(mokPersonalRest).edit(mokPersonal);
-       
+
     }
     
 }

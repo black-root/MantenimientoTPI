@@ -26,8 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Tipoprocedimiento;
 /**
  *
  * @author viktor
- */
-@Ignore
+*/
 public class TipoProcedimientoRestTest {
     final TipoProcedimientoRest mokTPRest = Mockito.mock(TipoProcedimientoRest.class);
     final Tipoprocedimiento mokTP = Mockito.mock(Tipoprocedimiento.class);
@@ -53,7 +52,9 @@ public class TipoProcedimientoRestTest {
         listTp.add(tp1);
         Mockito.when(mokTPRest.findall()).thenReturn(listTp);
         Mockito.when(mokTPRest.findById(1)).thenReturn(tp);
-       // Mockito.when(mokTPRest.findByDescripcion("descripcion")).thenReturn(listTp);
+        Mockito.when(mokTPRest.create(mokTP)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokTPRest.edit(mokTP)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokTPRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -117,45 +118,46 @@ public class TipoProcedimientoRestTest {
      * Test of remove method, of class TipoProcedimientoRest.
      */
     @Test
-    public void testRemove() {
-           System.out.println("remove");
-          Mockito.doNothing().when(mokTPRest).remove((Integer) Matchers.anyObject());
-        
-        mokTPRest.remove(Integer.SIZE);
-        Mockito.verify(mokTPRest, times(1)).remove(Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokTPRest).remove(Integer.SIZE);
-    
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokTPRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class TipoProcedimientoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-         Mockito.doNothing().when(mokTPRest).create(mokTP);
-        
-        mokTPRest.create(mokTP);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokTP);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokTPRest, times(1)).create(mokTP);
-        
-        Mockito.doThrow(Exception.class).when(mokTPRest).create(mokTP);
-    
+
     }
 
     /**
-     * Test of edit method, of class TipoProcedimientoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-////    @Test
-////    public void testEdit() {
-////        System.out.println("edit");
-////         Mockito.doNothing().when(mokTPRest).edit(Integer.SIZE, mokTP);
-////        
-////        mokTPRest.edit(Integer.SIZE, mokTP);
-////        Mockito.verify(mokTPRest, times(1)).edit(Integer.SIZE, mokTP);
-////        
-////        Mockito.doThrow(Exception.class).when(mokTPRest).edit(Integer.SIZE, mokTP);
-////    
-////    }
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        TipoProcedimientoRest instance = mokTPRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokTP);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokTPRest, times(1)).edit(mokTP);
+
+    }
     
 }

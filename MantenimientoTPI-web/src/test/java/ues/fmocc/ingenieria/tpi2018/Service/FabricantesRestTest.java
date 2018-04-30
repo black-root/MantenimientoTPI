@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -50,6 +51,9 @@ public class FabricantesRestTest {
        Mockito.when(mokFabricantesRest.findall()).thenReturn(listaFabricantes);
        Mockito.when(mokFabricantesRest.findById(1)).thenReturn(d);
        Mockito.when(mokFabricantesRest.findByNombre("nombre")).thenReturn(listaFabricantes);
+       Mockito.when(mokFabricantesRest.create(mokFabricantes)).thenReturn(Response.status(Response.Status.CREATED).entity(d).build());
+        Mockito.when(mokFabricantesRest.edit(mokFabricantes)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokFabricantesRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -81,7 +85,19 @@ public class FabricantesRestTest {
         assertEquals(expResult, result);
     }
 
- 
+    @Test
+    public void testFindByname(){
+        String nombre= "nombre";
+        FabricantesRest instance = mokFabricantesRest;
+        Fabricantes d = new Fabricantes(1);
+        Fabricantes d1 = new Fabricantes(2);
+        List<Fabricantes> listaFabricantes =new ArrayList<>();
+        listaFabricantes.add(d);
+        listaFabricantes.add(d1);
+        List<Fabricantes> result = instance.findByNombre(nombre);
+        assertNotNull(result);
+        assertEquals(listaFabricantes, result);
+    }
     /**
      * Test of count method, of class FabricantesRest.
      */
@@ -94,58 +110,51 @@ public class FabricantesRestTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of findByDescripcion method, of class FabricantesRest.
+
+     /**
+     * Test of borrarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testFindByDescripcion() {
+    public void testBorrar() throws Exception {
+        System.out.println("borrarDiagnosticoparte");
+        Integer id = 1;
         FabricantesRest instance = mokFabricantesRest;
-        Fabricantes expResult = new Fabricantes(1);
-        List<Fabricantes> result = instance.findByNombre("nombre");
-        assertThat(result, CoreMatchers.hasItem(expResult));
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokFabricantesRest, times(1)).remove(id);
+    }
+
+    /**
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
+    @Test
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        FabricantesRest instance = mokFabricantesRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokFabricantes);
+        assertEquals(expResult.getStatus(), result.getStatus());
         assertNotNull(result);
-    }
-
-    /**
-     * Test of remove method, of class FabricantesRest.
-     */
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-          Mockito.doNothing().when(mokFabricantesRest).remove(Matchers.anyInt());
-        
-        mokFabricantesRest.remove((int)Integer.SIZE);
-        Mockito.verify(mokFabricantesRest, times(1)).remove((int)Integer.SIZE);
-        
-        Mockito.doThrow(Exception.class).when(mokFabricantesRest).remove((int)Integer.SIZE);
-    
-    }
-
-    /**
-     * Test of create method, of class FabricantesRest.
-     */
-    @Test
-    public void testCreate() {
-        System.out.println("create");
-        Mockito.doNothing().when(mokFabricantesRest).create(mokFabricantes);
-        mokFabricantesRest.create(mokFabricantes);
         Mockito.verify(mokFabricantesRest, times(1)).create(mokFabricantes);
-        Mockito.doThrow(Exception.class).when(mokFabricantesRest).create(mokFabricantes);
-    
+
     }
 
     /**
-     * Test of edit method, of class FabricantesRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testEdit() {
-         Mockito.doNothing().when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
-        
-        mokFabricantesRest.edit((int)Integer.SIZE, mokFabricantes);
-        Mockito.verify(mokFabricantesRest, times(1)).edit((int)Integer.SIZE, mokFabricantes);
-        
-        Mockito.doThrow(Exception.class).when(mokFabricantesRest).edit((int)Integer.SIZE, mokFabricantes);
-    
+    public void testEditarDiagnosticoparte() throws Exception {
+        int id = 1;
+        FabricantesRest instance = mokFabricantesRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokFabricantes);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokFabricantesRest, times(1)).edit(mokFabricantes);
+
     }
     
 }

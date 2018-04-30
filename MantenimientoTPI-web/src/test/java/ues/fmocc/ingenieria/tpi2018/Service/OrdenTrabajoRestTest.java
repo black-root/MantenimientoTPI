@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,7 +28,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.OrdenTrabajo;
  *
  * @author viktor
  */
-@Ignore
+
 public class OrdenTrabajoRestTest {
     final OrdenTrabajoRest mokOrdenTrabajoRest = Mockito.mock(OrdenTrabajoRest.class);
     final OrdenTrabajo mokOrdenTrabajo = Mockito.mock(OrdenTrabajo.class);
@@ -53,7 +54,9 @@ public class OrdenTrabajoRestTest {
         listaOrdenTrabajo.add(or1);
         Mockito.when(mokOrdenTrabajoRest.findall()).thenReturn(listaOrdenTrabajo);
         Mockito.when(mokOrdenTrabajoRest.findById(1)).thenReturn(or1);
-        
+        Mockito.when(mokOrdenTrabajoRest.create(mokOrdenTrabajo)).thenReturn(Response.status(Response.Status.CREATED).entity(or).build());
+        Mockito.when(mokOrdenTrabajoRest.edit(mokOrdenTrabajo)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokOrdenTrabajoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
         
     }
     
@@ -94,38 +97,48 @@ public class OrdenTrabajoRestTest {
         OrdenTrabajo result = instance.findById(id);
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of remove method, of class OrdenTrabajoRest.
-     */
     @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokOrdenTrabajoRest).remove((Integer) Matchers.anyObject());
-        mokOrdenTrabajoRest.remove(Integer.SIZE);
-        Mockito.verify(mokOrdenTrabajoRest, times(1)).remove(Integer.SIZE);
-        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).remove(Integer.SIZE);
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        OrdenTrabajoRest instance = mokOrdenTrabajoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokOrdenTrabajoRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class OrdenTrabajoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        Mockito.doNothing().when(mokOrdenTrabajoRest).create(mokOrdenTrabajo);
-        mokOrdenTrabajoRest.create(mokOrdenTrabajo);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        OrdenTrabajoRest instance = mokOrdenTrabajoRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokOrdenTrabajo);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokOrdenTrabajoRest, times(1)).create(mokOrdenTrabajo);
-        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).create(mokOrdenTrabajo);
+
     }
 
     /**
-     * Test of edit method, of class OrdenTrabajoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testEdit() { 
-       Mockito.doNothing().when(mokOrdenTrabajoRest).edit(mokOrdenTrabajo);
-        mokOrdenTrabajoRest.edit(mokOrdenTrabajo);
+    public void testEditar() throws Exception {
+        int id = 1;
+        OrdenTrabajoRest instance = mokOrdenTrabajoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokOrdenTrabajo);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
         Mockito.verify(mokOrdenTrabajoRest, times(1)).edit(mokOrdenTrabajo);
-        Mockito.doThrow(Exception.class).when(mokOrdenTrabajoRest).edit(mokOrdenTrabajo);
+
     }
+
     
 }

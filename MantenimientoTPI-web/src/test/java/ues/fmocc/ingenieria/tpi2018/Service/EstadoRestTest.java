@@ -26,7 +26,6 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Estado;
  *
  * @author viktor
  */
-@Ignore
 public class EstadoRestTest {
     final EstadoRest mokEstadoRest = Mockito.mock(EstadoRest.class);
     final Estado mokEstado = Mockito.mock(Estado.class);
@@ -51,6 +50,9 @@ public class EstadoRestTest {
         listaEstado.add(d1);
         Mockito.when(mokEstadoRest.findAll()).thenReturn(listaEstado);
         Mockito.when(mokEstadoRest.findById(1)).thenReturn(d);
+        Mockito.when(mokEstadoRest.create(mokEstado)).thenReturn(Response.status(Response.Status.CREATED).entity(d).build());
+        Mockito.when(mokEstadoRest.edit(mokEstado)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokEstadoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
         
     }
     
@@ -87,44 +89,46 @@ public class EstadoRestTest {
      * Test of borrarEstado method, of class EstadoRest.
      */
     @Test
-    public void testBorrarEstado() throws Exception {
-        int id=1;
+    public void testBorrarDiagnosticoparte() throws Exception {
+        System.out.println("borrarDiagnosticoparte");
+        Integer id = 1;
         EstadoRest instance = mokEstadoRest;
-        Estado expResult = null;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokEstadoRest, times(1)).remove(id);
+    }
+
+    /**
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
+     */
+    @Test
+    public void testGuardarDiagnosticoparte() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        EstadoRest instance = mokEstadoRest;
+        Response expResult = Response.status(201).build();
         Response result = instance.create(mokEstado);
-         assertEquals(expResult, result);
-        assertNull(result);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokEstadoRest, times(1)).create(mokEstado);
 
     }
 
     /**
-     * Test of guardarEstado method, of class EstadoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testGuardarEstado() throws Exception {
-        int id=1;
+    public void testEditarDiagnosticoparte() throws Exception {
+        int id = 1;
         EstadoRest instance = mokEstadoRest;
-        Estado expResult = null;
+        Response expResult = Response.status(200).build();
         Response result = instance.edit(mokEstado);
-         assertEquals(expResult, result);
-        assertNull(result);
-        Mockito.verify(mokEstadoRest, times(1)).edit(mokEstado);;
-    }
-
-    /**
-     * Test of editarEstado method, of class EstadoRest.
-     */
-    @Test
-    public void testEditarEstado() throws Exception {
-        int id=1;
-        EstadoRest instance = mokEstadoRest;
-        Estado expResult = null;
-        Response result = instance.edit(mokEstado);
-         assertEquals(expResult, result);
-        assertNull(result);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
         Mockito.verify(mokEstadoRest, times(1)).edit(mokEstado);
-   
+
     }
     
 }

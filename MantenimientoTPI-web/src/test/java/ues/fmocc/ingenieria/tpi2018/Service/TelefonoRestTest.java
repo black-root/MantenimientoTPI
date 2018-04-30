@@ -7,6 +7,7 @@ package ues.fmocc.ingenieria.tpi2018.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +26,7 @@ import ues.fmoocc.ingenieria.tpi2018.Entities.Telefono;
  *
  * @author viktor
  */
-@Ignore
+
 public class TelefonoRestTest {
     final TelefonoRest mokTelefonoRest = Mockito.mock(TelefonoRest.class);
     final Telefono mokTelefono = Mockito.mock(Telefono.class);
@@ -52,6 +53,9 @@ public class TelefonoRestTest {
         listaTel.add(t1);
         Mockito.when(mokTelefonoRest.findall()).thenReturn(listaTel);
         Mockito.when(mokTelefonoRest.findById(1)).thenReturn(t);
+        Mockito.when(mokTelefonoRest.create(mokTelefono)).thenReturn(Response.status(Response.Status.CREATED).build());
+        Mockito.when(mokTelefonoRest.edit(mokTelefono)).thenReturn(Response.status(Response.Status.OK).build());
+        Mockito.when(mokTelefonoRest.remove(1)).thenReturn(Response.status(Response.Status.OK).build());
     }
     
     @After
@@ -100,36 +104,46 @@ public class TelefonoRestTest {
      * Test of remove method, of class TelefonoRest.
      */
     @Test
-    public void testRemove() {
-        Mockito.doNothing().when(mokTelefonoRest).remove((Integer) Matchers.anyObject());
-        mokTelefonoRest.remove(Integer.SIZE);
-        Mockito.verify(mokTelefonoRest, times(1)).remove(Integer.SIZE);
-        Mockito.doThrow(Exception.class).when(mokTelefonoRest).remove(Integer.SIZE);
-   
+    public void testBorrar() throws Exception {
+        System.out.println("borrar");
+        Integer id = 1;
+        TelefonoRest instance = mokTelefonoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.remove(id);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //(result);
+        Mockito.verify(mokTelefonoRest, times(1)).remove(id);
     }
 
     /**
-     * Test of create method, of class TelefonoRest.
+     * Test of guardarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
     @Test
-    public void testCreate() {
-        System.out.println("create");
-                Mockito.doNothing().when(mokTelefonoRest).create(mokTelefono);
-        mokTelefonoRest.create(mokTelefono);
+    public void testGuardar() throws Exception {
+        System.out.println("guardarDiagnosticoparte");
+        int id = 1;
+        TelefonoRest instance = mokTelefonoRest;
+        Response expResult = Response.status(201).build();
+        Response result = instance.create(mokTelefono);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        assertNotNull(result);
         Mockito.verify(mokTelefonoRest, times(1)).create(mokTelefono);
-        Mockito.doThrow(Exception.class).when(mokTelefonoRest).create(mokTelefono);
+
     }
 
     /**
-     * Test of edit method, of class TelefonoRest.
+     * Test of editarDiagnosticoparte method, of class Diagnostico_parteRest.
      */
-//    @Test
-//    public void testEdit() {
-//        
-//        Mockito.doNothing().when(mokTelefonoRest).edit(Integer.SIZE, mokTelefono);
-//        mokTelefonoRest.edit(Integer.SIZE, mokTelefono);
-//        Mockito.verify(mokTelefonoRest, times(1)).edit(Integer.SIZE, mokTelefono);
-//        Mockito.doThrow(Exception.class).when(mokTelefonoRest).edit(Integer.SIZE, mokTelefono);
-//    }
+    @Test
+    public void testEditar() throws Exception {
+        int id = 1;
+        TelefonoRest instance = mokTelefonoRest;
+        Response expResult = Response.status(200).build();
+        Response result = instance.edit(mokTelefono);
+        assertEquals(expResult.getStatus(), result.getStatus());
+        //assertNull(result);
+        Mockito.verify(mokTelefonoRest, times(1)).edit(mokTelefono);
+
+    }
     
 }
