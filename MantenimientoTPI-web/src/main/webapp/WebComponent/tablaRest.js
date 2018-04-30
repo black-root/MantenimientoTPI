@@ -20,7 +20,9 @@ class TablaDinamica extends HTMLElement{
                     font-weight:bold;
                 }
                  </style>
-                <div> <slot name = 'entidad'></slot></div>`;
+                <div>
+                    <slot entidad = 'entidad'></slot>
+                </div>`;
         const contenedor = document.createElement('div');
         contenedor.id = 'tbl';
 
@@ -32,6 +34,7 @@ class TablaDinamica extends HTMLElement{
         celda.id = 'idCelda';
 
         var datajson = []; //arreglo de objetos obtenidos del json
+
 
         let createTableFromJSON =  function (myBooks) {
 
@@ -58,16 +61,56 @@ class TablaDinamica extends HTMLElement{
 */
                 // EXTRACT VALUE FOR HTML HEADER.
                 // ('Book ID', 'Book Name', 'Category' and 'Price')
+
                 var col = [];
+                var ids = [];
+
+                var pivote;
+
                 for (var i = 0; i < myBooks.length; i++) {
+                    var count=0;
                     for (var key in myBooks[i]) {
                         if (col.indexOf(key) === -1) {
                             col.push(key);
+                            if(key.indexOf("Collec") > -1){
+                                pivote=key
+                                console.log(key);
+                            }
+                            if(key.indexOf("id") > -1){
+                                ids [count]= key;
+                                count++;
+                            }
                         }
+
                     }
                 }
 
+                for(ids of ids){
+                    console.log(ids);
+                }
+
                 var tr = tabla.insertRow(-1);                   // TABLE ROW.
+
+                //variable para ordenar el json
+/*
+                var pivote;
+                for(var i=0;i<col.length;i++){
+                    for(let j=0; j<ids.length;j++){
+                        if(col[i] == ids[j]){
+                            let trade = col[0]; //primera posicion del arreglo
+                            col[0] = ids [j]; //pasando el id al principio
+                            ids[j] = trade;
+                        }
+                    }
+                }
+            for(col of col){
+                console.log(col);
+            }*/
+
+                // we delete all the column Collection from the JSON
+                let borrar=col.indexOf(pivote);
+                console.log(borrar);
+                col.splice(borrar,1);
 
                 for (var i = 0; i < col.length; i++) {
                     var th = document.createElement("th");      // TABLE HEADER.
