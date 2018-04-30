@@ -8,26 +8,37 @@ class TablaDinamica extends HTMLElement{
     connectedCallback(){
         const shadow = this.attachShadow({mode: 'open'});
         shadow.innerHTML=`
-              <style>
-                    table, th, td
-                {
-                    margin:10px 0;
-                    border:solid 1px #333;
-                    padding:2px 4px;
-                    font:15px Verdana;
-                }
-                th {
-                    font-weight:bold;
-                }
-                 </style>
+                    
+                    <style>
+                    table{
+                      width: 100%;
+                      background-color: #ffffff;
+                      border-collapse: collapse;
+                      border-width: 2px;
+                      border-color: #636bf3;
+                      border-style: solid;
+                      color: #000000;
+                    }
+                    
+                    td, th {
+                      border-width: 2px;
+                      border-color: #636bf3;
+                      border-style: solid;
+                      padding: 3px;
+                    }
+                    
+                    th {
+                      background-color: #8b90ed;
+                    }
+                    </style>
                 <div>
                     <slot entidad = 'entidad'></slot>
                 </div>`;
         const contenedor = document.createElement('div');
         contenedor.id = 'tbl';
-
         let tabla = document.createElement('table');
         tabla.id = 'idTabla';
+        tabla.scrollIntoView();
         let header = document.createElement('th');
         header.id = 'idHeader';
         let celda = document.createElement('td');
@@ -67,50 +78,54 @@ class TablaDinamica extends HTMLElement{
 
                 var pivote;
 
+                var count=0;
                 for (var i = 0; i < myBooks.length; i++) {
-                    var count=0;
+
                     for (var key in myBooks[i]) {
                         if (col.indexOf(key) === -1) {
                             col.push(key);
                             if(key.indexOf("Collec") > -1){
                                 pivote=key
-                                console.log(key);
+                              //  console.log(key);
                             }
                             if(key.indexOf("id") > -1){
-                                ids [count]= key;
+                                ids[count]= key;
                                 count++;
                             }
                         }
 
                     }
                 }
-
+/*
                 for(ids of ids){
                     console.log(ids);
-                }
+                }*/
 
                 var tr = tabla.insertRow(-1);                   // TABLE ROW.
 
                 //variable para ordenar el json
-/*
-                var pivote;
-                for(var i=0;i<col.length;i++){
-                    for(let j=0; j<ids.length;j++){
-                        if(col[i] == ids[j]){
-                            let trade = col[0]; //primera posicion del arreglo
-                            col[0] = ids [j]; //pasando el id al principio
-                            ids[j] = trade;
-                        }
-                    }
-                }
-            for(col of col){
-                console.log(col);
-            }*/
+
+
 
                 // we delete all the column Collection from the JSON
                 let borrar=col.indexOf(pivote);
-                console.log(borrar);
+               // console.log(borrar);
                 col.splice(borrar,1);
+
+                //we sort the json and we put first the entity's id in the columns
+                var count2=0;
+                for(var i=0;i<col.length;i++){
+                    for(var j=0; j < ids.length;j++){
+                        if(col[i] == ids[j]){
+                            var trade = col[count2]; //primera posicion del arreglo
+                            col[count2] = ids [j]; //pasando el id al principio
+                            ids[j] = trade;
+                            col[i] = trade;
+                            count2++;
+                        }
+                    }
+                }
+               // console.log(col);
 
                 for (var i = 0; i < col.length; i++) {
                     var th = document.createElement("th");      // TABLE HEADER.
